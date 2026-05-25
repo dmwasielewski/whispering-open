@@ -1,4 +1,4 @@
-# Whispering Personal
+# Whispering Open
 
 Standalone extraction of the Whispering app from the Epicenter monorepo.
 
@@ -19,6 +19,10 @@ bun run typecheck
 bun run build:web
 bun run dev
 ```
+
+## Push Policy
+
+Always run the security/pre-push hook before pushing this repository. Do not bypass the hook.
 
 ## License
 

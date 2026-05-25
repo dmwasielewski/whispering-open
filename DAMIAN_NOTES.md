@@ -2,7 +2,7 @@
 
 ## 2026-05-25
 
-Created `/var/home/damian/whispering-personal` as a standalone Whispering extraction.
+Created `/var/home/damian/whispering-open` as a standalone Whispering extraction.
 
 Copied:
 
@@ -33,6 +33,10 @@ Verification:
 - `bun install` completed.
 - `bun run typecheck` passed with warnings.
 - `bun run build:web` passed with warnings.
+
+Project rule:
+
+- Always push through the security/pre-push hook. Never bypass it.
 
 Next cleanup candidates:
 

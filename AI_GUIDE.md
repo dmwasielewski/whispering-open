@@ -9,6 +9,7 @@ This repo is a staged extraction of `apps/whispering` from Epicenter.
 - Treat `apps/api` and nonessential shared packages as temporary dependencies to remove only after verification.
 - Do not remove license files.
 - Do not rename package scopes or Tauri identifiers until build/typecheck passes in the extracted repo.
+- Always run the security/pre-push hook before pushing. Do not bypass it.
 - Prefer small commits: copy/extract, verify, then simplify.
 
 ## Verified Commands
