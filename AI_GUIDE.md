@@ -6,6 +6,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Rules
 
+- Keep all repository artifacts in English: documentation, code comments, commit messages, issue notes, release notes, and user-facing app text unless there is an intentional localization change.
 - Preserve a working build at each step.
 - Treat `apps/whispering` as the product surface.
 - Treat `apps/api` and nonessential shared packages as temporary dependencies to remove only after verification.
