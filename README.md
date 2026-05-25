@@ -1,8 +1,10 @@
 # Whispering Open
 
-Standalone extraction of the Whispering app from the Epicenter monorepo.
+Whispering Open is Damian's standalone fork/extraction of the Whispering speech-to-text app from the Epicenter monorepo.
 
-This repository intentionally starts as a small workspace rather than a fully flattened app. The first goal is to keep Whispering building and running while removing Epicenter-specific infrastructure in small verified steps.
+The goal is not to rewrite Whispering from scratch. The goal is to keep a working desktop/web dictation app while gradually removing Epicenter-specific cloud, billing, account, sync, analytics, and branding pieces.
+
+This repository intentionally starts as a small workspace rather than a fully flattened app. Stability comes first: make one simplification, verify, document it, then commit.
 
 ## Current Layout
 
@@ -10,6 +12,8 @@ This repository intentionally starts as a small workspace rather than a fully fl
 - `apps/api` - temporary workspace dependency pulled in through shared Svelte utilities.
 - `packages/*` - local packages required by Whispering or its shared dependencies.
 - `patches/*` - upstream dependency patches used by the lockfile.
+
+See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the current ownership map and cleanup direction.
 
 ## Common Commands
 
@@ -19,6 +23,21 @@ bun run typecheck
 bun run build:web
 bun run dev
 ```
+
+## AI Documentation
+
+Start here before changing the project:
+
+- [AGENTS.md](AGENTS.md) - required rules for AI coding agents.
+- [AI_GUIDE.md](AI_GUIDE.md) - project context, priorities, and workflows.
+- [AI_ERRORS.md](AI_ERRORS.md) - known mistakes and traps to avoid.
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - repository layout and ownership.
+- [RELEASES.md](RELEASES.md) - release and packaging expectations.
+- [docs/EXTRACTION.md](docs/EXTRACTION.md) - current extraction status and dependency cleanup plan.
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) - architecture entry points.
+- [docs/BUILD_AND_RELEASE.md](docs/BUILD_AND_RELEASE.md) - build/release workflow.
+- [docs/DOTFILES_SWAY_INTEGRATION.md](docs/DOTFILES_SWAY_INTEGRATION.md) - how Damian's install automation consumes releases.
+- [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) - known Linux/Sway/Tauri issues.
 
 ## Push Policy
 

@@ -13,9 +13,9 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "git+ssh://git@github.com/dmwasielewski/whispering-open.git"
 	},
-	"homepage": "",
+	"homepage": "https://github.com/dmwasielewski/whispering-open",
 	"license": "AGPL-3.0-or-later",
 	"author": "",
 	"workspaces": {
