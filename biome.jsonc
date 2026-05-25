@@ -1,0 +1,118 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+	"plugins": ["./scripts/biome/c-json-errors.grit"],
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"css": {
+		"parser": {
+			"cssModules": true,
+			"tailwindDirectives": true
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": { "enabled": true, "indentScriptAndStyle": true }
+	},
+	"files": {
+		"ignoreUnknown": true,
+		"includes": [
+			"**",
+			"!.conductor",
+			"!apps/whispering/src-tauri",
+			"!**/.svelte-kit",
+			"!**/.astro",
+			"!**/.turbo",
+			"!**/.plasmo",
+			"!**/node_modules",
+			"!**/build",
+			"!**/dist",
+			"!package-lock.json",
+			"!pnpm-lock.yaml",
+			"!yarn.lock",
+			"!**/.gitignore",
+			"!.DS_Store",
+			"!docs/articles",
+			"!**/*.md",
+			// svelte-check owns .svelte files. Biome's HTML/Svelte parser
+			// rejects valid Svelte 5 syntax (e.g. value-less `{:then}`),
+			// and the rules it can apply to script blocks duplicate what
+			// svelte-check already enforces via TypeScript.
+			"!**/*.svelte"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"identifierOrder": "natural"
+					}
+				}
+			}
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"nursery": {
+				"useSortedClasses": "warn"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"overrides": [
+		{
+			// Biome can lint <script> blocks in .astro components but can't see
+			// template usage, so imports and handlers used only in templates
+			// appear unused. (.svelte files are excluded from Biome entirely;
+			// svelte-check owns them.)
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					},
+					"style": {
+						"useImportType": "off",
+						"noNonNullAssertion": "off"
+					},
+					"suspicious": {
+						"noConfusingVoidType": "off",
+						"noTemplateCurlyInString": "off",
+						"useIterableCallbackReturn": "off",
+						"noExplicitAny": "off"
+					},
+					"a11y": {
+						// SVG icons in components don't always need <title>
+						"noSvgWithoutTitle": "off",
+						// Astro components often omit button type in templates
+						"useButtonType": "off",
+						// autofocus is intentional UX in dialogs and forms
+						"noAutofocus": "off",
+						// Audio recording playback doesn't have captions
+						"useMediaCaption": "off"
+					}
+				}
+			}
+		},
+		{
+			// Vendored PostHog analytics snippet — minified code, not worth linting
+			"includes": ["**/posthog.astro"],
+			"linter": { "enabled": false }
+		}
+	]
+}

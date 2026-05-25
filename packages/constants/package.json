@@ -1,0 +1,42 @@
+{
+	"name": "@epicenter/constants",
+	"description": "Shared URLs, ports, and version info for the Epicenter monorepo",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"imports": {
+		"#*": [
+			"./src/*.ts",
+			"./src/*/index.ts"
+		]
+	},
+	"exports": {
+		"./apps": "./src/apps.ts",
+		"./auth": "./src/auth.ts",
+		"./identity": "./src/identity.ts",
+		"./oauth": "./src/oauth.ts",
+		"./vite": "./src/vite.ts",
+		"./versions": "./src/versions.ts",
+		"./ai-chat-errors": "./src/ai-chat-errors.ts",
+		"./api-routes": "./src/api-routes.ts",
+		"./asset-errors": "./src/asset-errors.ts",
+		"./billing-errors": "./src/billing-errors.ts",
+		"./oauth-errors": "./src/oauth-errors.ts",
+		"./oauth-routes": "./src/oauth-routes.ts",
+		"./request-guard-errors": "./src/request-guard-errors.ts"
+	},
+	"devDependencies": {
+		"@better-auth/oauth-provider": "catalog:",
+		"@types/node": "catalog:",
+		"typescript": "catalog:",
+		"vite": "catalog:"
+	},
+	"dependencies": {
+		"arktype": "catalog:",
+		"wellcrafted": "catalog:"
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit"
+	},
+	"license": "AGPL-3.0-or-later"
+}

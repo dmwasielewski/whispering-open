@@ -1,0 +1,199 @@
+/**
+ * Epicenter: YJS-First Collaborative Workspace System
+ *
+ * `@epicenter/workspace` attaches typed primitives: tables, KV, plain/rich
+ * text, timeline, and an action registry to a `Y.Doc`, then wires the
+ * result to IndexedDB persistence, end-to-end encryption, and WebSocket
+ * sync via `openCollaboration`. `openCollaboration` also consumes the
+ * server-owned presence channel and exposes the live-device surface
+ * (`devices.list()`) plus socket-backed `dispatch()` for cross-device calls.
+ *
+ * @example
+ * ```typescript
+ * import {
+ *   attachIndexedDb,
+ *   attachRichText,
+ *   attachTables,
+ *   createDisposableCache,
+ *   createDeviceId,
+ *   defineTable,
+ *   docGuid,
+ *   openCollaboration,
+ *   roomWsUrl,
+ * } from '@epicenter/workspace';
+ * import type { AuthClient } from '@epicenter/auth';
+ * import type { OwnerId } from '@epicenter/constants/identity';
+ * import { type } from 'arktype';
+ * import * as Y from 'yjs';
+ *
+ * const posts = defineTable(type({ id: 'string', title: 'string', _v: '1' }));
+ * declare const auth: AuthClient;
+ * declare const ownerId: OwnerId;
+ *
+ * const deviceId = createDeviceId({ storage: localStorage });
+ *
+ * // A cloud doc is owned by the authenticated `ownerId` and addressed by its
+ * // Y.Doc guid: `roomWsUrl({ baseURL, ownerId, guid, deviceId })` builds the
+ * // partitioned room URL the server expects.
+ * const ydoc = new Y.Doc({ guid: 'notes' });
+ * const tables = attachTables(ydoc, { posts });
+ * const idb = attachIndexedDb(ydoc);
+ * const collaboration = openCollaboration(ydoc, {
+ *   url: roomWsUrl({ baseURL: auth.baseURL, ownerId, guid: ydoc.guid, deviceId }),
+ *   openWebSocket: auth.openWebSocket,
+ *   onReconnectSignal: auth.onStateChange,
+ *   waitFor: idb.whenLoaded,
+ *   actions: {},
+ * });
+ *
+ * // Content docs build the same URL from their own guid. The local Y.Doc
+ * // guid doubles as the cloud room id, so there is no second id system.
+ * const noteBodyDocs = createDisposableCache(
+ *   (noteId: string) => {
+ *     const bodyYdoc = new Y.Doc({
+ *       guid: docGuid({
+ *         workspaceId: ydoc.guid,
+ *         collection: 'posts',
+ *         rowId: noteId,
+ *         field: 'body',
+ *       }),
+ *       gc: true,
+ *     });
+ *     const bodyIdb = attachIndexedDb(bodyYdoc);
+ *     const bodySync = openCollaboration(bodyYdoc, {
+ *       url: roomWsUrl({
+ *         baseURL: auth.baseURL,
+ *         ownerId,
+ *         guid: bodyYdoc.guid,
+ *         deviceId,
+ *       }),
+ *       openWebSocket: auth.openWebSocket,
+ *       onReconnectSignal: auth.onStateChange,
+ *       waitFor: bodyIdb.whenLoaded,
+ *       actions: {},
+ *     });
+ *     return {
+ *       ydoc: bodyYdoc,
+ *       body: attachRichText(bodyYdoc),
+ *       idb: bodyIdb,
+ *       sync: bodySync,
+ *       [Symbol.dispose]() {
+ *         bodyYdoc.destroy();
+ *       },
+ *     };
+ *   },
+ *   { gcTime: 5_000 },
+ * );
+ * ```
+ *
+ * @packageDocumentation
+ */
+
+// ════════════════════════════════════════════════════════════════════════════
+// ACTION SYSTEM
+// ════════════════════════════════════════════════════════════════════════════
+
+export type { ActionManifest } from './shared/actions';
+export {
+	defineActions,
+	defineMutation,
+	defineQuery,
+} from './shared/actions';
+
+// ════════════════════════════════════════════════════════════════════════════
+// DEVICE IDENTITY
+// ════════════════════════════════════════════════════════════════════════════
+
+export {
+	asDeviceId,
+	createDeviceId,
+	createDeviceIdAsync,
+	DeviceId,
+} from './document/device-id.js';
+
+// ════════════════════════════════════════════════════════════════════════════
+// PROJECT CONFIG (browser-safe surface)
+// ════════════════════════════════════════════════════════════════════════════
+
+// Node-only helpers that resolve real paths (`findProjectRoot`,
+// `loadProjectConfig`, etc.) import `node:fs`, `node:path`, or `node:os`
+// at module top level. They are exported from `@epicenter/workspace/node`;
+// keeping them out of this root barrel stops browser bundles (fuji,
+// whispering, etc.) from traversing `node:*` modules. Daemon runtime and
+// log paths live in `@epicenter/workspace/daemon/paths.ts`.
+export {
+	DEFAULT_PROJECT_CONFIG_SOURCE,
+	defineConfig,
+} from './config/define-config.js';
+export { defineWorkspace } from './daemon/define-workspace.js';
+export type { ProjectDir } from './shared/types';
+
+// ════════════════════════════════════════════════════════════════════════════
+// ID + DATE PRIMITIVES
+// ════════════════════════════════════════════════════════════════════════════
+
+export { DateTimeString } from './shared/datetime-string';
+export type { Guid, Id } from './shared/id';
+export { generateGuid, generateId } from './shared/id';
+
+// ════════════════════════════════════════════════════════════════════════════
+// DOCUMENT PRIMITIVES
+// ════════════════════════════════════════════════════════════════════════════
+
+export {
+	createDisposableCache,
+	type DisposableCache,
+} from './cache/disposable-cache.js';
+
+export { attachBroadcastChannel } from './document/attach-broadcast-channel.js';
+export {
+	type AttachEncryptionOptions,
+	attachEncryption,
+	type EncryptionAttachment,
+} from './document/attach-encryption.js';
+export { attachIndexedDb } from './document/attach-indexed-db.js';
+export {
+	attachKv,
+	type InferKvValue,
+	type Kv,
+	type KvDefinitions,
+} from './document/attach-kv.js';
+export { attachLocalStorage } from './document/attach-local-storage.js';
+export { attachPlainText } from './document/attach-plain-text.js';
+export { attachRichText } from './document/attach-rich-text.js';
+export {
+	attachTable,
+	attachTables,
+	type BaseRow,
+	type InferTableRow,
+	type Table,
+	type Tables,
+} from './document/attach-table.js';
+export { attachTimeline } from './document/attach-timeline/index.js';
+export { defineKv } from './document/define-kv.js';
+export { defineTable } from './document/define-table.js';
+export {
+	DispatchError,
+	type DispatchRequest,
+	type TypedDispatch,
+	typedDispatch,
+} from './document/dispatch.js';
+export { docGuid } from './document/doc-guid.js';
+export type { SyncStatus } from './document/internal/sync-supervisor.js';
+export { onLocalUpdate } from './document/on-local-update.js';
+export {
+	type Collaboration,
+	type OnReconnectSignal,
+	type OpenCollaborationConfig,
+	type OpenWebSocketFn,
+	openCollaboration,
+} from './document/open-collaboration.js';
+export type { PresenceDevice } from './document/presence-protocol.js';
+// Transport URL builder.
+//
+// `roomWsUrl({ baseURL, ownerId, guid, deviceId })` builds the WebSocket
+// URL for the partitioned `/api/owners/:ownerId/rooms/:roomId` endpoint. The
+// same single URL form is used in both personal and team modes. Both browser
+// apps and the daemon use this one builder.
+export { type RoomWsUrlOptions, roomWsUrl } from './document/transport.js';
+export { wipeLocalStorage } from './document/wipe-local-storage.js';
