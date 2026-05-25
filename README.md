@@ -22,7 +22,19 @@ bun run dev
 
 ## Push Policy
 
-Always run the security/pre-push hook before pushing this repository. Do not bypass the hook.
+This repo uses the same secret-scan push policy as `dotfiles-sway`:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+Before every `git push`, `.githooks/pre-push` runs:
+
+```sh
+gitleaks detect --source . --redact --verbose
+```
+
+If `gitleaks` is missing or detects a secret, the push is blocked. Do not bypass the hook.
 
 ## License
 

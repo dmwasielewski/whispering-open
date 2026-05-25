@@ -36,7 +36,7 @@ Verification:
 
 Project rule:
 
-- Always push through the security/pre-push hook. Never bypass it.
+- Always push through `.githooks/pre-push`, the same style of hook used in `dotfiles-sway`. It runs `gitleaks detect --source . --redact --verbose`. Never bypass it.
 
 Next cleanup candidates:
 

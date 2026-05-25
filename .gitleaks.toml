@@ -1,0 +1,19 @@
+title = "whispering-open gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Pinned test keyring fixtures are deterministic test bytes, not live secrets."
+condition = "AND"
+regexTarget = "match"
+paths = [
+	'''packages/auth/src/node/machine-auth\.test\.ts''',
+	'''packages/auth/src/persisted-auth-format\.test\.ts''',
+	'''packages/auth/src/contract\.test\.ts''',
+	'''packages/encryption/src/crypto\.test\.ts''',
+	'''packages/svelte-utils/src/session\.svelte\.test\.ts''',
+]
+regexes = [
+	'''keyBytesBase64''',
+]
