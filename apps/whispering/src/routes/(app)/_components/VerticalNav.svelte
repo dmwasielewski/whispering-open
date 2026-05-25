@@ -152,13 +152,13 @@
 						{#snippet child({ props })}
 							<button
 								onclick={async () => {
-								const { getCurrentWindow, LogicalSize } = await import('@tauri-apps/api/window');
-								getCurrentWindow().setSize(new LogicalSize(72, 84));
+								const { getCurrentWindow } = await import('@tauri-apps/api/window');
+								await getCurrentWindow().hide();
 							}}
 								{...props}
 							>
 								<Minimize2Icon />
-								<span>Minimize</span>
+								<span>Minimize to Tray</span>
 							</button>
 						{/snippet}
 					</Sidebar.MenuButton>

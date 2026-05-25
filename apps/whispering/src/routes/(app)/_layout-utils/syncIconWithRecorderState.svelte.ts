@@ -7,6 +7,8 @@ export function syncIconWithRecorderState() {
 		() => rpc.recorder.getRecorderState.options,
 	);
 
+	desktopRpc.tray.setTrayIcon({ icon: 'IDLE' });
+
 	$effect(() => {
 		if (getRecorderStateQuery.data) {
 			desktopRpc.tray.setTrayIcon({

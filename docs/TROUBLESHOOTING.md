@@ -25,6 +25,17 @@ Use this repo's patched builds for future release assets.
 
 Desktop changes require Tauri verification.
 
+## Minimize To Tray
+
+The intended desktop behavior is:
+
+- The sidebar `Minimize to Tray` action hides the main window.
+- A close request for the main window, including normal window-manager close shortcuts, hides the window instead of exiting.
+- The tray icon remains visible in Waybar and can restore the window.
+- The tray menu `Quit` action is the normal way to fully exit the app.
+
+If the window disappears and no tray icon is visible, check that Waybar has the `tray` module enabled and that tray initialization ran without a Tauri error.
+
 ## Global Shortcuts On Sway
 
 Global shortcut behavior may differ between X11, Wayland, Sway, and desktop portals. Test on Damian's actual Sway session before claiming shortcut support.

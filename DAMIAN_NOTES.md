@@ -34,6 +34,15 @@ Verification:
 - `bun run typecheck` passed with warnings.
 - `bun run build:web` passed with warnings.
 
+Desktop tray behavior added:
+
+- The main window close request is intercepted in Tauri and hides the window instead of exiting.
+- The sidebar minimize control now hides the window to tray instead of resizing it.
+- The tray icon is initialized with the idle icon as soon as the app layout runs, so the hidden window should be recoverable from Waybar.
+- Tray `Show Window`, `Settings`, and left-click actions show and focus the main window.
+
+Desktop runtime verification is still pending. `cargo check` on the host failed because `cc` is missing. `cargo check` inside toolbox progressed further but failed in the existing `whisper-rs` dependency before checking the app crate. `bun run typecheck` and `bun run build:web` pass.
+
 Project rule:
 
 - Always push through `.githooks/pre-push`, the same style of hook used in `dotfiles-sway`. It runs `gitleaks detect --source . --redact --verbose`. Never bypass it.
