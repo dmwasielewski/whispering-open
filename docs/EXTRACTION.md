@@ -12,7 +12,7 @@ Included intentionally:
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
 - `packages/util`, `packages/constants`, `packages/workspace` - shared helpers still used by the app.
-- `apps/api` and auth/server/sync/billing-related packages - legacy files still on disk until the workspace graph is narrowed, verified, and cleaned.
+- auth/server/sync/billing-related packages - legacy shared packages still on disk until their dependency chains are verified and cleaned.
 
 Still carrying old workspace technical debt:
 
@@ -59,11 +59,17 @@ Expected next step after verification:
 
 - remove the `apps/api` directory from the repository
 
-## Why `apps/api` Still Exists
+### 2026-05-26: Removed `apps/api`
 
-`apps/api` still exists on disk until the narrowed workspace is verified. It should not be treated as product code for Whispering Open.
+The Epicenter API app was removed after the previous cuts proved it was no longer part of the active workspace or lockfile.
 
-Do not remove it blindly before the current cut is verified and committed.
+Cut made:
+
+- removed the `apps/api` directory
+
+Expected next step after verification:
+
+- inspect remaining shared packages for unused auth/server/billing/sync dependency chains
 
 ## Safe Cleanup Order
 
@@ -76,8 +82,8 @@ Do not remove it blindly before the current cut is verified and committed.
 3. Remove unused package metadata dependencies from `packages/svelte-utils`.
 4. Narrow the root workspace so only `apps/whispering` remains under `apps`.
 5. Remove `apps/api`.
-6. Move or copy only the needed Svelte helpers into a Whispering Open-owned package or local module.
-7. Repeat for `auth`, `server`, `billing`, `sync`, and other unused packages.
+6. Inspect and remove unused auth/server/billing/sync packages.
+7. Move or copy only the needed Svelte helpers into a Whispering Open-owned package or local module.
 8. Rename package scopes after dependency graph is small.
 9. Rename Tauri identity and release metadata in a dedicated migration.
 

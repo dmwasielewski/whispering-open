@@ -49,7 +49,7 @@ The app currently still imports:
 - `@epicenter/constants`
 - `@epicenter/workspace`
 
-`@epicenter/svelte` no longer depends on `@epicenter/api`. The root workspace is narrowed to `apps/whispering`, so `apps/api` should no longer be part of the active workspace graph. A good next step is to remove the `apps/api` directory after verifying install, typecheck, and web build without it.
+`@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is narrowed to `apps/whispering`, and `apps/api` has been removed. A good next step is to inspect remaining shared packages and remove unused auth/server/billing/sync dependency chains.
 
 ## Documentation Contract
 

@@ -68,7 +68,6 @@ These features came from Epicenter or upstream product direction and are not par
 
 These pieces may remain only because the current build still needs them.
 
-- `apps/api`
 - `@epicenter/ui`
 - `@epicenter/svelte`
 - `@epicenter/util`

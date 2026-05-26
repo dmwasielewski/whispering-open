@@ -11,8 +11,8 @@ import { defineErrors, type InferErrors } from 'wellcrafted/error';
  * The serialized envelope is `wellcrafted`'s `{ data: null, error: {
  * name, message, ...fields } }`. Receivers branch on `body.error.name`.
  *
- * `StorageLimitExceeded` is emitted by the cloud-only Autumn storage
- * policy (`apps/api/src/billing/policies.ts`). It lives with the asset surface
+ * `StorageLimitExceeded` was emitted by the removed cloud-only Autumn storage
+ * policy. It lives with the asset surface
  * (not in a separate billing namespace) so an asset client handles one
  * error type per call, matching the `AiChatError` precedent that lumps
  * billing-shaped failures with the surface that raises them.
