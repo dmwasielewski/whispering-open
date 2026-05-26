@@ -14,21 +14,12 @@
 		"reactive state"
 	],
 	"exports": {
-		".": "./src/index.ts",
-		"./account-popover": "./src/account-popover/index.ts",
-		"./workspace-gate": "./src/workspace-gate/index.ts"
+		".": "./src/index.ts"
 	},
 	"dependencies": {
-		"@epicenter/auth": "workspace:*",
-		"@epicenter/auth-svelte": "workspace:*",
 		"@epicenter/constants": "workspace:*",
-		"@epicenter/ui": "workspace:*",
 		"@epicenter/workspace": "workspace:*",
-		"@lucide/svelte": "catalog:",
-		"@tanstack/svelte-query": "catalog:",
 		"arktype": "catalog:",
-		"better-auth": "catalog:",
-		"idb": "^8.0.3",
 		"wellcrafted": "catalog:"
 	},
 	"devDependencies": {

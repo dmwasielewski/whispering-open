@@ -89,6 +89,27 @@ Expected next step after verification:
 
 - inspect `packages/auth`, `packages/auth-svelte`, `packages/server`, `packages/sync`, and `packages/encryption` before removing anything else
 
+### 2026-05-26: Removed unused auth UI exports from `@epicenter/svelte`
+
+Whispering Open imports only the root `@epicenter/svelte` helpers used for local state:
+
+- `fromTable`
+- `createPersistedMap`
+- `createPersistedState`
+
+The auth-related `createSession`, `account-popover`, and `workspace-gate` utilities were not imported by Whispering Open. They kept auth, UI, icon, and query dependencies attached to `@epicenter/svelte`.
+
+Cut made:
+
+- removed `createSession` from the root `@epicenter/svelte` export
+- removed `@epicenter/svelte/account-popover` and `@epicenter/svelte/workspace-gate` package exports
+- removed unused auth/UI/query dependencies from `packages/svelte-utils/package.json`
+
+Expected next step after verification:
+
+- remove `packages/auth-svelte` if no active package still imports it
+- inspect whether `packages/auth` remains only through server/legacy packages
+
 ## Safe Cleanup Order
 
 1. Verify current build:
