@@ -8,3 +8,4 @@
 - Removed the unused `@epicenter/api` dependency from `@epicenter/svelte`.
 - Narrowed the root app workspace from `apps/*` to `apps/whispering`.
 - Removed the legacy `apps/api` directory.
+- Removed the unused Epicenter billing package.

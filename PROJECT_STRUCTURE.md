@@ -31,7 +31,6 @@ packages/auth
 packages/auth-svelte
 packages/encryption
 packages/server
-packages/billing
 ```
 
 Current purpose:
@@ -40,7 +39,7 @@ Current purpose:
 - `packages/svelte-utils` - persisted state/session/workspace helpers.
 - `packages/workspace` - local-first document/table helpers used by Whispering Open state.
 - `packages/constants`, `packages/util` - shared constants/utilities.
-- `packages/auth`, `packages/auth-svelte`, `packages/encryption`, `packages/server`, `packages/sync`, `packages/billing` - undesirable long term, present because dependency chains still reference them.
+- `packages/auth`, `packages/auth-svelte`, `packages/encryption`, `packages/server`, `packages/sync` - undesirable long term, present because dependency chains still reference them.
 
 ## Root Files
 
@@ -67,7 +66,9 @@ Current purpose:
 Recommended order:
 
 1. Prove local Tauri build and Linux release asset.
-2. Remove unused auth/server/billing/sync packages.
-4. Rename app identity and package scopes.
-5. Replace old workspace links and branding.
-6. Add stable release automation.
+2. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
+3. Review the 21 GitHub Dependabot vulnerabilities reported after push.
+4. Audit and remove unused `packages/auth`, `packages/auth-svelte`, `packages/server`, `packages/sync`, and `packages/encryption` dependencies.
+5. Rename app identity and package scopes.
+6. Replace old workspace links and branding.
+7. Add stable release automation.

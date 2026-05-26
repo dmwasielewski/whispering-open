@@ -12,7 +12,7 @@ Included intentionally:
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
 - `packages/util`, `packages/constants`, `packages/workspace` - shared helpers still used by the app.
-- auth/server/sync/billing-related packages - legacy shared packages still on disk until their dependency chains are verified and cleaned.
+- auth/server/sync/encryption-related packages - legacy shared packages still on disk until their dependency chains are verified and cleaned.
 
 Still carrying old workspace technical debt:
 
@@ -20,6 +20,12 @@ Still carrying old workspace technical debt:
 - analytics service
 - remaining references to old upstream release assets where the app still downloads required files
 - some workspace/auth/sync abstractions that may not be needed for a local dictation app
+
+## Cleanup Backlog
+
+- Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
+- Review the 21 GitHub Dependabot vulnerabilities reported after push.
+- Inspect `packages/auth`, `packages/auth-svelte`, `packages/server`, `packages/sync`, and `packages/encryption` to determine which packages are really used by Whispering Open.
 
 ## Completed Cuts
 
@@ -71,6 +77,18 @@ Expected next step after verification:
 
 - inspect remaining shared packages for unused auth/server/billing/sync dependency chains
 
+### 2026-05-26: Removed `packages/billing`
+
+The Epicenter billing package was not imported by Whispering Open or by any required shared package. It only remained because the root workspace still included every package under `packages/*`.
+
+Cut made:
+
+- removed the `packages/billing` directory
+
+Expected next step after verification:
+
+- inspect `packages/auth`, `packages/auth-svelte`, `packages/server`, `packages/sync`, and `packages/encryption` before removing anything else
+
 ## Safe Cleanup Order
 
 1. Verify current build:
@@ -82,7 +100,7 @@ Expected next step after verification:
 3. Remove unused package metadata dependencies from `packages/svelte-utils`.
 4. Narrow the root workspace so only `apps/whispering` remains under `apps`.
 5. Remove `apps/api`.
-6. Inspect and remove unused auth/server/billing/sync packages.
+6. Inspect and remove unused auth/server/sync/encryption packages.
 7. Move or copy only the needed Svelte helpers into a Whispering Open-owned package or local module.
 8. Rename package scopes after dependency graph is small.
 9. Rename Tauri identity and release metadata in a dedicated migration.

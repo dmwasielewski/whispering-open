@@ -122,15 +122,6 @@
         "svelte": "^5.0.0",
       },
     },
-    "packages/billing": {
-      "name": "@epicenter/billing",
-      "version": "0.1.0",
-      "devDependencies": {
-        "@tanstack/ai-gemini": "catalog:",
-        "@tanstack/ai-openai": "catalog:",
-        "typescript": "catalog:",
-      },
-    },
     "packages/constants": {
       "name": "@epicenter/constants",
       "version": "0.1.0",
@@ -489,8 +480,6 @@
     "@epicenter/auth": ["@epicenter/auth@workspace:packages/auth"],
 
     "@epicenter/auth-svelte": ["@epicenter/auth-svelte@workspace:packages/auth-svelte"],
-
-    "@epicenter/billing": ["@epicenter/billing@workspace:packages/billing"],
 
     "@epicenter/constants": ["@epicenter/constants@workspace:packages/constants"],
 
