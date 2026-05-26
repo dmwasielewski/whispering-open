@@ -12,10 +12,8 @@ function isBroadcastChannelOrigin(origin: unknown): boolean {
  *
  * Broadcasts every local `updateV2` to same-origin tabs and applies incoming
  * updates from other tabs. Defaults the channel key to `ydoc.guid` so only
- * docs for the same local workspace communicate. Authenticated browser
- * workspaces should pass an owner-scoped key (`attachLocalStorage` derives
- * one from the `(server, ownerId)` pair) so two signed-in owners in the same
- * browser profile cannot exchange plaintext.
+ * docs for the same local workspace communicate. Callers can pass a custom
+ * key when they need stricter isolation between local document instances.
  *
  * Skips re-broadcasting updates that arrived from BroadcastChannel itself.
  * Without that guard, delivered updates would be re-broadcast to other tabs,

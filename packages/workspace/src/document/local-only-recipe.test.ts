@@ -3,12 +3,10 @@
  *
  * Pins the composition a local-only consumer (desktop notes app, offline
  * CLI, test fixture) is meant to use. The recipe does NOT route through
- * `attachLocalStorage` or `attachEncryption`: those are cloud-synced
- * composites that require an owner-scoped keyring. Local-only data has no
- * cloud adversary, so plain IDB + plain BroadcastChannel + plain
- * `attachTable` is the right shape.
+ * removed cloud storage or encryption composites. Local-only data uses plain
+ * IDB + plain BroadcastChannel + plain `attachTable`.
  *
- * If this file ever needs to import encryption or owner identity helpers, the
+ * If this file ever needs to import auth, sync, or owner identity helpers, the
  * primitives have drifted away from the local-only ergonomic that motivated
  * the workspace split. Either rename the test, or fix the primitive.
  */

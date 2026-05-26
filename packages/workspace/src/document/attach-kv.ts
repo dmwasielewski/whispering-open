@@ -4,9 +4,6 @@
  * Constructs an unencrypted `YKeyValueLww` on `ydoc.getArray('kv')` and
  * wraps it with a typed `Kv`. KV uses validate-or-default semantics:
  * invalid or missing values return the default value from the KV definition.
- *
- * For encrypted storage, call `encryption.attachKv` on the coordinator
- * returned by `attachEncryption(ydoc, { keyring })`.
  */
 
 import type { StandardSchemaV1 } from '@standard-schema/spec';
@@ -78,9 +75,7 @@ export function attachKv<TKvDefinitions extends KvDefinitions>(
 }
 
 /**
- * Build a Kv helper over any `ObservableKvStore`. Exported so
- * `@epicenter/workspace` can reuse the same helper logic over its encrypted
- * store wrapper.
+ * Build a Kv helper over any `ObservableKvStore`.
  */
 export function createKv<TKvDefinitions extends KvDefinitions>(
 	ykv: ObservableKvStore<unknown>,

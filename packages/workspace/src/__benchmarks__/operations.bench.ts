@@ -12,8 +12,8 @@ import { type } from 'arktype';
 import * as Y from 'yjs';
 import { createKv } from '../document/attach-kv.js';
 import { defineKv } from '../document/define-kv.js';
+import { YKeyValueLww } from '../document/y-keyvalue/index.js';
 import { attachTable } from '../index.js';
-import { createEncryptedYkvLww } from '../shared/y-keyvalue/y-keyvalue-lww-encrypted.js';
 import { generateId, measureTime, postDefinition } from './helpers.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -182,7 +182,7 @@ describe('table operations', () => {
 describe('KV operations', () => {
 	test('repeated set on same key (10,000 times)', () => {
 		const ydoc = new Y.Doc();
-		const ykv = createEncryptedYkvLww<unknown>(ydoc, 'kv');
+		const ykv = new YKeyValueLww<unknown>(ydoc.getArray('kv'));
 		const kv = createKv(ykv, {
 			counter: defineKv(type({ value: 'number' }), { value: 0 }),
 		});
@@ -202,7 +202,7 @@ describe('KV operations', () => {
 
 	test('set + get alternating (10,000 cycles)', () => {
 		const ydoc = new Y.Doc();
-		const ykv = createEncryptedYkvLww<unknown>(ydoc, 'kv');
+		const ykv = new YKeyValueLww<unknown>(ydoc.getArray('kv'));
 		const kv = createKv(ykv, {
 			counter: defineKv(type({ value: 'number' }), { value: 0 }),
 		});
@@ -220,7 +220,7 @@ describe('KV operations', () => {
 
 	test('set + delete cycle (1,000 times)', () => {
 		const ydoc = new Y.Doc();
-		const ykv = createEncryptedYkvLww<unknown>(ydoc, 'kv');
+		const ykv = new YKeyValueLww<unknown>(ydoc.getArray('kv'));
 		const kv = createKv(ykv, {
 			counter: defineKv(type({ value: 'number' }), { value: 0 }),
 		});

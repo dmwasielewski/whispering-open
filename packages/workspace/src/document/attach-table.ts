@@ -4,10 +4,6 @@
  * Constructs an unencrypted `YKeyValueLww` on `ydoc.getArray('table:<name>')`
  * and wraps it with a typed `Table`. Provides CRUD operations with
  * schema validation and migration on read.
- *
- * For encrypted storage, call `encryption.attachTable` / `encryption.attachKv`
- * on the coordinator returned by `attachEncryption(ydoc, { keyring })`.
- *
  * @example
  * ```typescript
  * import * as Y from 'yjs';
@@ -314,9 +310,6 @@ export function attachReadonlyTable<
  * Bind a record of plaintext `TableDefinition`s to a Y.Doc. Sugar over
  * `attachTable`: calls it for each entry and returns the helpers keyed by
  * table name.
- *
- * For encrypted storage, call `encryption.attachTables` on the coordinator
- * returned by `attachEncryption(ydoc, { keyring })`.
  */
 export function attachTables<T extends TableDefinitions>(
 	ydoc: Y.Doc,
@@ -345,8 +338,8 @@ export function attachReadonlyTables<T extends TableDefinitions>(
 /**
  * Construct a ReadonlyTable from any `ObservableKvStore` and a TableDefinition.
  *
- * Exported so `@epicenter/workspace` can reuse the exact same helper logic
- * over its encrypted store wrapper.
+ * Exported so callers can reuse the exact same helper logic over compatible
+ * observable store implementations.
  */
 export function createReadonlyTable<
 	// biome-ignore lint/suspicious/noExplicitAny: variance-friendly: defineTable already constrains schemas

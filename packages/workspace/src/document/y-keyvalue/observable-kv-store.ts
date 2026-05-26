@@ -1,11 +1,7 @@
 /**
  * # ObservableKvStore
  *
- * The shared contract between `YKeyValueLww` and the encrypted wrapper —
- * both live in `@epicenter/workspace`. Consumers like
- * `createTable` / `createKv` depend on this interface — not on any specific
- * store implementation — so the same helper logic runs over plaintext and
- * encrypted stores alike.
+ * The shared contract consumed by `createTable` and `createKv`.
  *
  * ## Why not `LwwStore<T>`?
  *
@@ -39,9 +35,8 @@ export type KvStoreChangeHandler<T> = (
 /**
  * Observable, bulk-capable keyed store.
  *
- * Implemented by `YKeyValueLww` (unencrypted) and the encrypted wrapper in
- * `@epicenter/workspace`. `createTable` / `createKv` consume this interface
- * so they can wrap either backend without branching.
+ * Implemented by `YKeyValueLww`. `createTable` / `createKv` consume this
+ * interface instead of binding directly to one concrete store class.
  */
 export interface ObservableKvStore<T> {
 	get(key: string): T | undefined;

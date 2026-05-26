@@ -1,18 +1,24 @@
 /**
- * createKv — set/get/delete/observe over EncryptedYKeyValueLww with validate-or-default semantics.
+ * createKv - set/get/delete/observe over YKeyValueLww with validate-or-default semantics.
  */
 
 import { expect, test } from 'bun:test';
 import { type } from 'arktype';
 import * as Y from 'yjs';
-import { createEncryptedYkvLww } from '../shared/y-keyvalue/y-keyvalue-lww-encrypted.js';
 import { createKv } from './attach-kv.js';
 import { defineKv } from './define-kv.js';
 import { KV_KEY } from './keys.js';
+import { YKeyValueLww } from './y-keyvalue/index.js';
+
+function setupKv() {
+	const ydoc = new Y.Doc();
+	const yarray = ydoc.getArray(KV_KEY);
+	const ykv = new YKeyValueLww<unknown>(yarray);
+	return { ydoc, ykv };
+}
 
 test('set stores a value that get returns', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});
@@ -22,8 +28,7 @@ test('set stores a value that get returns', () => {
 });
 
 test('get returns defaultValue for unset key', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});
@@ -32,8 +37,7 @@ test('get returns defaultValue for unset key', () => {
 });
 
 test('delete causes get to return defaultValue', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});
@@ -46,8 +50,7 @@ test('delete causes get to return defaultValue', () => {
 });
 
 test('get returns defaultValue for invalid stored data', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		count: defineKv(type('number'), 0),
 	});
@@ -59,8 +62,7 @@ test('get returns defaultValue for invalid stored data', () => {
 });
 
 test('observeAll fires for set changes with correct key and value', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});
@@ -84,8 +86,7 @@ test('observeAll fires for set changes with correct key and value', () => {
 });
 
 test('observeAll fires for delete changes', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});
@@ -110,8 +111,7 @@ test('observeAll fires for delete changes', () => {
 });
 
 test('observeAll batches multiple changes in a single callback', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ydoc, ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 		fontSize: defineKv(type('number'), 14),
@@ -148,8 +148,7 @@ test('observeAll batches multiple changes in a single callback', () => {
 });
 
 test('observeAll skips invalid values', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ydoc, ykv } = setupKv();
 	const kv = createKv(ykv, {
 		count: defineKv(type('number'), 0),
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
@@ -178,8 +177,7 @@ test('observeAll skips invalid values', () => {
 });
 
 test('observeAll skips unknown keys', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ydoc, ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});
@@ -207,8 +205,7 @@ test('observeAll skips unknown keys', () => {
 });
 
 test('observeAll returns an unsubscribe function that works', () => {
-	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, KV_KEY);
+	const { ykv } = setupKv();
 	const kv = createKv(ykv, {
 		theme: defineKv(type({ mode: "'light' | 'dark'" }), { mode: 'light' }),
 	});

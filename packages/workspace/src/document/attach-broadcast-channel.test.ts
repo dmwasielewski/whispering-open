@@ -7,10 +7,12 @@ const originalBroadcastChannel = globalThis.BroadcastChannel;
 class FakeBroadcastChannel {
 	static names: string[] = [];
 	static posted: unknown[] = [];
+	static instances: FakeBroadcastChannel[] = [];
 	onmessage: ((event: MessageEvent) => void) | null = null;
 
 	constructor(public name: string) {
 		FakeBroadcastChannel.names.push(name);
+		FakeBroadcastChannel.instances.push(this);
 	}
 
 	postMessage(message: unknown): void {
@@ -24,6 +26,7 @@ describe('attachBroadcastChannel', () => {
 	beforeEach(() => {
 		FakeBroadcastChannel.names = [];
 		FakeBroadcastChannel.posted = [];
+		FakeBroadcastChannel.instances = [];
 		Object.assign(globalThis, {
 			BroadcastChannel:
 				FakeBroadcastChannel as unknown as typeof BroadcastChannel,
@@ -43,14 +46,14 @@ describe('attachBroadcastChannel', () => {
 		ydoc.destroy();
 	});
 
-	test('does not rebroadcast sync-origin updates', async () => {
-		const { SYNC_ORIGIN } = await import('@epicenter/sync');
+	test('does not rebroadcast updates received from BroadcastChannel', () => {
 		const ydoc = new Y.Doc({ guid: 'epicenter.fuji' });
 
 		attachBroadcastChannel(ydoc);
-		ydoc.transact(() => {
-			ydoc.getText('body').insert(0, 'remote sync');
-		}, SYNC_ORIGIN);
+		const initialUpdate = Y.encodeStateAsUpdateV2(ydoc);
+		FakeBroadcastChannel.instances[0]?.onmessage?.(
+			new MessageEvent('message', { data: initialUpdate }),
+		);
 
 		expect(FakeBroadcastChannel.posted).toEqual([]);
 		ydoc.destroy();

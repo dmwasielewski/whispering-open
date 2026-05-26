@@ -144,7 +144,7 @@ Cut made:
 Expected next step after verification:
 
 - inspect whether the active `@epicenter/workspace` surface can be narrowed enough to remove `packages/sync`
-- inspect whether encrypted workspace helpers are unused by Whispering Open so `packages/encryption` can be removed later
+- remove stale encrypted helper source files from `packages/workspace`
 
 ### 2026-05-26: Narrowed the root `@epicenter/workspace` browser export
 
@@ -199,6 +199,25 @@ Cut made:
 Expected next step after verification:
 
 - remove stale encrypted helper source files from `packages/workspace`
+
+### 2026-05-26: Removed stale encrypted workspace helper source files
+
+The app already used the local browser workspace surface only. After removing
+`packages/encryption`, the old encrypted IndexedDB, keyring, and local-storage
+helpers in `packages/workspace/src` were dead source files with dangling
+references to the removed package.
+
+Cut made:
+
+- removed encrypted workspace helper source and tests
+- changed table/KV tests and benchmarks to use the local `YKeyValueLww` store
+- refreshed document API notes to describe the local-only Whispering Open
+  surface
+
+Expected next step after verification:
+
+- inspect the remaining workspace daemon, collaboration, and sync source files
+  that are still not part of the active Whispering Open browser surface
 
 ## Safe Cleanup Order
 

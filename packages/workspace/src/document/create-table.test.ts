@@ -1,12 +1,11 @@
 /**
- * createTable: CRUD, query, observation, and migration over EncryptedYKeyValueLww.
+ * createTable: CRUD, query, observation, and migration over YKeyValueLww.
  */
 
 import { describe, expect, test } from 'bun:test';
 import { type } from 'arktype';
 import { expectErr, expectOk } from 'wellcrafted/testing';
 import * as Y from 'yjs';
-import { createEncryptedYkvLww } from '../shared/y-keyvalue/y-keyvalue-lww-encrypted.js';
 import {
 	attachReadonlyTable,
 	attachTable,
@@ -14,11 +13,13 @@ import {
 	createTable,
 } from './attach-table.js';
 import { defineTable } from './define-table.js';
+import { YKeyValueLww } from './y-keyvalue/index.js';
 
 /** Creates Yjs infrastructure for testing */
 function setup() {
 	const ydoc = new Y.Doc();
-	const ykv = createEncryptedYkvLww<unknown>(ydoc, 'test-table');
+	const yarray = ydoc.getArray('test-table');
+	const ykv = new YKeyValueLww<unknown>(yarray);
 	return { ydoc, yarray: ykv.yarray, ykv };
 }
 
