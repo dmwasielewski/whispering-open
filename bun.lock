@@ -106,22 +106,6 @@
         "typescript": "catalog:",
       },
     },
-    "packages/auth-svelte": {
-      "name": "@epicenter/auth-svelte",
-      "version": "0.1.0",
-      "dependencies": {
-        "@epicenter/auth": "workspace:*",
-      },
-      "devDependencies": {
-        "@types/bun": "catalog:",
-        "svelte": "catalog:",
-        "svelte-check": "catalog:",
-        "typescript": "catalog:",
-      },
-      "peerDependencies": {
-        "svelte": "^5.0.0",
-      },
-    },
     "packages/constants": {
       "name": "@epicenter/constants",
       "version": "0.1.0",
@@ -471,8 +455,6 @@
     "@emoji-mart/data": ["@emoji-mart/data@1.2.1", "", {}, "sha512-no2pQMWiBy6gpBEiqGeU77/bFejDqUTRY7KX+0+iur13op3bqUsXdnwoZs6Xb1zbv0gAj5VvS1PWoUUckSr5Dw=="],
 
     "@epicenter/auth": ["@epicenter/auth@workspace:packages/auth"],
-
-    "@epicenter/auth-svelte": ["@epicenter/auth-svelte@workspace:packages/auth-svelte"],
 
     "@epicenter/constants": ["@epicenter/constants@workspace:packages/constants"],
 

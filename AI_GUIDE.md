@@ -49,7 +49,7 @@ The app currently still imports:
 - `@epicenter/constants`
 - `@epicenter/workspace`
 
-`@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is narrowed to `apps/whispering`, and `apps/api` plus `packages/billing` have been removed. A good next step is to inspect `packages/auth`, `packages/auth-svelte`, `packages/server`, `packages/sync`, and `packages/encryption` and remove only the dependency chains that Whispering Open does not use.
+`@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is narrowed to `apps/whispering`, and `apps/api`, `packages/billing`, and `packages/auth-svelte` have been removed. A good next step is to inspect `packages/auth`, `packages/server`, `packages/sync`, and `packages/encryption` and remove only the dependency chains that Whispering Open does not use.
 
 Known cleanup items:
 

@@ -10,3 +10,4 @@
 - Removed the legacy `apps/api` directory.
 - Removed the unused Epicenter billing package.
 - Removed unused auth UI exports from `@epicenter/svelte`.
+- Removed the unused Svelte auth wrapper package.
