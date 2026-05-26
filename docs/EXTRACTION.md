@@ -25,7 +25,7 @@ Still carrying old workspace technical debt:
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Inspect `packages/sync` and `packages/encryption` to determine which packages are really used by Whispering Open.
+- Inspect `packages/encryption` to determine whether it is really used by Whispering Open.
 
 ## Completed Cuts
 
@@ -87,7 +87,7 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect `packages/sync` and `packages/encryption` before removing anything else
+- inspect `packages/encryption` before removing anything else
 
 ### 2026-05-26: Removed unused auth UI exports from `@epicenter/svelte`
 
@@ -171,7 +171,20 @@ Cut made:
 
 Expected next step after verification:
 
-- remove the `packages/sync` directory if no active package still imports it
+- remove stale cloud sync source files in `packages/workspace` if no active export still uses them
+
+### 2026-05-26: Removed `packages/sync`
+
+The sync protocol package was no longer imported by Whispering Open or by the active `@epicenter/workspace` browser surface after `attachBroadcastChannel` stopped importing the shared sync origin markers.
+
+Cut made:
+
+- removed the `packages/sync` directory
+
+Expected next step after verification:
+
+- remove stale cloud sync source files in `packages/workspace`
+- inspect whether encrypted workspace helpers are unused by Whispering Open so `packages/encryption` can be removed later
 
 ## Safe Cleanup Order
 

@@ -26,7 +26,6 @@ packages/svelte-utils
 packages/util
 packages/constants
 packages/workspace
-packages/sync
 packages/encryption
 ```
 
@@ -36,7 +35,7 @@ Current purpose:
 - `packages/svelte-utils` - persisted state/session/workspace helpers.
 - `packages/workspace` - local-first document/table helpers used by Whispering Open state.
 - `packages/constants`, `packages/util` - shared constants/utilities.
-- `packages/encryption`, `packages/sync` - undesirable long term, present because dependency chains still reference them.
+- `packages/encryption` - undesirable long term, present because dependency chains still reference it.
 
 ## Root Files
 
@@ -65,7 +64,7 @@ Recommended order:
 1. Prove local Tauri build and Linux release asset.
 2. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
 3. Review the 21 GitHub Dependabot vulnerabilities reported after push.
-4. Audit and remove unused `packages/sync` and `packages/encryption` dependencies.
+4. Audit and remove unused `packages/encryption` dependencies.
 5. Rename app identity and package scopes.
 6. Replace old workspace links and branding.
 7. Add stable release automation.

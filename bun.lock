@@ -134,23 +134,6 @@
         "typescript": "catalog:",
       },
     },
-    "packages/sync": {
-      "name": "@epicenter/sync",
-      "version": "0.1.0",
-      "dependencies": {
-        "@epicenter/constants": "workspace:*",
-        "lib0": "catalog:",
-        "wellcrafted": "catalog:",
-      },
-      "devDependencies": {
-        "@types/bun": "catalog:",
-        "typescript": "catalog:",
-        "yjs": "catalog:",
-      },
-      "peerDependencies": {
-        "yjs": "catalog:",
-      },
-    },
     "packages/ui": {
       "name": "@epicenter/ui",
       "version": "0.1.0",
@@ -407,8 +390,6 @@
     "@epicenter/encryption": ["@epicenter/encryption@workspace:packages/encryption"],
 
     "@epicenter/svelte": ["@epicenter/svelte@workspace:packages/svelte-utils"],
-
-    "@epicenter/sync": ["@epicenter/sync@workspace:packages/sync"],
 
     "@epicenter/ui": ["@epicenter/ui@workspace:packages/ui"],
 
