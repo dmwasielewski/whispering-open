@@ -260,6 +260,23 @@ Expected next step after verification:
 - inspect remaining timeline, rich-text, markdown, SQLite materializer, Yjs log,
   and AI helper files for actual Whispering Open usage
 
+### 2026-05-27: Removed unused workspace AI bridge
+
+The `packages/workspace/src/ai` bridge converted workspace action registries
+into TanStack AI tools. Whispering Open does not import that bridge, and the
+root workspace export does not expose it.
+
+Cut made:
+
+- removed the unused workspace AI bridge source and tests
+- removed the now-unused `@tanstack/ai` dependency from `@epicenter/workspace`
+- refreshed `bun.lock` with `bun install`
+
+Expected next step after verification:
+
+- inspect remaining timeline, rich-text, markdown, SQLite materializer, and Yjs
+  log files for actual Whispering Open usage
+
 ## Safe Cleanup Order
 
 1. Verify current build:

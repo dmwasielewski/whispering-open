@@ -33,7 +33,6 @@
 		"bench": "bun test ./src/__benchmarks__/*.bench.ts --timeout 60000"
 	},
 	"dependencies": {
-		"@tanstack/ai": "catalog:",
 		"@epicenter/util": "workspace:*",
 		"@sindresorhus/slugify": "catalog:",
 		"@standard-schema/spec": "catalog:",
