@@ -9,6 +9,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 - Keep all repository artifacts in English: documentation, code comments, commit messages, issue notes, release notes, and user-facing app text unless there is an intentional localization change.
 - Preserve a working build at each step.
 - Treat `apps/whispering` as the Whispering Open product surface.
+- Use `docs/FUNCTIONALITY.md` as the source of truth for which features stay, which inherited Epicenter features should be removed, and which decisions are deferred.
 - Treat `apps/api` and nonessential shared packages as temporary dependencies to remove only after verification.
 - Do not remove license files.
 - Do not rename package scopes or Tauri identifiers until build/typecheck passes in the extracted repo.
@@ -58,3 +59,4 @@ The app currently still imports:
 - `DAMIAN_NOTES.md`: chronological project notes and decisions.
 - `PROJECT_STRUCTURE.md`: what each folder is for.
 - `RELEASES.md`: how GitHub releases should be produced and consumed.
+- `docs/FUNCTIONALITY.md`: product scope, feature retention/removal list, and deferred decisions.

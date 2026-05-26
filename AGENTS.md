@@ -16,12 +16,14 @@ Before changing files, read:
 2. `AI_GUIDE.md`
 3. `AI_ERRORS.md`
 4. `PROJECT_STRUCTURE.md`
-5. `DAMIAN_NOTES.md`
+5. `docs/FUNCTIONALITY.md`
+6. `DAMIAN_NOTES.md`
 
 ## Hard Rules
 
 - Keep repository files, documentation, code comments, commit messages, and release notes in English. User-facing conversation with Damian may be Polish, but project artifacts stay English.
 - Keep the app buildable after each commit.
+- Check `docs/FUNCTIONALITY.md` before removing, keeping, or deferring inherited Epicenter functionality.
 - Do not bypass `.githooks/pre-push`.
 - Do not commit secrets, API keys, auth tokens, private logs, local app data, or user recordings.
 - Preserve AGPL/license files.

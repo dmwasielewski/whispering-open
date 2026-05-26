@@ -33,6 +33,7 @@ Start here before changing the project:
 - [AI_ERRORS.md](AI_ERRORS.md) - known mistakes and traps to avoid.
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - repository layout and ownership.
 - [RELEASES.md](RELEASES.md) - release and packaging expectations.
+- [docs/FUNCTIONALITY.md](docs/FUNCTIONALITY.md) - product scope, features to keep, features to remove, and deferred decisions.
 - [docs/EXTRACTION.md](docs/EXTRACTION.md) - current extraction status and dependency cleanup plan.
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) - architecture entry points.
 - [docs/BUILD_AND_RELEASE.md](docs/BUILD_AND_RELEASE.md) - build/release workflow.
