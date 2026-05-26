@@ -16,3 +16,4 @@
 - Narrowed the root workspace browser export to the surface used by Whispering Open.
 - Removed the sync protocol package from the active workspace dependency graph.
 - Removed the unused sync protocol package.
+- Removed the unused encryption package.

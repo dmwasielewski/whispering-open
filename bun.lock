@@ -103,20 +103,6 @@
         "vite": "catalog:",
       },
     },
-    "packages/encryption": {
-      "name": "@epicenter/encryption",
-      "version": "0.1.0",
-      "dependencies": {
-        "@noble/ciphers": "^2.1.1",
-        "@noble/hashes": "^2.0.1",
-        "arktype": "catalog:",
-        "wellcrafted": "catalog:",
-      },
-      "devDependencies": {
-        "@types/bun": "catalog:",
-        "typescript": "catalog:",
-      },
-    },
     "packages/svelte-utils": {
       "name": "@epicenter/svelte",
       "version": "0.1.0",
@@ -186,7 +172,6 @@
       "dependencies": {
         "@ark/json-schema": "^0.0.4",
         "@epicenter/constants": "workspace:*",
-        "@epicenter/encryption": "workspace:*",
         "@epicenter/util": "workspace:*",
         "@hono/standard-validator": "catalog:",
         "@sindresorhus/slugify": "catalog:",
@@ -386,8 +371,6 @@
     "@emoji-mart/data": ["@emoji-mart/data@1.2.1", "", {}, "sha512-no2pQMWiBy6gpBEiqGeU77/bFejDqUTRY7KX+0+iur13op3bqUsXdnwoZs6Xb1zbv0gAj5VvS1PWoUUckSr5Dw=="],
 
     "@epicenter/constants": ["@epicenter/constants@workspace:packages/constants"],
-
-    "@epicenter/encryption": ["@epicenter/encryption@workspace:packages/encryption"],
 
     "@epicenter/svelte": ["@epicenter/svelte@workspace:packages/svelte-utils"],
 

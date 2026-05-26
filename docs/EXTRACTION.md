@@ -25,7 +25,7 @@ Still carrying old workspace technical debt:
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Inspect `packages/encryption` to determine whether it is really used by Whispering Open.
+- Remove stale cloud/auth/sync/encryption source files from `packages/workspace`.
 
 ## Completed Cuts
 
@@ -87,7 +87,7 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect `packages/encryption` before removing anything else
+- remove stale cloud/auth/sync/encryption source files from `packages/workspace`
 
 ### 2026-05-26: Removed unused auth UI exports from `@epicenter/svelte`
 
@@ -184,7 +184,21 @@ Cut made:
 Expected next step after verification:
 
 - remove stale cloud sync source files in `packages/workspace`
-- inspect whether encrypted workspace helpers are unused by Whispering Open so `packages/encryption` can be removed later
+- inspect whether encrypted workspace helper source files can be removed from `packages/workspace`
+
+### 2026-05-26: Removed `packages/encryption`
+
+Whispering Open does not import encrypted workspace helpers. After the root `@epicenter/workspace` export was narrowed to the local browser surface, the encryption package was no longer part of the active app dependency graph.
+
+Cut made:
+
+- narrowed `packages/workspace/package.json` exports to the root browser surface
+- removed `@epicenter/encryption` from `packages/workspace/package.json`
+- removed the `packages/encryption` directory
+
+Expected next step after verification:
+
+- remove stale encrypted helper source files from `packages/workspace`
 
 ## Safe Cleanup Order
 

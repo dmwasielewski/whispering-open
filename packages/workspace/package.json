@@ -24,20 +24,7 @@
 	},
 	"homepage": "https://epicenter.so",
 	"exports": {
-		".": "./src/index.ts",
-		"./markdown": "./src/markdown/index.ts",
-		"./document/materializer/markdown": "./src/document/materializer/markdown/index.ts",
-		"./daemon": "./src/daemon/index.ts",
-		"./ai": "./src/ai/index.ts",
-		"./node": "./src/node.ts",
-		"./document/materializer/sqlite": "./src/document/materializer/sqlite/index.ts",
-		"./test-utils": "./src/shared/test-utils.ts",
-		"./links": "./src/links.ts",
-		"./document/keys": "./src/document/keys.ts",
-		"./document/presence": "./src/document/presence-protocol.ts",
-		"./document/dispatch-protocol": "./src/document/dispatch-protocol.ts",
-		"./document/y-keyvalue/y-keyvalue-lww": "./src/document/y-keyvalue/y-keyvalue-lww.ts",
-		"./document/attach-timeline": "./src/document/attach-timeline/index.ts"
+		".": "./src/index.ts"
 	},
 	"license": "MIT",
 	"scripts": {
@@ -48,7 +35,6 @@
 	"dependencies": {
 		"@ark/json-schema": "^0.0.4",
 		"@epicenter/constants": "workspace:*",
-		"@epicenter/encryption": "workspace:*",
 		"@hono/standard-validator": "catalog:",
 		"@tanstack/ai": "catalog:",
 		"@epicenter/util": "workspace:*",
