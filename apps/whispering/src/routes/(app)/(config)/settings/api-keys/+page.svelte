@@ -15,11 +15,11 @@
 	} from '$lib/components/settings';
 </script>
 
-<svelte:head> <title>API Keys - Whispering</title> </svelte:head>
+<svelte:head> <title>API Keys - Whispering Open</title> </svelte:head>
 
 <Field.Set>
 	<Field.Legend>API Keys</Field.Legend>
-	<Field.Description>Configure your API keys for Whispering.</Field.Description>
+	<Field.Description>Configure your API keys for Whispering Open.</Field.Description>
 	<Field.Separator />
 
 	<Tabs.Root value="all" class="w-full">

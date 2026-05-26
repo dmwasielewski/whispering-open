@@ -33,7 +33,7 @@
 	}));
 </script>
 
-<svelte:head> <title>Install FFmpeg - Whispering</title> </svelte:head>
+<svelte:head> <title>Install FFmpeg - Whispering Open</title> </svelte:head>
 
 <main class="flex flex-1 items-center justify-center p-8">
 	<div class="w-full min-w-[640px] max-w-4xl">
@@ -314,7 +314,7 @@
 											>
 											<div class="space-y-3 flex-1">
 												<p class="text-sm text-muted-foreground">
-													Restart Whispering, then verify FFmpeg is working:
+													Restart Whispering Open, then verify FFmpeg is working:
 												</p>
 												<Snippet text="ffmpeg -version" variant="secondary" />
 											</div>
@@ -349,7 +349,7 @@
 													>)
 												</li>
 												<li>
-													Restart Whispering completely after adding to PATH
+													Restart Whispering Open completely after adding to PATH
 												</li>
 												<li>
 													Test in a new Command Prompt:

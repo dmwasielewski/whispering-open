@@ -41,7 +41,7 @@ export const CommandServiceLive = {
 	 *
 	 * @param command - The command to execute (e.g., "ffmpeg -version")
 	 * @returns The command output (stdout/stderr/exit code) or an error
-	 * @see https://github.com/EpicenterHQ/epicenter/issues/815
+	 * @see Original upstream issue 815.
 	 */
 	async execute(command: ShellCommand) {
 		console.log('[TS] execute: starting command:', command);
@@ -73,7 +73,7 @@ export const CommandServiceLive = {
 	 *
 	 * @param command - The command to spawn (e.g., "ffmpeg -f avfoundation -i :0 output.wav")
 	 * @returns A Child process handle or an error
-	 * @see https://github.com/EpicenterHQ/epicenter/issues/815
+	 * @see Original upstream issue 815.
 	 */
 	async spawn(command: ShellCommand) {
 		console.log('[TS] spawn: starting command:', command);

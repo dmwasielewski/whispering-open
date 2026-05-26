@@ -69,7 +69,7 @@
 				checkForUpdates(),
 			]);
 		} else {
-			// Browser extension context - notify that the Whispering tab is ready
+			// Browser extension context - notify that the Whispering Open tab is ready
 			// extension.notifyWhisperingTabReady(undefined);
 		}
 	});

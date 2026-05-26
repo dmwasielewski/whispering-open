@@ -33,7 +33,7 @@
 		</div>
 		<SectionHeader.Description class="max-w-2xl">
 			Help us understand which features are used most. We use anonymized event
-			logging to improve Whispering.
+			logging to improve Whispering Open.
 		</SectionHeader.Description>
 	</SectionHeader.Root>
 
@@ -142,7 +142,7 @@
 		<Card.Content class="space-y-3">
 			<div class="grid gap-2 text-sm">
 				<a
-					href="https://github.com/EpicenterHQ/epicenter/blob/main/apps/whispering/src/lib/services/analytics/types.ts"
+					href="https://github.com/dmwasielewski/whispering-open/blob/main/apps/whispering/src/lib/services/analytics/types.ts"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="group flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -157,7 +157,7 @@
 					>
 				</a>
 				<a
-					href="https://github.com/search?q=repo%3AEpicenterHQ%2Fepicenter+rpc.analytics.logEvent&type=code"
+					href="https://github.com/search?q=repo%3Admwasielewski%2Fwhispering-open+rpc.analytics.logEvent&type=code"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="group flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"

@@ -24,7 +24,7 @@ export type AutostartError = InferErrors<typeof AutostartError>;
 
 /**
  * Auto-start service for desktop platforms.
- * Enables/disables launching Whispering on system login.
+ * Enables/disables launching Whispering Open on system login.
  *
  * Platform-specific behavior:
  * - macOS: Creates Launch Agent in ~/Library/LaunchAgents/
@@ -32,21 +32,21 @@ export type AutostartError = InferErrors<typeof AutostartError>;
  * - Linux: Creates .desktop file in ~/.config/autostart/
  */
 export const AutostartServiceLive = {
-	/** Check if autostart is currently enabled for Whispering. */
+	/** Check if autostart is currently enabled for Whispering Open. */
 	isEnabled: () =>
 		tryAsync({
 			try: () => isEnabled(),
 			catch: (error) => AutostartError.CheckFailed({ cause: error }),
 		}),
 
-	/** Enable autostart so Whispering launches on system login. */
+	/** Enable autostart so Whispering Open launches on system login. */
 	enable: () =>
 		tryAsync({
 			try: () => enable(),
 			catch: (error) => AutostartError.EnableFailed({ cause: error }),
 		}),
 
-	/** Disable autostart so Whispering does not launch on system login. */
+	/** Disable autostart so Whispering Open does not launch on system login. */
 	disable: () =>
 		tryAsync({
 			try: () => disable(),

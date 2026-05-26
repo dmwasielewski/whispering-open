@@ -9,7 +9,7 @@
 	import { ChromeWebStoreIcon } from '$lib/components/icons';
 </script>
 
-<svelte:head> <title>Download Desktop App - Whispering</title> </svelte:head>
+<svelte:head> <title>Download Desktop App - Whispering Open</title> </svelte:head>
 
 <main
 	class="flex flex-1 items-center justify-center p-4 container max-w-4xl mx-auto"
@@ -20,10 +20,10 @@
 				level={1}
 				class="scroll-m-20 text-4xl tracking-tight lg:text-5xl"
 			>
-				Whispering Desktop
+				Whispering Open Desktop
 			</SectionHeader.Title>
 			<SectionHeader.Description class="text-lg lg:text-xl max-w-2xl mx-auto">
-				Experience the full power of Whispering with native performance and
+				Experience the full power of Whispering Open with native performance and
 				system-wide integration.
 			</SectionHeader.Description>
 		</SectionHeader.Root>
@@ -65,8 +65,8 @@
 		<div class="flex flex-col items-center gap-4">
 			<div class="flex flex-col gap-3 sm:flex-row">
 				<Button
-					tooltip="Download Whispering Desktop App"
-					href="https://github.com/EpicenterHQ/epicenter/releases"
+					tooltip="Download Whispering Open Desktop App"
+					href="https://github.com/dmwasielewski/whispering-open/releases"
 					target="_blank"
 					rel="noopener noreferrer"
 					variant="default"

@@ -40,7 +40,7 @@
 							<div
 								class="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden"
 							>
-								<span class="truncate font-semibold">Whispering</span>
+								<span class="truncate font-semibold">Whispering Open</span>
 								<span class="truncate text-xs text-muted-foreground"
 									>Speech to text</span
 								>
@@ -100,7 +100,7 @@
 				<Sidebar.MenuButton>
 					{#snippet child({ props })}
 						<a
-							href="https://github.com/EpicenterHQ/epicenter"
+							href="https://github.com/dmwasielewski/whispering-open"
 							target="_blank"
 							rel="noopener noreferrer"
 							{...props}

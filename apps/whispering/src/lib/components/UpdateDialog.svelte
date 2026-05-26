@@ -76,7 +76,7 @@
 	import { rpc } from '$lib/query';
 
 	const GITHUB_RELEASES_URL =
-		'https://github.com/EpicenterHQ/epicenter/releases/tag';
+		'https://github.com/dmwasielewski/whispering-open/releases/tag';
 
 	function getGitHubReleaseUrl(version: string) {
 		const tag = version.startsWith('v') ? version : `v${version}`;
@@ -111,10 +111,10 @@
 						case 'Finished':
 							rpc.notify.success({
 								title: 'Update installed successfully!',
-								description: 'Restart Whispering to apply the update.',
+								description: 'Restart Whispering Open to apply the update.',
 								action: {
 									type: 'button',
-									label: 'Restart Whispering',
+									label: 'Restart Whispering Open',
 									onClick: () => relaunch(),
 								},
 							});

@@ -125,12 +125,12 @@
 	}
 </script>
 
-<svelte:head> <title>Recording Settings - Whispering</title> </svelte:head>
+<svelte:head> <title>Recording Settings - Whispering Open</title> </svelte:head>
 
 <Field.Set>
 	<Field.Legend>Recording</Field.Legend>
 	<Field.Description>
-		Configure your Whispering recording preferences.
+		Configure your Whispering Open recording preferences.
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
@@ -309,7 +309,7 @@
 						Device enumeration and recording will fail. Please use Manual
 						recording mode instead.
 						<Link
-							href="https://github.com/EpicenterHQ/epicenter/issues/839"
+							href="https://github.com/dmwasielewski/whispering-open/issues"
 							target="_blank"
 							class="font-medium underline underline-offset-4 hover:text-red-700 dark:hover:text-red-300"
 						>

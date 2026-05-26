@@ -10,7 +10,7 @@
 	let { children } = $props();
 </script>
 
-<svelte:head> <title>Whispering</title> </svelte:head>
+<svelte:head> <title>Whispering Open</title> </svelte:head>
 
 <QueryClientProvider client={queryClient}>
 	<!-- Uses UI package defaults (300ms delay, 150ms skip) -->

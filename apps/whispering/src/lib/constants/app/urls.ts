@@ -1,7 +1,7 @@
 import { APP_URLS } from '@epicenter/constants/vite';
 
 /**
- * URL and pathname constants for the Whispering application
+ * URL and pathname constants for the Whispering Open application
  */
 export const WHISPERING_URL = APP_URLS.AUDIO;
 

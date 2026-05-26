@@ -226,7 +226,7 @@
 	}
 </script>
 
-<svelte:head> <title>Whispering</title> </svelte:head>
+<svelte:head> <title>Whispering Open</title> </svelte:head>
 
 <div
 	class="flex flex-1 flex-col items-center justify-center gap-4 w-full max-w-md mx-auto px-4"
@@ -236,10 +236,10 @@
 			level={1}
 			class="scroll-m-20 text-4xl tracking-tight lg:text-5xl"
 		>
-			Whispering
+			Whispering Open
 		</SectionHeader.Title>
 		<SectionHeader.Description class="text-center">
-			Press shortcut → speak → get text. Free and open source ❤️
+			Press shortcut, speak, get text. Free and open source.
 		</SectionHeader.Description>
 	</SectionHeader.Root>
 
@@ -478,8 +478,8 @@
 			{#if !window.__TAURI_INTERNALS__}
 				Tired of switching tabs?
 				<Link
-					tooltip="Get Whispering for desktop"
-					href="https://epicenter.so/whispering"
+					tooltip="Get Whispering Open for desktop"
+					href="https://github.com/dmwasielewski/whispering-open/releases"
 					target="_blank"
 					rel="noopener noreferrer"
 				>

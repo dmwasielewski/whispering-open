@@ -92,7 +92,7 @@ export type Transformation = InferTableRow<typeof transformations>;
  * - Per-provider model memory: each inference provider's model selection is stored
  *   independently. Switching providers and switching back retains your choices.
  *
- * @see {@link https://github.com/EpicenterHQ/epicenter/blob/main/specs/20260312T170000-whispering-workspace-polish-and-migration.md | Spec Decision 1}
+ * @see Spec Decision 1 in the original workspace migration notes.
  */
 const transformationSteps = defineTable(
 	type({
@@ -138,7 +138,7 @@ export type TransformationStep = InferTableRow<typeof transformationSteps>;
  * across states. The union ensures `output` exists only on completed runs and `error`
  * exists only on failed runs, eliminating null checks after status narrowing.
  *
- * @see {@link https://github.com/EpicenterHQ/epicenter/blob/main/specs/20260312T170000-whispering-workspace-polish-and-migration.md | Spec Decision 1}
+ * @see Spec Decision 1 in the original workspace migration notes.
  */
 const TransformationRunBase = type({
 	id: 'string',
@@ -268,7 +268,7 @@ const recording = {
  * back preserves your OpenAI model choice. `temperature` is stored as a number
  * (0–1) — the old settings schema used a string for localStorage.
  *
- * @see {@link https://github.com/EpicenterHQ/epicenter/blob/main/specs/20260312T170000-whispering-workspace-polish-and-migration.md | Spec Decision 2}
+ * @see Spec Decision 2 in the original workspace migration notes.
  */
 const transcription = {
 	'transcription.service': defineKv(
@@ -327,7 +327,7 @@ const analytics = {
 
 /**
  * In-app keyboard shortcuts. System-global shortcuts are device-specific and stay
- * in localStorage — these are only the shortcuts within the Whispering window.
+ * in localStorage — these are only the shortcuts within the Whispering Open window.
  * `null` = unbound.
  */
 const shortcuts = {
@@ -344,7 +344,7 @@ const shortcuts = {
 } as const;
 
 /**
- * Whispering table schemas — 5 normalized tables for domain data.
+ * Whispering Open table schemas — 5 normalized tables for domain data.
  * Consumed by `attachTables` in `client.ts`.
  */
 export const whisperingTables = {
@@ -356,7 +356,7 @@ export const whisperingTables = {
 };
 
 /**
- * Whispering KV schemas — ~40 entries for synced preferences.
+ * Whispering Open KV schemas — ~40 entries for synced preferences.
  * Consumed by `attachKv` in `client.ts`.
  */
 export const whisperingKv = {

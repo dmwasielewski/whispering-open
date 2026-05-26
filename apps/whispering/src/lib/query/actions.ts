@@ -87,7 +87,7 @@ const startManualRecording = defineMutation({
 			case 'success': {
 				notify.success({
 					id: toastId,
-					title: '🎙️ Whispering is recording...',
+					title: '🎙️ Whispering Open is recording...',
 					description: 'Speak now and stop recording when done',
 				});
 				break;

@@ -3,7 +3,7 @@ import { Err, type Ok } from 'wellcrafted/result';
 import type { UnifiedNotificationOptions } from '$lib/services/notifications/types';
 
 /**
- * Custom error type for the Whispering application that combines error information
+ * Custom error type for the Whispering Open application that combines error information
  * with notification display options. This error type is designed to be user-facing,
  * providing both error details and UI presentation information.
  */

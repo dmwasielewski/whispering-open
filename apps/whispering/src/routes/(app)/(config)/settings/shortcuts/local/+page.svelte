@@ -9,7 +9,7 @@
 	import ShortcutTable from '../keyboard-shortcut-recorder/ShortcutTable.svelte';
 </script>
 
-<svelte:head> <title>Local Shortcuts - Whispering</title> </svelte:head>
+<svelte:head> <title>Local Shortcuts - Whispering Open</title> </svelte:head>
 
 <section>
 	<div
@@ -27,7 +27,7 @@
 			</div>
 			<SectionHeader.Description>
 				Set keyboard shortcuts that work when the app is in focus. These
-				shortcuts will only trigger when Whispering is the active application.
+				shortcuts will only trigger when Whispering Open is the active application.
 			</SectionHeader.Description>
 		</SectionHeader.Root>
 		<Button

@@ -57,7 +57,7 @@ async function mockCheck(): Promise<UpdateInfo> {
 
 ## Automatic Updates
 
-Whispering now checks for updates on startup and shows you what's new before installing. No more manually checking GitHub for new versions.
+Whispering Open now checks for updates on startup and shows you what's new before installing. No more manually checking GitHub for new versions.
 
 ## Performance Improvements
 
@@ -66,13 +66,13 @@ Audio processing is now 50% faster thanks to optimized buffering and parallel pr
 ## What's Changed
 
 ### Features
-* feat: add automatic update checking on app startup by @braden-w in https://github.com/EpicenterHQ/epicenter/pull/1234
-* feat: improve audio processing performance by @braden-w in https://github.com/EpicenterHQ/epicenter/pull/1235
+* feat: add automatic update checking on app startup
+* feat: improve audio processing performance
 
 ### Bug Fixes
-* fix: resolve memory leak in long recording sessions by @braden-w in https://github.com/EpicenterHQ/epicenter/pull/1236
+* fix: resolve memory leak in long recording sessions
 
-**Full Changelog**: https://github.com/EpicenterHQ/epicenter/compare/v1.9.0...v2.0.0`,
+**Full Changelog**: https://github.com/dmwasielewski/whispering-open/compare/v1.9.0...v2.0.0`,
 		/**
 		 * Mock download and install function that simulates real update behavior
 		 */

@@ -63,9 +63,9 @@
 		<Card.Header>
 			<Card.Title class="text-xl">MacOS Accessibility</Card.Title>
 			<Card.Description class="leading-7">
-				Follow the steps below to re-enable Whispering in your macOS
+				Follow the steps below to re-enable Whispering Open in your macOS
 				Accessibility settings. This often is needed after installing new
-				versions of Whispering due to a macOS bug.
+				versions of Whispering Open due to a macOS bug.
 			</Card.Description>
 		</Card.Header>
 		<Card.Content>
@@ -120,14 +120,14 @@
 					<li>
 						Click on
 						<span class="text-primary font-semibold tracking-tight"
-							>🎙️ Whispering</span
+							>🎙️ Whispering Open</span
 						>
 						and remove it using the minus icon (-).
 					</li>
 					<li>
-						Re-add Whispering by pressing the plus icon (+) and selecting
+						Re-add Whispering Open by pressing the plus icon (+) and selecting
 						<span class="text-primary font-semibold tracking-tight"
-							>🎙️ Whispering.app</span
+							>🎙️ Whispering Open.app</span
 						>
 					</li>
 				</ol>

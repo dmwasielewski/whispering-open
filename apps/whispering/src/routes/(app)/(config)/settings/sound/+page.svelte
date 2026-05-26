@@ -4,12 +4,12 @@
 	import { settings } from '$lib/state/settings.svelte';
 </script>
 
-<svelte:head> <title>Sound Settings - Whispering</title> </svelte:head>
+<svelte:head> <title>Sound Settings - Whispering Open</title> </svelte:head>
 
 <Field.Set>
 	<Field.Legend>Sound</Field.Legend>
 	<Field.Description>
-		Configure your Whispering sound preferences.
+		Configure your Whispering Open sound preferences.
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>

@@ -1,10 +1,10 @@
 /**
- * Centralized path constants for the Whispering desktop app.
+ * Centralized path constants for the Whispering Open desktop app.
  *
  * All paths are absolute and resolve relative to the platform-specific app data directory:
- * - macOS: `~/Library/Application Support/com.bradenwong.whispering/`
- * - Windows: `%APPDATA%/com.bradenwong.whispering/`
- * - Linux: `~/.config/com.bradenwong.whispering/`
+ * - macOS: `~/Library/Application Support/io.github.dmwasielewski.whisperingopen/`
+ * - Windows: `%APPDATA%/io.github.dmwasielewski.whisperingopen/`
+ * - Linux: `~/.config/io.github.dmwasielewski.whisperingopen/`
  *
  * Methods are async because they use Tauri's path APIs which require dynamic imports.
  */

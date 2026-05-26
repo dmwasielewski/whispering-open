@@ -13,7 +13,7 @@
 	import ShortcutTable from '../keyboard-shortcut-recorder/ShortcutTable.svelte';
 </script>
 
-<svelte:head> <title>Global Shortcuts - Whispering</title> </svelte:head>
+<svelte:head> <title>Global Shortcuts - Whispering Open</title> </svelte:head>
 
 {#if window.__TAURI_INTERNALS__}
 	<section>
@@ -31,7 +31,7 @@
 					<ShortcutFormatHelp type="global" />
 				</div>
 				<SectionHeader.Description>
-					Set system-wide keyboard shortcuts that work even when Whispering is
+					Set system-wide keyboard shortcuts that work even when Whispering Open is
 					not in focus. These shortcuts will trigger from anywhere on your
 					system.
 				</SectionHeader.Description>
@@ -66,7 +66,7 @@
 			</Empty.Media>
 			<Empty.Title>Global Shortcuts</Empty.Title>
 			<Empty.Description>
-				Global shortcuts allow you to use Whispering from any application on
+				Global shortcuts allow you to use Whispering Open from any application on
 				your computer. This feature is only available in the desktop app or
 				browser extension.
 			</Empty.Description>
