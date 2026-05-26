@@ -1,5 +1,11 @@
-import { BC_ORIGIN, isTransportOrigin } from '@epicenter/sync';
 import * as Y from 'yjs';
+
+const BC_ORIGIN = Symbol.for('@whispering-open/workspace/bc-origin');
+const BROADCAST_CHANNEL_ORIGINS: readonly unknown[] = [BC_ORIGIN];
+
+function isBroadcastChannelOrigin(origin: unknown): boolean {
+	return BROADCAST_CHANNEL_ORIGINS.includes(origin);
+}
 
 /**
  * Local-only BroadcastChannel cross-tab sync for a Yjs document.
@@ -11,10 +17,9 @@ import * as Y from 'yjs';
  * one from the `(server, ownerId)` pair) so two signed-in owners in the same
  * browser profile cannot exchange plaintext.
  *
- * Skips re-broadcasting updates that arrived from BroadcastChannel itself
- * (via `BC_ORIGIN`) and updates that arrived from WebSocket sync. Without
- * those guards, delivered updates would be re-broadcast to other tabs, and
- * those tabs would re-send them.
+ * Skips re-broadcasting updates that arrived from BroadcastChannel itself.
+ * Without that guard, delivered updates would be re-broadcast to other tabs,
+ * and those tabs would re-send them.
  *
  * No-ops gracefully when `BroadcastChannel` is unavailable (Node.js, SSR,
  * older browsers).
@@ -30,7 +35,7 @@ export function attachBroadcastChannel(
 	const channel = new BroadcastChannel(`yjs.${channelKey}`);
 
 	const handleUpdate = (update: Uint8Array, origin: unknown) => {
-		if (isTransportOrigin(origin)) return;
+		if (isBroadcastChannelOrigin(origin)) return;
 		channel.postMessage(update);
 	};
 	ydoc.on('updateV2', handleUpdate);

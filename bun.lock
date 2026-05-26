@@ -204,7 +204,6 @@
         "@ark/json-schema": "^0.0.4",
         "@epicenter/constants": "workspace:*",
         "@epicenter/encryption": "workspace:*",
-        "@epicenter/sync": "workspace:*",
         "@epicenter/util": "workspace:*",
         "@hono/standard-validator": "catalog:",
         "@sindresorhus/slugify": "catalog:",

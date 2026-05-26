@@ -51,7 +51,6 @@
 		"@epicenter/encryption": "workspace:*",
 		"@hono/standard-validator": "catalog:",
 		"@tanstack/ai": "catalog:",
-		"@epicenter/sync": "workspace:*",
 		"@epicenter/util": "workspace:*",
 		"@sindresorhus/slugify": "catalog:",
 		"@standard-schema/spec": "catalog:",

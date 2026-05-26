@@ -146,6 +146,33 @@ Expected next step after verification:
 - inspect whether the active `@epicenter/workspace` surface can be narrowed enough to remove `packages/sync`
 - inspect whether encrypted workspace helpers are unused by Whispering Open so `packages/encryption` can be removed later
 
+### 2026-05-26: Narrowed the root `@epicenter/workspace` browser export
+
+Whispering Open imports a small local-first subset from `@epicenter/workspace`: table/KV definitions, table/KV attachments, IndexedDB, BroadcastChannel, `DateTimeString`, and cache/table/KV types used by helper packages.
+
+Cut made:
+
+- narrowed `packages/workspace/src/index.ts` to the browser-safe surface used by Whispering Open
+- stopped exporting cloud sync, daemon, auth, encryption, transport, action, timeline, and rich text helpers from the root workspace barrel
+
+Expected next step after verification:
+
+- inspect whether `packages/sync` can be removed after the app no longer traverses cloud sync exports
+- inspect whether `packages/encryption` can be removed after the app no longer traverses encryption exports
+
+### 2026-05-26: Removed `@epicenter/sync` from the active workspace dependency graph
+
+Whispering Open uses local-only BroadcastChannel sync, not the cloud WebSocket sync protocol. `attachBroadcastChannel` only needed a BroadcastChannel origin marker to avoid echo loops, so it no longer imports the shared sync protocol package.
+
+Cut made:
+
+- moved the BroadcastChannel origin guard into `attach-broadcast-channel.ts`
+- removed `@epicenter/sync` from `packages/workspace/package.json`
+
+Expected next step after verification:
+
+- remove the `packages/sync` directory if no active package still imports it
+
 ## Safe Cleanup Order
 
 1. Verify current build:
