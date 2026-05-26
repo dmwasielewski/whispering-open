@@ -12,7 +12,7 @@ Included intentionally:
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
 - `packages/util`, `packages/constants`, `packages/workspace` - shared helpers still used by the app.
-- `apps/api` and auth/server/sync/billing-related packages - temporary dependency chain.
+- `apps/api` and auth/server/sync/billing-related packages - temporary workspace packages that still exist until the workspace graph is narrowed and verified.
 
 Still carrying old workspace technical debt:
 
@@ -21,11 +21,32 @@ Still carrying old workspace technical debt:
 - remaining references to old upstream release assets where the app still downloads required files
 - some workspace/auth/sync abstractions that may not be needed for a local dictation app
 
-## Why `apps/api` Exists
+## Completed Cuts
 
-`@epicenter/svelte` currently depends on `@epicenter/api`. Until the exact helpers used by Whispering Open are isolated, removing `apps/api` breaks workspace dependency resolution.
+### 2026-05-26: Removed `@epicenter/api` from `@epicenter/svelte`
 
-Do not remove it blindly.
+Whispering Open uses `@epicenter/svelte` for local Svelte helpers:
+
+- `fromTable`
+- `createPersistedMap`
+- `createPersistedState`
+
+The `packages/svelte-utils` source did not import `@epicenter/api`, but its package metadata still declared `@epicenter/api` as a workspace dependency. That dependency kept `apps/api` connected to the active dependency graph.
+
+Cut made:
+
+- removed `@epicenter/api` from `packages/svelte-utils/package.json`
+
+Expected next step after verification:
+
+- narrow the root workspace from `apps/*` to `apps/whispering`
+- then remove `apps/api` if `bun install`, `bun run typecheck`, and `bun run build:web` still pass
+
+## Why `apps/api` Still Exists
+
+`apps/api` still exists on disk while the workspace package list is being narrowed. It should not be treated as product code for Whispering Open.
+
+Do not remove it blindly before the current cut is verified and committed.
 
 ## Safe Cleanup Order
 
@@ -35,12 +56,13 @@ Do not remove it blindly.
    bun run build:web
    ```
 2. Identify exact imports from `@epicenter/svelte`.
-3. Move or copy only the needed Svelte helpers into a Whispering Open-owned package or local module.
-4. Remove `@epicenter/api` from `packages/svelte-utils`.
+3. Remove unused package metadata dependencies from `packages/svelte-utils`.
+4. Narrow the root workspace so only `apps/whispering` remains under `apps`.
 5. Remove `apps/api`.
-6. Repeat for `auth`, `server`, `billing`, `sync`, and other unused packages.
-7. Rename package scopes after dependency graph is small.
-8. Rename Tauri identity and release metadata in a dedicated migration.
+6. Move or copy only the needed Svelte helpers into a Whispering Open-owned package or local module.
+7. Repeat for `auth`, `server`, `billing`, `sync`, and other unused packages.
+8. Rename package scopes after dependency graph is small.
+9. Rename Tauri identity and release metadata in a dedicated migration.
 
 ## Verification Rule
 
