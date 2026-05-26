@@ -25,7 +25,7 @@ Still carrying old workspace technical debt:
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Inspect `packages/auth`, `packages/sync`, and `packages/encryption` to determine which packages are really used by Whispering Open.
+- Inspect `packages/sync` and `packages/encryption` to determine which packages are really used by Whispering Open.
 
 ## Completed Cuts
 
@@ -87,7 +87,7 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect `packages/auth`, `packages/sync`, and `packages/encryption` before removing anything else
+- inspect `packages/sync` and `packages/encryption` before removing anything else
 
 ### 2026-05-26: Removed unused auth UI exports from `@epicenter/svelte`
 
@@ -107,7 +107,7 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect whether `packages/auth` remains only through server/legacy packages
+- inspect whether `packages/server` can be removed
 
 ### 2026-05-26: Removed `packages/server`
 
@@ -119,7 +119,6 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect whether `packages/auth` is still required after server removal
 - inspect whether `packages/sync` is still required by active workspace code
 
 ### 2026-05-26: Removed `packages/auth-svelte`
@@ -132,7 +131,20 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect whether `packages/auth` remains only through server/legacy packages
+- inspect whether the active `@epicenter/workspace` surface can be narrowed enough to remove `packages/sync`
+
+### 2026-05-26: Removed `packages/auth`
+
+The auth core package was no longer imported by Whispering Open or by active shared package code after removing the API app, Svelte auth wrapper, and shared server package.
+
+Cut made:
+
+- removed the `packages/auth` directory
+
+Expected next step after verification:
+
+- inspect whether the active `@epicenter/workspace` surface can be narrowed enough to remove `packages/sync`
+- inspect whether encrypted workspace helpers are unused by Whispering Open so `packages/encryption` can be removed later
 
 ## Safe Cleanup Order
 

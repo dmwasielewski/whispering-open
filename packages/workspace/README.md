@@ -876,7 +876,6 @@ import {
 	openCollaboration,
 	roomWsUrl,
 } from '@epicenter/workspace';
-import type { AuthClient } from '@epicenter/auth';
 import type { OwnerId } from '@epicenter/constants/identity';
 import { type } from 'arktype';
 
@@ -888,8 +887,8 @@ function openTabs({
 	onReconnectSignal,
 }: {
 	ownerId: OwnerId;
-	openWebSocket: AuthClient['openWebSocket'];
-	onReconnectSignal: AuthClient['onStateChange'];
+	openWebSocket: (url: string | URL, protocols?: string[]) => Promise<WebSocket>;
+	onReconnectSignal: (fn: () => void) => () => void;
 }) {
 	const ydoc = new Y.Doc({ guid: 'epicenter.tabs' });
 	const tables = attachTables(ydoc, { tabs });

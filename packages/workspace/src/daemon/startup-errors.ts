@@ -14,9 +14,9 @@ import type { DaemonRouteNameIssue } from './route-validation.js';
  * - `RouteNameRejected`: embedded callers passed invalid route names.
  * - `MetadataWriteFailed`: startup could not publish its metadata sidecar.
  *
- * Auth-construction failures are surfaced as `MachineAuthStorageError`
- * variants directly (see `@epicenter/auth`); they do not need a startup-
- * scope wrapper because `runUp` returns the original typed error.
+ * Auth-construction failures are surfaced by their auth client directly; they
+ * do not need a startup-scope wrapper because `runUp` returns the original
+ * typed error.
  */
 export const StartupError = defineErrors({
 	AlreadyRunning: ({ pid }: { pid?: number }) => ({

@@ -8,11 +8,9 @@
  * cloud adversary, so plain IDB + plain BroadcastChannel + plain
  * `attachTable` is the right shape.
  *
- * If this file ever needs to import from `@epicenter/auth`,
- * `@epicenter/encryption`, or `@epicenter/constants/identity`, the
- * primitives have drifted away from the local-only ergonomic that
- * motivated the workspace split. Either rename the test, or fix the
- * primitive.
+ * If this file ever needs to import encryption or owner identity helpers, the
+ * primitives have drifted away from the local-only ergonomic that motivated
+ * the workspace split. Either rename the test, or fix the primitive.
  */
 
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test';

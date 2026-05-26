@@ -21,13 +21,16 @@
  *   openCollaboration,
  *   roomWsUrl,
  * } from '@epicenter/workspace';
- * import type { AuthClient } from '@epicenter/auth';
  * import type { OwnerId } from '@epicenter/constants/identity';
  * import { type } from 'arktype';
  * import * as Y from 'yjs';
  *
  * const posts = defineTable(type({ id: 'string', title: 'string', _v: '1' }));
- * declare const auth: AuthClient;
+ * declare const auth: {
+ *   baseURL: string;
+ *   openWebSocket: (url: string | URL, protocols?: string[]) => Promise<WebSocket>;
+ *   onStateChange: (fn: () => void) => () => void;
+ * };
  * declare const ownerId: OwnerId;
  *
  * const deviceId = createDeviceId({ storage: localStorage });
