@@ -83,7 +83,7 @@ pub async fn run() {
         {
             use std::fs::OpenOptions;
             use std::io::Write;
-            let crash_log_path = std::env::temp_dir().join("whispering-crash.log");
+            let crash_log_path = std::env::temp_dir().join("whispering-open-crash.log");
             if let Ok(mut file) = OpenOptions::new()
                 .create(true)
                 .append(true)
@@ -119,7 +119,7 @@ pub async fn run() {
         .level_for("whispering::transcription", log::LevelFilter::Debug)
         .target(Target::new(TargetKind::Stdout))
         .target(Target::new(TargetKind::LogDir {
-            file_name: Some("whispering".to_string()),
+            file_name: Some("whispering-open".to_string()),
         }))
         .build();
 

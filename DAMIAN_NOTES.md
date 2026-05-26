@@ -2,7 +2,7 @@
 
 ## 2026-05-25
 
-Created `/var/home/damian/whispering-open` as a standalone Whispering extraction.
+Created `/var/home/damian/whispering-open` as a standalone Whispering Open extraction.
 
 Copied:
 
@@ -26,7 +26,7 @@ Preserved local edits from the source tree:
 - `apps/whispering/src/routes/+layout.svelte`
 - `apps/whispering/src/routes/(app)/_components/VerticalNav.svelte`
 
-Changed root `package.json` so the default scripts target Whispering instead of unrelated Epicenter apps.
+Changed root `package.json` so the default scripts target Whispering Open instead of unrelated apps.
 
 Verification:
 
@@ -41,6 +41,6 @@ Project rule:
 Next cleanup candidates:
 
 1. Remove `apps/api` by trimming `packages/svelte-utils` imports/dependencies.
-2. Remove unused auth/cloud/sync packages after checking actual imports from Whispering.
-3. Rename package/app identifiers away from Epicenter.
+2. Remove unused auth/cloud/sync packages after checking actual imports from Whispering Open.
+3. Rename package/app identifiers away from old workspace names.
 4. Remove analytics/cloud/account UI if not needed.

@@ -533,17 +533,10 @@
 					>
 						{#snippet prebuiltFooter()}
 							<Field.Description>
-								Models are downloaded from{' '}
-								<Link
-									href="https://github.com/EpicenterHQ/epicenter/releases/tag/models/parakeet-tdt-0.6b-v3-int8"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									GitHub releases
-								</Link>
-								{' '}and stored in your app data directory. The pre-packaged
-								archive contains the NVIDIA Parakeet model with INT8
-								quantization and is extracted after download.
+								Models are downloaded from the configured model archive and
+								stored in your app data directory. The pre-packaged archive
+								contains the NVIDIA Parakeet model with INT8 quantization and
+								is extracted after download.
 							</Field.Description>
 						{/snippet}
 

@@ -90,21 +90,10 @@
 						allowfullscreen
 					></iframe>
 				{:else}
-					<!-- Direct video for web version -->
-					<video
-						class="max-w-md rounded-lg border"
-						src="https://github.com/EpicenterHQ/epicenter/releases/download/_assets/macos_enable_accessibility.mp4"
-						autoplay
-						loop
-						controls
-						muted
-						playsinline
-					>
-						<p class="text-muted-foreground text-sm">
-							Video guide not available. Please follow the written instructions
-							below.
-						</p>
-					</video>
+					<p class="text-muted-foreground max-w-md text-sm">
+						Video guide not available. Please follow the written instructions
+						below.
+					</p>
 				{/if}
 				<ol
 					class="text-muted-foreground list-inside list-decimal space-y-1 text-sm leading-7"

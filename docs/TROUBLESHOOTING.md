@@ -15,7 +15,7 @@ Do not remove this from `dotfiles-sway` integration until a newer build is teste
 
 ## Upstream AppImage/RPM Problems
 
-Upstream Whispering `7.11.0` AppImage and unpacked RPM were unreliable on Fedora Sway Atomic.
+The original upstream `7.11.0` AppImage and unpacked RPM were unreliable on Fedora Sway Atomic.
 
 Use this repo's patched builds for future release assets.
 
@@ -31,7 +31,7 @@ Global shortcut behavior may differ between X11, Wayland, Sway, and desktop port
 
 ## Local Model Downloads
 
-Local transcription model links may still point to upstream Epicenter assets. Audit download URLs before publishing a release that claims local model support.
+Local transcription model links may still point to upstream release assets. Audit download URLs before publishing a release that claims local model support.
 
 ## Analytics And API Keys
 

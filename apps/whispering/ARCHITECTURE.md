@@ -1,6 +1,6 @@
-# Whispering Architecture Deep Dive
+# Whispering Open Architecture Deep Dive
 
-Whispering uses a clean three-layer architecture that achieves **extensive code sharing** between the desktop app (Tauri) and web app. This is possible because of how we handle platform differences and separate business logic from UI concerns.
+Whispering Open uses a clean three-layer architecture that achieves **extensive code sharing** between the desktop app (Tauri) and web app. This is possible because of how we handle platform differences and separate business logic from UI concerns.
 
 **Quick Navigation:** [Service Layer](#service-layer---pure-business-logic--platform-abstraction) | [Query Layer](#query-layer---adding-reactivity-and-state-management) | [Error Handling](#error-handling-with-wellcrafted)
 
@@ -36,7 +36,7 @@ This design enables **97% code sharing** between desktop and web versions. The v
 
 ### Measuring Code Sharing
 
-To calculate the actual code sharing percentage, I analyzed the codebase:
+To calculate the actual code sharing percentage, analyze the codebase:
 
 ```bash
 # Count total lines of code in the app
@@ -131,7 +131,7 @@ if (serviceError) {
 
 ## Error Handling with WellCrafted
 
-Whispering uses [WellCrafted](https://github.com/wellcrafted-dev/wellcrafted), a lightweight TypeScript library I created to bring Rust-inspired error handling to JavaScript. I built WellCrafted after using the [effect-ts library](https://github.com/Effect-TS/effect) when it first came out in 2023—I was very excited about the concepts but found it too verbose. WellCrafted distills my takeaways from effect-ts and makes them better by leaning into more native JavaScript syntax, making it perfect for this use case. Unlike traditional try-catch blocks that hide errors, WellCrafted makes all potential failures explicit in function signatures using the `Result<T, E>` pattern.
+Whispering Open uses [WellCrafted](https://github.com/wellcrafted-dev/wellcrafted), a lightweight TypeScript library for Rust-inspired error handling in JavaScript. Unlike traditional try-catch blocks that hide errors, WellCrafted makes all potential failures explicit in function signatures using the `Result<T, E>` pattern.
 
 `wellcrafted` ensures robust error handling across the entire codebase, from service layer functions to UI components, while maintaining excellent developer experience with TypeScript's control flow analysis.
 

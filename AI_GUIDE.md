@@ -1,14 +1,14 @@
 # AI Guide
 
-This repo is a staged extraction of `apps/whispering` from Epicenter.
+This repo is a staged extraction of `apps/whispering` from the original monorepo.
 
-Whispering Open should become a standalone speech-to-text desktop app that Damian can build, release, and install automatically from `dotfiles-sway`. The current code still carries Epicenter workspace structure and naming. That is expected at this stage.
+Whispering Open should become a standalone speech-to-text desktop app that Damian can build, release, and install automatically from `dotfiles-sway`. The current code still carries old workspace structure and package naming. That is expected at this stage.
 
 ## Rules
 
 - Keep all repository artifacts in English: documentation, code comments, commit messages, issue notes, release notes, and user-facing app text unless there is an intentional localization change.
 - Preserve a working build at each step.
-- Treat `apps/whispering` as the product surface.
+- Treat `apps/whispering` as the Whispering Open product surface.
 - Treat `apps/api` and nonessential shared packages as temporary dependencies to remove only after verification.
 - Do not remove license files.
 - Do not rename package scopes or Tauri identifiers until build/typecheck passes in the extracted repo.
@@ -22,7 +22,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 1. Keep the current app buildable.
 2. Keep Fedora Sway Atomic desktop behavior working.
-3. Remove Epicenter dependencies in small reversible steps.
+3. Remove old workspace dependencies in small reversible steps.
 4. Rename/brand after technical dependencies are understood.
 5. Add release automation only after local desktop builds are proven.
 
@@ -48,7 +48,7 @@ The app currently still imports:
 - `@epicenter/constants`
 - `@epicenter/workspace`
 
-`@epicenter/svelte` depends on `@epicenter/api`, so `apps/api` is present for workspace completeness. A good next step is to split only the Svelte helpers that Whispering actually uses and then remove `apps/api`.
+`@epicenter/svelte` depends on `@epicenter/api`, so `apps/api` is present for workspace completeness. A good next step is to split only the Svelte helpers that Whispering Open actually uses and then remove `apps/api`.
 
 ## Documentation Contract
 

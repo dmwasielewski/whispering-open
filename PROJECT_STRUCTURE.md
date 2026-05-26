@@ -26,7 +26,7 @@ apps/api
 
 Temporary workspace package needed because shared Svelte utilities still depend on `@epicenter/api`.
 
-Goal: remove this after trimming or replacing the exact utilities Whispering needs.
+Goal: remove this after trimming or replacing the exact utilities Whispering Open needs.
 
 ## Shared Packages
 
@@ -46,9 +46,9 @@ packages/billing
 
 Current purpose:
 
-- `packages/ui` - Svelte UI component library used heavily by Whispering.
+- `packages/ui` - Svelte UI component library used heavily by Whispering Open.
 - `packages/svelte-utils` - persisted state/session/workspace helpers.
-- `packages/workspace` - local-first document/table helpers used by Whispering state.
+- `packages/workspace` - local-first document/table helpers used by Whispering Open state.
 - `packages/constants`, `packages/util` - shared constants/utilities.
 - `packages/auth`, `packages/auth-svelte`, `packages/encryption`, `packages/server`, `packages/sync`, `packages/billing` - undesirable long term, present because dependency chains still reference them.
 
@@ -80,5 +80,5 @@ Recommended order:
 2. Remove `apps/api` by isolating the used parts of `packages/svelte-utils`.
 3. Remove unused auth/server/billing/sync packages.
 4. Rename app identity and package scopes.
-5. Replace Epicenter links/branding.
+5. Replace old workspace links and branding.
 6. Add stable release automation.

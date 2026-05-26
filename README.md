@@ -1,16 +1,16 @@
 # Whispering Open
 
-Whispering Open is Damian's standalone fork/extraction of the Whispering speech-to-text app from the Epicenter monorepo.
+Whispering Open is Damian's standalone fork/extraction of a speech-to-text app from the original Epicenter monorepo.
 
-The goal is not to rewrite Whispering from scratch. The goal is to keep a working desktop/web dictation app while gradually removing Epicenter-specific cloud, billing, account, sync, analytics, and branding pieces.
+The goal is not to rewrite the app from scratch. The goal is to keep a working desktop/web dictation app while gradually removing old cloud, billing, account, sync, analytics, and branding pieces.
 
 This repository intentionally starts as a small workspace rather than a fully flattened app. Stability comes first: make one simplification, verify, document it, then commit.
 
 ## Current Layout
 
-- `apps/whispering` - the desktop/web Whispering application.
+- `apps/whispering` - the desktop/web Whispering Open application.
 - `apps/api` - temporary workspace dependency pulled in through shared Svelte utilities.
-- `packages/*` - local packages required by Whispering or its shared dependencies.
+- `packages/*` - local packages required by Whispering Open or its shared dependencies.
 - `patches/*` - upstream dependency patches used by the lockfile.
 
 See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for the current ownership map and cleanup direction.
@@ -57,4 +57,4 @@ If `gitleaks` is missing or detects a secret, the push is blocked. Do not bypass
 
 ## License
 
-The upstream Whispering/Epicenter code is licensed under AGPL-3.0-or-later or package-specific licenses. Keep the upstream license files and publish source changes when distributing builds.
+The upstream code is licensed under AGPL-3.0-or-later or package-specific licenses. Keep the upstream license files and publish source changes when distributing builds.

@@ -1,4 +1,4 @@
-# Whispering App
+# Whispering Open App
 
 Tauri + Svelte 5 desktop/web app for voice transcription.
 

@@ -70,7 +70,7 @@
 			]);
 		} else {
 			// Browser extension context - notify that the Whispering Open tab is ready
-			// extension.notifyWhisperingTabReady(undefined);
+			// extension.notifyAppTabReady(undefined);
 		}
 	});
 

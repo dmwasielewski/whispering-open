@@ -71,4 +71,4 @@ whispering-open-linux-x86_64.tar.gz
 - automatic updater
 - renamed app identity/data migration
 - fully local-only mode
-- complete removal of Epicenter cloud/auth/sync dependencies
+- complete removal of old cloud/auth/sync dependencies

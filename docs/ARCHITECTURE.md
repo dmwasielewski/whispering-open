@@ -50,6 +50,6 @@ Important responsibilities:
 
 - `@epicenter/*` package scopes remain.
 - Some cloud/auth/sync packages may be unused at runtime but still present through workspace dependency chains.
-- Updater and release metadata still point at upstream Epicenter.
+- Updater and release metadata should point at Whispering Open releases.
 - Analytics settings and Aptabase integration still exist and need review.
 - Local model/download URLs may still point at upstream release assets.
