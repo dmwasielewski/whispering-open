@@ -12,20 +12,23 @@ Included intentionally:
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
 - `packages/util`, `packages/constants`, `packages/workspace` - shared helpers still used by the app.
-- auth/server/sync/encryption-related packages - legacy shared packages still on disk until their dependency chains are verified and cleaned.
+- `packages/workspace` still carries some legacy non-exported document helpers
+  that are being reviewed in small verified cuts.
 
 Still carrying old workspace technical debt:
 
 - package names such as `@epicenter/*`
 - analytics service
 - remaining references to old upstream release assets where the app still downloads required files
-- some workspace/auth/sync abstractions that may not be needed for a local dictation app
+- some non-exported workspace abstractions that may not be needed for a local
+  dictation app
 
 ## Cleanup Backlog
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Remove stale cloud/auth/sync/encryption source files from `packages/workspace`.
+- Remove stale collaboration/materializer/timeline source files from
+  `packages/workspace` if they are not needed by Whispering Open.
 
 ## Completed Cuts
 
@@ -218,6 +221,25 @@ Expected next step after verification:
 
 - inspect the remaining workspace daemon, collaboration, and sync source files
   that are still not part of the active Whispering Open browser surface
+
+### 2026-05-26: Removed unused workspace daemon runtime
+
+The `@epicenter/workspace/node` daemon runtime was no longer exported by
+`packages/workspace/package.json` and was not imported by Whispering Open. It
+belonged to the old Epicenter workspace infrastructure rather than the local
+dictation app.
+
+Cut made:
+
+- removed the unused workspace daemon, daemon client, project config loader,
+  and daemon workspace app startup code
+- removed package dependencies that were only used by that daemon runtime
+- refreshed `bun.lock` with `bun install`
+
+Expected next step after verification:
+
+- inspect the remaining collaboration, sync-supervisor, transport, dispatch,
+  timeline, rich-text, markdown, and SQLite materializer source files
 
 ## Safe Cleanup Order
 

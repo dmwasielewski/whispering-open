@@ -8,8 +8,8 @@
  * the browser and the app crashes at runtime ("node:os has been externalized
  * for browser compatibility").
  *
- * Node-only helpers belong in `@epicenter/workspace/node`. If this test fails,
- * move the offending export there instead of polyfilling node modules in Vite.
+ * Node-only helpers must stay out of this package surface. If this test fails,
+ * remove the offending export instead of polyfilling node modules in Vite.
  */
 
 import { describe, expect, test } from 'bun:test';

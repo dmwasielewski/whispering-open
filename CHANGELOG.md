@@ -18,3 +18,4 @@
 - Removed the unused sync protocol package.
 - Removed the unused encryption package.
 - Removed stale encrypted workspace helper source files.
+- Removed the unused workspace daemon runtime and its stale dependencies.
