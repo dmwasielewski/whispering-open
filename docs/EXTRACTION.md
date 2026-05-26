@@ -238,8 +238,27 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect the remaining collaboration, sync-supervisor, transport, dispatch,
-  timeline, rich-text, markdown, and SQLite materializer source files
+- inspect the remaining collaboration, timeline, rich-text, markdown, and
+  SQLite materializer source files
+
+### 2026-05-26: Removed stale collaboration and sync source files
+
+The remaining collaboration files in `packages/workspace/src/document` belonged
+to cloud sync and remote action dispatch. They were not exported by the root
+browser surface and were not imported by Whispering Open.
+
+Cut made:
+
+- removed `open-collaboration`, sync supervisor, transport URL, dispatch
+  protocol, presence protocol, device id, owner-scoped Yjs key, and local-update
+  helpers
+- removed the now-unused `@epicenter/constants` workspace dependency
+- updated comments that still described the removed collaboration layer
+
+Expected next step after verification:
+
+- inspect remaining timeline, rich-text, markdown, SQLite materializer, Yjs log,
+  and AI helper files for actual Whispering Open usage
 
 ## Safe Cleanup Order
 

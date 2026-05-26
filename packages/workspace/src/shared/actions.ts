@@ -211,10 +211,8 @@ type InvalidActionKey<S extends string> =
 
 /**
  * Regex enforcing `^[a-z][a-z0-9_]{0,63}$` at runtime. Used by
- * `defineActions` for the authoring boundary check and by
- * `openCollaboration` for the construction-time defense against `as`
- * casts. Exported so tests and future external validators can share the
- * single source of truth.
+ * `defineActions` for the authoring boundary check. Exported so tests and
+ * future external validators can share the single source of truth.
  */
 export const ACTION_KEY_PATTERN = /^[a-z][a-z0-9_]{0,63}$/;
 
