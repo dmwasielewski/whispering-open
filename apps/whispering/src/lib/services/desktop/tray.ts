@@ -55,11 +55,7 @@ async function initTray() {
 			await MenuItem.new({
 				id: 'show',
 				text: 'Show Window',
-				action: async () => {
-					const window = getCurrentWindow();
-					await window.show();
-					await window.setFocus();
-				},
+				action: () => getCurrentWindow().show(),
 			}),
 
 			await MenuItem.new({
@@ -72,11 +68,9 @@ async function initTray() {
 			await MenuItem.new({
 				id: 'settings',
 				text: 'Settings',
-				action: async () => {
-					await goto('/settings');
-					const window = getCurrentWindow();
-					await window.show();
-					await window.setFocus();
+				action: () => {
+					goto('/settings');
+					return getCurrentWindow().show();
 				},
 			}),
 
@@ -100,7 +94,7 @@ async function initTray() {
 				e.button === 'Left' &&
 				e.buttonState === 'Down'
 			) {
-				void getCurrentWindow().show().then(() => getCurrentWindow().setFocus());
+				// commandCallbacks.toggleManualRecording();
 				return true;
 			}
 			return false;

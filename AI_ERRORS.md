@@ -67,19 +67,6 @@ com.bradenwong.whispering
 
 Rename it only in a dedicated change that also handles app data migration, release identity, desktop launcher behavior, and documentation.
 
-## Do Not Claim Desktop Tray Runtime Until Tested
-
-Minimize-to-tray behavior is implemented in the desktop app, but runtime behavior must be tested on Fedora Sway before claiming it is fully verified.
-
-Expected behavior:
-
-- sidebar `Minimize to Tray` hides the main window
-- window-manager close requests hide the main window
-- Waybar tray icon restores the window
-- tray menu `Quit` exits the process
-
-As of 2026-05-25, `bun run typecheck` and `bun run build:web` pass. Full `cargo check` is blocked by existing local toolchain/dependency issues: missing `cc` on the host, and a `whisper-rs` binding mismatch inside toolbox.
-
 ## Public Repo Means No Private Runtime Data
 
 Never commit:

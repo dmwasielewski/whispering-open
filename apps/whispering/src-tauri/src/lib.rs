@@ -24,9 +24,7 @@ pub mod command;
 use command::{execute_command, spawn_command};
 
 pub mod markdown;
-use markdown::{
-    count_markdown_files, delete_files_in_directory, read_markdown_files, write_markdown_files,
-};
+use markdown::{count_markdown_files, delete_files_in_directory, read_markdown_files, write_markdown_files};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 #[tokio::main]
@@ -181,20 +179,6 @@ pub async fn run() {
         .expect("error while building tauri application");
 
     app.run(|handler, event| {
-        if let tauri::RunEvent::WindowEvent {
-            label,
-            event: tauri::WindowEvent::CloseRequested { api, .. },
-            ..
-        } = &event
-        {
-            if label == "main" {
-                api.prevent_close();
-                if let Some(window) = handler.get_webview_window("main") {
-                    let _ = window.hide();
-                }
-            }
-        }
-
         // Only track events if Aptabase is enabled (key is not empty)
         if !aptabase_key.is_empty() {
             match event {
