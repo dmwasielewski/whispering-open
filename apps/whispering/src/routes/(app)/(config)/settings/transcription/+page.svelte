@@ -110,12 +110,12 @@
 	);
 </script>
 
-<svelte:head> <title>Transcription Settings - Whispering Open</title> </svelte:head>
+<svelte:head> <title>Transcription Settings</title> </svelte:head>
 
 <Field.Set>
 	<Field.Legend>Transcription</Field.Legend>
 	<Field.Description>
-		Configure your Whispering Open transcription preferences.
+		Configure your transcription preferences.
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
@@ -278,7 +278,7 @@
 					<Card.Header>
 						<Card.Title class="text-lg">Speaches Setup</Card.Title>
 						<Card.Description>
-							Install Speaches server and configure Whispering Open. Speaches is the
+							Install Speaches server and configure the app. Speaches is the
 							successor to faster-whisper-server with improved features and
 							active development.
 						</Card.Description>

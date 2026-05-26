@@ -125,12 +125,12 @@
 	}
 </script>
 
-<svelte:head> <title>Recording Settings - Whispering Open</title> </svelte:head>
+<svelte:head> <title>Recording Settings</title> </svelte:head>
 
 <Field.Set>
 	<Field.Legend>Recording</Field.Legend>
 	<Field.Description>
-		Configure your Whispering Open recording preferences.
+		Configure your recording preferences.
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>

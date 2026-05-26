@@ -33,7 +33,7 @@
 		</div>
 		<SectionHeader.Description class="max-w-2xl">
 			Help us understand which features are used most. We use anonymized event
-			logging to improve Whispering Open.
+			logging to improve the app.
 		</SectionHeader.Description>
 	</SectionHeader.Root>
 

@@ -25,7 +25,7 @@
 			Keyboard Shortcuts
 		</SectionHeader.Title>
 		<SectionHeader.Description class="mt-2">
-			Configure keyboard shortcuts to quickly access Whispering Open features.
+			Configure keyboard shortcuts to quickly access app features.
 		</SectionHeader.Description>
 	</SectionHeader.Root>
 

@@ -51,12 +51,12 @@
 	);
 </script>
 
-<svelte:head> <title>Settings - Whispering Open</title> </svelte:head>
+<svelte:head> <title>Settings</title> </svelte:head>
 
 <Field.Set>
 	<Field.Legend>General</Field.Legend>
 	<Field.Description>
-		Configure your general Whispering Open preferences.
+		Configure your general application preferences.
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
@@ -195,7 +195,7 @@
 				<Field.Content>
 					<Field.Label for="autostart">Launch on Startup</Field.Label>
 					<Field.Description>
-						Automatically open Whispering Open when you log in
+						Automatically open the app when you log in
 					</Field.Description>
 				</Field.Content>
 				<Switch
