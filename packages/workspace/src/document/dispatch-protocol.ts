@@ -1,7 +1,7 @@
 /**
  * Dispatch wire protocol: the text frames and result shape exchanged
- * between the relay (`packages/server/src/room/core.ts`) and dispatch
- * clients (`dispatch.ts`, `open-collaboration.ts`).
+ * between relay implementations and dispatch clients (`dispatch.ts`,
+ * `open-collaboration.ts`).
  *
  * Frame flow (all four are text frames on the one authenticated WebSocket;
  * `id` is minted by the caller and echoed unchanged by the relay):

@@ -25,7 +25,7 @@ Still carrying old workspace technical debt:
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Inspect `packages/auth`, `packages/server`, `packages/sync`, and `packages/encryption` to determine which packages are really used by Whispering Open.
+- Inspect `packages/auth`, `packages/sync`, and `packages/encryption` to determine which packages are really used by Whispering Open.
 
 ## Completed Cuts
 
@@ -87,7 +87,7 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect `packages/auth`, `packages/server`, `packages/sync`, and `packages/encryption` before removing anything else
+- inspect `packages/auth`, `packages/sync`, and `packages/encryption` before removing anything else
 
 ### 2026-05-26: Removed unused auth UI exports from `@epicenter/svelte`
 
@@ -108,6 +108,19 @@ Cut made:
 Expected next step after verification:
 
 - inspect whether `packages/auth` remains only through server/legacy packages
+
+### 2026-05-26: Removed `packages/server`
+
+The shared Hono server package was not imported by Whispering Open or by the active client-side workspace code. It represented hosted/self-hosted Epicenter infrastructure, not the local dictation app.
+
+Cut made:
+
+- removed the `packages/server` directory
+
+Expected next step after verification:
+
+- inspect whether `packages/auth` is still required after server removal
+- inspect whether `packages/sync` is still required by active workspace code
 
 ### 2026-05-26: Removed `packages/auth-svelte`
 

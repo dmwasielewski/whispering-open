@@ -11,3 +11,4 @@
 - Removed the unused Epicenter billing package.
 - Removed unused auth UI exports from `@epicenter/svelte`.
 - Removed the unused Svelte auth wrapper package.
+- Removed the unused Epicenter server package.

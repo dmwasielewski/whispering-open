@@ -12,8 +12,8 @@
  * tool layer with no second round trip. Manifests are opaque to the relay: it
  * stores and forwards them as bytes, never inspects their shape.
  *
- * Shared by the relay (`packages/server/src/room/core.ts`, the sender) and
- * the client (`open-collaboration.ts`, the reader).
+ * Shared by relay implementations and the client (`open-collaboration.ts`,
+ * the reader).
  *
  * Schemas are TypeBox: they ARE valid JSON Schema at runtime, double as the
  * source of truth for the TypeScript types via `Static`, and feed

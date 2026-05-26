@@ -3,15 +3,15 @@ import { defineErrors, type InferErrors } from 'wellcrafted/error';
 /**
  * Structured error variants for the OAuth resource boundary.
  *
- * Emitted by the bearer-token resolver and surfaced to clients via
- * `createOAuthUnauthorizedResourceResponse` in `@epicenter/server`:
+ * Emitted by the bearer-token resolver and surfaced to clients by the legacy
+ * Epicenter server boundary:
  *   - HTTP: `c.json(error, 401)` with `WWW-Authenticate: Bearer error="invalid_token"`.
  *   - WebSocket: close code 4401 with the error JSON in the close reason.
  *
- * Defined once in the shared constants package so the server runtime and
- * any client SDK reference the same discriminated union. The server calls
- * the factory at runtime (`OAuthError.InvalidToken()`); clients import the
- * type via `InferErrors` for zero-cost narrowing.
+ * Defined once in the shared constants package so the server runtime and any
+ * client SDK can reference the same discriminated union. Server runtimes call
+ * the factory at runtime (`OAuthError.InvalidToken()`); clients import the type
+ * via `InferErrors` for zero-cost narrowing.
  *
  * The serialized envelope is `wellcrafted`'s `{ data: null, error: {
  * name, message, ...fields } }`. Receivers branch on `body.error.name`.
