@@ -1,0 +1,4 @@
+[env]
+# whisper-rs-sys bindgen can generate opaque whisper_full_params bindings on Fedora.
+# Use the crate's bundled bindings so local builds compile reproducibly.
+WHISPER_DONT_GENERATE_BINDINGS = "1"

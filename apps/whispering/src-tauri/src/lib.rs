@@ -24,11 +24,30 @@ pub mod command;
 use command::{execute_command, spawn_command};
 
 pub mod markdown;
-use markdown::{count_markdown_files, delete_files_in_directory, read_markdown_files, write_markdown_files};
+use markdown::{
+    count_markdown_files, delete_files_in_directory, read_markdown_files, write_markdown_files,
+};
+
+#[cfg(target_os = "linux")]
+fn configure_linux_webkit_environment() {
+    for (key, value) in [
+        ("GDK_BACKEND", "x11"),
+        ("WEBKIT_DISABLE_COMPOSITING_MODE", "1"),
+        ("WEBKIT_DISABLE_DMABUF_RENDERER", "1"),
+        ("LIBGL_ALWAYS_SOFTWARE", "1"),
+    ] {
+        if std::env::var_os(key).is_none() {
+            std::env::set_var(key, value);
+        }
+    }
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 #[tokio::main]
 pub async fn run() {
+    #[cfg(target_os = "linux")]
+    configure_linux_webkit_environment();
+
     // Set up panic hook to capture crash information before the app exits.
     // The previous hook is preserved so default panic reporting still occurs.
     let previous_hook = std::panic::take_hook();
@@ -136,10 +155,11 @@ pub async fn run() {
     #[cfg(desktop)]
     {
         builder = builder
-            .plugin(tauri_plugin_autostart::init(
-                tauri_plugin_autostart::MacosLauncher::LaunchAgent,
-                None,
-            ))
+            .plugin(
+                tauri_plugin_autostart::Builder::new()
+                    .app_name("Whispering Open")
+                    .build(),
+            )
             .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
                 let _ = app
                     .get_webview_window("main")
