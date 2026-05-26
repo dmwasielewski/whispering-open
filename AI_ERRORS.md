@@ -67,6 +67,49 @@ com.bradenwong.whispering
 
 Rename it only in a dedicated change that also handles app data migration, release identity, desktop launcher behavior, and documentation.
 
+## Do Not Install Raw Cargo Builds As Desktop Releases
+
+A raw `cargo build --release` binary is not a valid installed Tauri release for this app.
+
+Observed failure:
+
+- Installing the raw Rust binary caused the app window to show `Could not connect to localhost: Connection refused`.
+- That happened because the binary expected the Tauri dev server instead of using a packaged frontend.
+
+Rules:
+
+- Use `bun tauri build` or another verified Tauri packaging path before replacing `~/.local/bin/whispering-open`.
+- If a full AppImage build fails late in bundling, verify whether RPM/DEB artifacts and the release binary are valid before installing anything.
+- Never replace Damian's working launcher with an unverified binary.
+- After installing, launch the exact desktop entry used by `Super+D` and check that it renders the real app, not a localhost error page.
+
+## One Change, One Test, Then Push
+
+For this app, use a strict programmer/tester workflow:
+
+1. Make one small behavior change.
+2. Run the smallest relevant static checks.
+3. Build the exact artifact that will be installed.
+4. Install or launch only that artifact.
+5. Verify it on Damian's Fedora Sway session.
+6. Update documentation with the result.
+7. Run `.githooks/pre-push`.
+8. Push only after the tested behavior works.
+
+Do not combine risky desktop behavior changes with launcher cleanup, packaging changes, or dependency cleanup in the same commit.
+
+## Do Not Reintroduce Minimize To Tray Without Runtime Testing
+
+The first minimize-to-tray attempt was reverted because it was not verified end-to-end before being installed and pushed.
+
+Future tray work must be done in smaller steps:
+
+- First verify the existing tray icon appears in Waybar.
+- Then test a simple explicit `Hide` action without intercepting window close.
+- Only after that test close-request interception.
+- Keep `Quit` in the tray as the only real app exit path.
+- Do not push tray behavior until Damian confirms the installed app can hide, restore, and quit correctly.
+
 ## Public Repo Means No Private Runtime Data
 
 Never commit:
