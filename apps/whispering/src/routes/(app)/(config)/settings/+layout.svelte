@@ -16,7 +16,7 @@
 		typeof value === 'string';
 	const versionPromise = (async () => {
 		const res = await fetch(
-			'https://api.github.com/repos/EpicenterHQ/epicenter/releases/latest',
+			'https://api.github.com/repos/dmwasielewski/whispering-open/releases/latest',
 		);
 		const { html_url: latestReleaseUrl, tag_name: latestVersion } =
 			await res.json();
@@ -49,11 +49,11 @@
 			>
 			<SectionHeader.Description>
 				{#await versionPromise}
-					Customize your Whispering experience.
+					Customize your Whispering Open experience.
 				{:then v}
 					{#if v.isOutdated}
 						{@const { latestVersion, currentVersion, latestReleaseUrl } = v}
-						Customize your experience for Whispering {currentVersion} (latest
+						Customize your experience for Whispering Open {currentVersion} (latest
 						<Link
 							href={latestReleaseUrl}
 							target="_blank"
@@ -64,10 +64,10 @@
 						).
 					{:else}
 						{@const { version } = v}
-						Customize your experience for Whispering {version}.
+						Customize your experience for Whispering Open {version}.
 					{/if}
 				{:catch error}
-					Customize your Whispering experience.
+					Customize your Whispering Open experience.
 				{/await}
 			</SectionHeader.Description>
 		</SectionHeader.Root>

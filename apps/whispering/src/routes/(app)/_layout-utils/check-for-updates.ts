@@ -1,37 +1,28 @@
 import { check, type DownloadEvent } from '@tauri-apps/plugin-updater';
-import { extractErrorMessage } from 'wellcrafted/error';
-import { tryAsync } from 'wellcrafted/result';
 import {
 	type UpdateInfo,
 	updateDialog,
 } from '$lib/components/UpdateDialog.svelte';
 import { rpc } from '$lib/query';
-import { WhisperingErr } from '$lib/result';
 
 export async function checkForUpdates() {
-	const { error } = await tryAsync({
-		try: async () => {
-			const update = await (shouldUseMockUpdates() ? mockCheck() : check());
-			if (update) {
-				await rpc.notify.info({
-					title: `Update ${update.version} available`,
-					description: 'A new version of Whispering is available.',
-					action: {
-						type: 'button',
-						label: 'View Update',
-						onClick: () => updateDialog.open(update),
-					},
-					persist: true,
-				});
-			}
-		},
-		catch: (error) =>
-			WhisperingErr({
-				title: 'Failed to check for updates',
-				description: extractErrorMessage(error),
-			}),
-	});
-	if (error) rpc.notify.error(error);
+	try {
+		const update = await (shouldUseMockUpdates() ? mockCheck() : check());
+		if (update) {
+			await rpc.notify.info({
+				title: `Update ${update.version} available`,
+				description: 'A new version of Whispering Open is available.',
+				action: {
+					type: 'button',
+					label: 'View Update',
+					onClick: () => updateDialog.open(update),
+				},
+				persist: true,
+			});
+		}
+	} catch (error) {
+		console.warn('Failed to check for Whispering Open updates:', error);
+	}
 }
 
 /**
