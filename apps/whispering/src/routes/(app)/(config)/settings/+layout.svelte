@@ -49,11 +49,11 @@
 			>
 			<SectionHeader.Description>
 				{#await versionPromise}
-					Customize your Whispering Open experience.
+					Customize application preferences.
 				{:then v}
 					{#if v.isOutdated}
 						{@const { latestVersion, currentVersion, latestReleaseUrl } = v}
-						Customize your experience for Whispering Open {currentVersion} (latest
+						Current version: {currentVersion}. Latest release:
 						<Link
 							href={latestReleaseUrl}
 							target="_blank"
@@ -61,13 +61,13 @@
 						>
 							{latestVersion}
 						</Link>
-						).
+						.
 					{:else}
 						{@const { version } = v}
-						Customize your experience for Whispering Open {version}.
+						Current version: {version}.
 					{/if}
 				{:catch error}
-					Customize your Whispering Open experience.
+					Customize application preferences.
 				{/await}
 			</SectionHeader.Description>
 		</SectionHeader.Root>
