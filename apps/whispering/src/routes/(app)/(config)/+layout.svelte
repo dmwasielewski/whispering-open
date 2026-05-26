@@ -35,7 +35,7 @@
 	style="view-transition-name: {viewTransition.global.header}"
 >
 	<Button tooltip="Go home" href="/" variant="ghost" class="-ml-4">
-		<span class="text-lg font-bold">whispering</span>
+		<span class="text-lg font-bold">Whispering Open</span>
 	</Button>
 
 	<div class="flex items-center gap-1.5">
