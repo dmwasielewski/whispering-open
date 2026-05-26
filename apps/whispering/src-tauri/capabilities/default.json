@@ -52,7 +52,7 @@
           "path": "$HOME/.local/share/**"
         },
         {
-          "path": "$HOME/.local/share/com.bradenwong.whispering/**"
+          "path": "$HOME/.local/share/io.github.dmwasielewski.whisperingopen/**"
         }
       ]
     },

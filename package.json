@@ -92,7 +92,7 @@
 	},
 	"packageManager": "bun@1.3.3",
 	"scripts": {
-		"build": "turbo run build --filter=@epicenter/whispering",
+		"build": "turbo run build --filter=@whispering-open/app",
 		"check": "bun run format:check && bun run lint:check && bun run typecheck",
 		"dev": "bun run --cwd apps/whispering dev",
 		"dev:web": "bun run --cwd apps/whispering dev:web",
@@ -101,7 +101,7 @@
 		"format:check": "biome ci --linter-enabled=false",
 		"lint": "biome lint --write",
 		"lint:check": "biome lint",
-		"typecheck": "turbo run typecheck --filter=@epicenter/whispering",
+		"typecheck": "turbo run typecheck --filter=@whispering-open/app",
 		"test": "turbo run test",
 		"tauri": "bun run --cwd apps/whispering tauri"
 	},
