@@ -27,7 +27,7 @@ Before changing files, read:
 - Do not bypass `.githooks/pre-push`.
 - Do not commit secrets, API keys, auth tokens, private logs, local app data, or user recordings.
 - Preserve AGPL/license files.
-- Do not remove `apps/api` or shared packages until `bun run typecheck` and `bun run build:web` pass without them.
+- Do not remove shared packages until `bun run typecheck` and `bun run build:web` pass without them.
 - Do not replace the current working Fedora Sway crash workaround without testing on Damian's Sway setup.
 - Do not push partial work unless Damian explicitly asks.
 

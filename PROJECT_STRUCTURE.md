@@ -18,15 +18,15 @@ Important areas:
 - `src/lib/components` - app-level UI components.
 - `src-tauri` - Rust/Tauri desktop application.
 
-## Temporary App Dependency
+## Legacy App Directory
 
 ```text
 apps/api
 ```
 
-Temporary workspace package needed because shared Svelte utilities still depend on `@epicenter/api`.
+Legacy Epicenter API app kept on disk only until the next verified cleanup step. It is no longer part of the root workspace package list.
 
-Goal: remove this after trimming or replacing the exact utilities Whispering Open needs.
+Goal: remove this directory after confirming the narrowed workspace installs, typechecks, and builds without it.
 
 ## Shared Packages
 
@@ -77,7 +77,7 @@ Current purpose:
 Recommended order:
 
 1. Prove local Tauri build and Linux release asset.
-2. Remove `apps/api` by isolating the used parts of `packages/svelte-utils`.
+2. Remove `apps/api` after the narrowed workspace is verified.
 3. Remove unused auth/server/billing/sync packages.
 4. Rename app identity and package scopes.
 5. Replace old workspace links and branding.

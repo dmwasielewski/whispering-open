@@ -9,7 +9,6 @@ This repository intentionally starts as a small workspace rather than a fully fl
 ## Current Layout
 
 - `apps/whispering` - the desktop/web Whispering Open application.
-- `apps/api` - temporary workspace dependency pulled in through shared Svelte utilities.
 - `packages/*` - local packages required by Whispering Open or its shared dependencies.
 - `patches/*` - upstream dependency patches used by the lockfile.
 

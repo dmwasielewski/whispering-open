@@ -20,7 +20,7 @@
 	"author": "",
 	"workspaces": {
 		"packages": [
-			"apps/*",
+			"apps/whispering",
 			"packages/*"
 		],
 		"catalog": {

@@ -10,7 +10,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 - Preserve a working build at each step.
 - Treat `apps/whispering` as the Whispering Open product surface.
 - Use `docs/FUNCTIONALITY.md` as the source of truth for which features stay, which inherited Epicenter features should be removed, and which decisions are deferred.
-- Treat `apps/api` and nonessential shared packages as temporary dependencies to remove only after verification.
+- Treat nonessential shared packages as temporary dependencies to remove only after verification.
 - Do not remove license files.
 - Do not rename package scopes or Tauri identifiers until build/typecheck passes in the extracted repo.
 - Always use the configured `.githooks/pre-push` hook before pushing. It runs `gitleaks detect --source . --redact --verbose`. Do not bypass it.
@@ -49,7 +49,7 @@ The app currently still imports:
 - `@epicenter/constants`
 - `@epicenter/workspace`
 
-`@epicenter/svelte` depends on `@epicenter/api`, so `apps/api` is present for workspace completeness. A good next step is to split only the Svelte helpers that Whispering Open actually uses and then remove `apps/api`.
+`@epicenter/svelte` no longer depends on `@epicenter/api`. The root workspace is narrowed to `apps/whispering`, so `apps/api` should no longer be part of the active workspace graph. A good next step is to remove the `apps/api` directory after verifying install, typecheck, and web build without it.
 
 ## Documentation Contract
 

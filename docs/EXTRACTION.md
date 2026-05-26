@@ -12,7 +12,7 @@ Included intentionally:
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
 - `packages/util`, `packages/constants`, `packages/workspace` - shared helpers still used by the app.
-- `apps/api` and auth/server/sync/billing-related packages - temporary workspace packages that still exist until the workspace graph is narrowed and verified.
+- `apps/api` and auth/server/sync/billing-related packages - legacy files still on disk until the workspace graph is narrowed, verified, and cleaned.
 
 Still carrying old workspace technical debt:
 
@@ -42,9 +42,26 @@ Expected next step after verification:
 - narrow the root workspace from `apps/*` to `apps/whispering`
 - then remove `apps/api` if `bun install`, `bun run typecheck`, and `bun run build:web` still pass
 
+### 2026-05-26: Narrowed root app workspace to `apps/whispering`
+
+The root workspace no longer includes every directory under `apps/*`.
+
+Cut made:
+
+- changed the root workspace package list from `apps/*` to `apps/whispering`
+
+Expected result after `bun install`:
+
+- `apps/api` should disappear from `bun.lock` as a workspace package
+- `@epicenter/api` should disappear from `bun.lock`
+
+Expected next step after verification:
+
+- remove the `apps/api` directory from the repository
+
 ## Why `apps/api` Still Exists
 
-`apps/api` still exists on disk while the workspace package list is being narrowed. It should not be treated as product code for Whispering Open.
+`apps/api` still exists on disk until the narrowed workspace is verified. It should not be treated as product code for Whispering Open.
 
 Do not remove it blindly before the current cut is verified and committed.
 
