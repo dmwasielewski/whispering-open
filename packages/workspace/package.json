@@ -33,14 +33,10 @@
 		"bench": "bun test ./src/__benchmarks__/*.bench.ts --timeout 60000"
 	},
 	"dependencies": {
-		"@epicenter/util": "workspace:*",
-		"@sindresorhus/slugify": "catalog:",
 		"@standard-schema/spec": "catalog:",
 		"@types/bun": "catalog:",
 		"arktype": "catalog:",
 		"lib0": "catalog:",
-		"nanoid": "catalog:",
-		"typebox": "catalog:",
 		"wellcrafted": "catalog:",
 		"y-indexeddb": "catalog:"
 	},
@@ -49,9 +45,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "catalog:",
-		"better-sqlite3": "^12.4.1",
 		"fake-indexeddb": "^6.2.5",
-		"filenamify": "^7.0.1",
 		"typescript": "catalog:",
 		"yjs": "catalog:"
 	}

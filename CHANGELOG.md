@@ -22,3 +22,4 @@
 - Removed stale workspace collaboration and sync source files.
 - Removed the unused workspace AI bridge.
 - Removed unused workspace editor document primitives.
+- Removed unused workspace materializer tooling.

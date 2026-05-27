@@ -159,8 +159,7 @@ export type ReadonlyTable<TRow extends BaseRow> = {
 
 	/**
 	 * The underlying `TableDefinition` (schema + migration) this table was
-	 * attached with. Exposed for consumers that need the raw schema: e.g.,
-	 * the sqlite materializer generating DDL.
+	 * attached with. Exposed for consumers that need the raw schema.
 	 */
 	// biome-ignore lint/suspicious/noExplicitAny: variance-friendly: defineTable already constrains schemas
 	definition: TableDefinition<any>;

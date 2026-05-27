@@ -27,8 +27,8 @@ Still carrying old workspace technical debt:
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Remove stale collaboration/materializer/timeline source files from
-  `packages/workspace` if they are not needed by Whispering Open.
+- Remove stale source files from `packages/workspace` if they are not needed by
+  Whispering Open.
 
 ## Completed Cuts
 
@@ -238,8 +238,8 @@ Cut made:
 
 Expected next step after verification:
 
-- inspect the remaining collaboration, timeline, rich-text, markdown, and
-  SQLite materializer source files
+- inspect remaining timeline, rich-text, markdown, SQLite materializer, Yjs log,
+  and AI helper files for actual Whispering Open usage
 
 ### 2026-05-26: Removed stale collaboration and sync source files
 
@@ -296,6 +296,27 @@ Expected next step after verification:
 
 - inspect remaining markdown, SQLite materializer, Yjs log, links, workspace
   paths, and shared action/id helpers for actual Whispering Open usage
+
+### 2026-05-27: Removed unused workspace materializer tooling
+
+Whispering Open writes recording markdown through its own Tauri-side
+`recording-materializer`, not the old workspace materializer package. The
+workspace markdown/SQLite materializers, Yjs update log, SQLite readers, link
+helpers, workspace path helpers, and shared action/id helpers were not imported
+by Whispering Open and were not exported from the workspace root.
+
+Cut made:
+
+- removed unused workspace markdown and SQLite materializer source and tests
+- removed unused Yjs log, SQLite reader, workspace path, link, action, and id
+  helpers
+- removed stale materializer dependencies from `@epicenter/workspace`
+- refreshed `bun.lock` with `bun install`
+
+Expected next step after verification:
+
+- inspect remaining benchmark-only files and any remaining non-exported shared
+  helpers for actual Whispering Open usage
 
 ## Safe Cleanup Order
 
