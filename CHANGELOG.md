@@ -27,3 +27,4 @@
 - Updated workspace package metadata for the extracted local-only surface.
 - Removed unused non-exported workspace helper leftovers from the old runtime.
 - Updated package metadata and README files to describe the Whispering Open extraction.
+- Removed unused legacy constants and the unused Svelte AI chat fetch helper.

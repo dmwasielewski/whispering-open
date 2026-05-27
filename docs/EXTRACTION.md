@@ -396,6 +396,27 @@ Expected next step after verification:
 - inspect stale constants and Svelte utility exports that are no longer imported
   by Whispering Open
 
+### 2026-05-27: Removed stale constants and AI chat Svelte helper
+
+Whispering Open used `@epicenter/constants` only for Vite/dev-server URL
+metadata. The remaining constants exported auth, OAuth, billing, request-guard,
+asset, API route, version, and AI chat helpers from the old hosted workspace.
+`@epicenter/svelte` also still exported `createAiChatFetch`, which depended on
+those AI chat constants but was not imported by the app.
+
+Cut made:
+
+- removed the unused `createAiChatFetch` export and source file
+- removed `@epicenter/constants` from `@epicenter/svelte`
+- narrowed `@epicenter/constants` to `./apps` and `./vite`
+- removed unused constants source files and stale package dependencies
+- removed the unused root dependency on `@epicenter/constants`
+
+Expected next step after verification:
+
+- inspect whether `@epicenter/constants` is still useful as a package or should
+  be replaced by app-local constants in a small dedicated change
+
 ## 2026-05-27 Session Stop Point
 
 Last completed pushed commit:

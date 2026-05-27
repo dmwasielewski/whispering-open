@@ -110,9 +110,6 @@
 		"@types/bun": "catalog:",
 		"turbo": "^2.8.19"
 	},
-	"dependencies": {
-		"@epicenter/constants": "workspace:*"
-	},
 	"patchedDependencies": {
 		"@tanstack/ai@0.8.1": "patches/@tanstack%2Fai@0.8.1.patch"
 	}

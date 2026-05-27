@@ -17,7 +17,6 @@
 		".": "./src/index.ts"
 	},
 	"dependencies": {
-		"@epicenter/constants": "workspace:*",
 		"@epicenter/workspace": "workspace:*",
 		"arktype": "catalog:",
 		"wellcrafted": "catalog:"

@@ -23,5 +23,5 @@ import { createPersistedState } from '@epicenter/svelte';
 
 ## Cleanup Notes
 
-This package should stay small and app-facing. Do not add auth, billing,
-hosted sync, or hosted dashboard helpers back here for Whispering Open.
+This package should stay small and app-facing. Do not add AI chat, auth,
+billing, hosted sync, or hosted dashboard helpers back here for Whispering Open.
