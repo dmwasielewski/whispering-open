@@ -38,7 +38,6 @@
 		"@standard-schema/spec": "catalog:",
 		"@types/bun": "catalog:",
 		"arktype": "catalog:",
-		"diff": "^8.0.3",
 		"lib0": "catalog:",
 		"nanoid": "catalog:",
 		"typebox": "catalog:",
@@ -49,7 +48,6 @@
 		"yjs": "catalog:"
 	},
 	"devDependencies": {
-		"@types/diff": "^8.0.0",
 		"@types/node": "catalog:",
 		"better-sqlite3": "^12.4.1",
 		"fake-indexeddb": "^6.2.5",

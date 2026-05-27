@@ -21,3 +21,4 @@
 - Removed the unused workspace daemon runtime and its stale dependencies.
 - Removed stale workspace collaboration and sync source files.
 - Removed the unused workspace AI bridge.
+- Removed unused workspace editor document primitives.

@@ -277,6 +277,26 @@ Expected next step after verification:
 - inspect remaining timeline, rich-text, markdown, SQLite materializer, and Yjs
   log files for actual Whispering Open usage
 
+### 2026-05-27: Removed unused editor document primitives
+
+Whispering Open uses table/KV storage for recordings, transformations, runs,
+and settings. It does not import the old workspace editor primitives for plain
+text, rich text, timeline documents, or Y.Text diffing.
+
+Cut made:
+
+- removed unused plain-text, rich-text, and timeline document primitives and
+  their tests
+- removed the edit-history benchmark that depended on timeline documents
+- removed the now-unused `diff` and `@types/diff` dependencies from
+  `@epicenter/workspace`
+- refreshed `bun.lock` with `bun install`
+
+Expected next step after verification:
+
+- inspect remaining markdown, SQLite materializer, Yjs log, links, workspace
+  paths, and shared action/id helpers for actual Whispering Open usage
+
 ## Safe Cleanup Order
 
 1. Verify current build:
