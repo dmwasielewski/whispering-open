@@ -11,7 +11,7 @@ Included intentionally:
 - `apps/whispering` - the product app.
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
-- `packages/util`, `packages/constants`, `packages/workspace` - shared helpers still used by the app.
+- `packages/util`, `packages/workspace` - shared helpers still used by the app.
 - `packages/workspace` still carries some legacy non-exported document helpers
   that are being reviewed in small verified cuts.
 
@@ -416,6 +416,27 @@ Expected next step after verification:
 
 - inspect whether `@epicenter/constants` is still useful as a package or should
   be replaced by app-local constants in a small dedicated change
+
+### 2026-05-27: Replaced constants package with app-local constants
+
+After stale constants were removed, the remaining `@epicenter/constants` package
+only provided the Whispering Open dev-server port and app URL. Those values are
+owned by `apps/whispering`, so keeping a workspace package for them added more
+dependency surface than value.
+
+Cut made:
+
+- moved the Vite dev-server port into `apps/whispering/vite.config.ts`
+- moved `WHISPERING_URL` resolution into
+  `apps/whispering/src/lib/constants/app/urls.ts`
+- removed the `@epicenter/constants` dependency from the app
+- removed `packages/constants`
+- refreshed `bun.lock`
+
+Expected next step after verification:
+
+- inspect `@epicenter/util` usage and remove or inline it if the app no longer
+  needs a separate utility package
 
 ## 2026-05-27 Session Stop Point
 

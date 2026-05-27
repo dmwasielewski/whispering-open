@@ -11,7 +11,6 @@ Copied:
 - `packages/auth`
 - `packages/auth-svelte`
 - `packages/billing`
-- `packages/constants`
 - `packages/encryption`
 - `packages/server`
 - `packages/svelte-utils`
@@ -74,6 +73,6 @@ Current known backlog:
 
 Recommended next cleanup candidates:
 
-1. Inspect whether `@epicenter/constants` should be replaced by app-local constants.
+1. Inspect `@epicenter/util` usage and remove or inline it if practical.
 2. Keep package scope renaming as a dedicated migration after dependency cleanup.
 3. Run typecheck, focused tests, and build before pushing.
