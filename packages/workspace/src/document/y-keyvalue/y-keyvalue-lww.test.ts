@@ -9,9 +9,9 @@
  * - Higher timestamps win conflicts regardless of merge ordering.
  * - Transaction-local pending state and observer processing stay internally consistent.
  *
- * See also:
- * - `y-keyvalue.ts` for positional (rightmost-wins) alternative
- * - `__benchmarks__/conflict-resolution.bench.ts` for side-by-side behavioral comparison
+ * The old positional `YKeyValue` comparison implementation was removed during
+ * the Whispering Open extraction. This test suite is now the production
+ * conflict-resolution contract for workspace KV storage.
  */
 import { describe, expect, test } from 'bun:test';
 import * as Y from 'yjs';

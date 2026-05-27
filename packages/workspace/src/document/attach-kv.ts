@@ -10,12 +10,14 @@ import type { StandardSchemaV1 } from '@standard-schema/spec';
 import type * as Y from 'yjs';
 import { KV_KEY } from './keys.js';
 import type { CombinedStandardSchema } from './standard-schema.js';
+import type {
+	KvStoreChange,
+	ObservableKvStore,
+} from './y-keyvalue/observable-kv-store.js';
 import {
-	type KvStoreChange,
-	type ObservableKvStore,
 	YKeyValueLww,
 	type YKeyValueLwwEntry,
-} from './y-keyvalue/index.js';
+} from './y-keyvalue/y-keyvalue-lww.js';
 
 // ════════════════════════════════════════════════════════════════════════════
 // KV RESULT TYPES

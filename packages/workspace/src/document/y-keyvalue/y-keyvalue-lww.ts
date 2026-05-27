@@ -1,19 +1,9 @@
 /**
  * # YKeyValueLww - Last-Write-Wins Key-Value Store for Yjs
  *
- * A timestamp-based variant of YKeyValue that uses last-write-wins (LWW) conflict
- * resolution instead of positional ordering.
- *
- * **See also**: `y-keyvalue.ts` for the simpler positional (rightmost-wins) version.
- *
- * ## When to Use This vs YKeyValue
- *
- * | Scenario | Use `YKeyValue` | Use `YKeyValueLww` |
- * |----------|-----------------|-------------------|
- * | Real-time collab | Yes | Either |
- * | Offline-first, multi-device | No | Yes |
- * | Clock sync unreliable | Yes | No |
- * | Need "latest edit wins" | No | Yes |
+ * Timestamp-based key-value storage that uses last-write-wins (LWW) conflict
+ * resolution. This is the only Y.Array-backed KV implementation kept in
+ * Whispering Open.
  *
  * ## How It Works
  *

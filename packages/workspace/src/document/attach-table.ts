@@ -28,12 +28,14 @@ import { Err, Ok, type Result } from 'wellcrafted/result';
 import type * as Y from 'yjs';
 import { TableKey } from './keys.js';
 import type { CombinedStandardSchema } from './standard-schema.js';
+import type {
+	KvStoreChangeHandler,
+	ObservableKvStore,
+} from './y-keyvalue/observable-kv-store.js';
 import {
-	type KvStoreChangeHandler,
-	type ObservableKvStore,
 	YKeyValueLww,
 	type YKeyValueLwwEntry,
-} from './y-keyvalue/index.js';
+} from './y-keyvalue/y-keyvalue-lww.js';
 
 // ════════════════════════════════════════════════════════════════════════════
 // TABLE PARSE ERROR

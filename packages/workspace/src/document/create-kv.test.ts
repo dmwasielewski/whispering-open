@@ -8,7 +8,7 @@ import * as Y from 'yjs';
 import { createKv } from './attach-kv.js';
 import { defineKv } from './define-kv.js';
 import { KV_KEY } from './keys.js';
-import { YKeyValueLww } from './y-keyvalue/index.js';
+import { YKeyValueLww } from './y-keyvalue/y-keyvalue-lww.js';
 
 function setupKv() {
 	const ydoc = new Y.Doc();

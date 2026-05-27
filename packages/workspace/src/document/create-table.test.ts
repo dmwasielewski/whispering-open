@@ -13,7 +13,7 @@ import {
 	createTable,
 } from './attach-table.js';
 import { defineTable } from './define-table.js';
-import { YKeyValueLww } from './y-keyvalue/index.js';
+import { YKeyValueLww } from './y-keyvalue/y-keyvalue-lww.js';
 
 /** Creates Yjs infrastructure for testing */
 function setup() {

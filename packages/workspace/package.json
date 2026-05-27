@@ -29,8 +29,7 @@
 	"license": "MIT",
 	"scripts": {
 		"typecheck": "tsc --noEmit",
-		"test": "bun test",
-		"bench": "bun test ./src/__benchmarks__/*.bench.ts --timeout 60000"
+		"test": "bun test"
 	},
 	"dependencies": {
 		"@standard-schema/spec": "catalog:",

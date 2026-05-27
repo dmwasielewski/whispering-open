@@ -318,6 +318,25 @@ Expected next step after verification:
 - inspect remaining benchmark-only files and any remaining non-exported shared
   helpers for actual Whispering Open usage
 
+### 2026-05-27: Removed unused workspace benchmarks
+
+The remaining workspace benchmark suite and raw Yjs scripts documented old
+storage tradeoffs, but they were not imported by Whispering Open and were not
+part of the production workspace export. The historical positional `YKeyValue`
+reference implementation only existed for those comparisons.
+
+Cut made:
+
+- removed `packages/workspace/src/__benchmarks__`
+- removed raw workspace benchmark/demo scripts
+- removed the non-exported positional `YKeyValue` reference implementation
+- removed the stale `bench` package script
+
+Expected next step after verification:
+
+- inspect remaining non-exported workspace helpers and stale package metadata
+  for actual Whispering Open usage
+
 ## Safe Cleanup Order
 
 1. Verify current build:
