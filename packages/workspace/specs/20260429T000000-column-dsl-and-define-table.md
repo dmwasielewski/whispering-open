@@ -134,13 +134,13 @@ There is no dedicated `boolean()`, `bigint()`, `enum()`, `array()`, `object()`, 
 In `fuji`, `honeycrisp`, and `opensidian`, per-row collaborative content uses a `createDisposableCache` keyed by `row.id`:
 
 ```ts
-// fuji/browser.ts:27 (verbatim)
+// fuji/browser.ts:27
 const entryContentDocs = createDisposableCache(
   (entryId: EntryId) => createEntryContentDoc({ entryId, ... }),
   { gcTime: 5_000 },
 )
-// EntryEditor.svelte:39
-const contentDoc = fromDisposableCache(fuji.entryContentDocs, () => entry.id)
+// EntryEditor.svelte:39, adapted after the extracted Svelte helper was removed
+const contentDoc = useEntryContentDoc(fuji.entryContentDocs, () => entry.id)
 ```
 
 **Implication**: there is no separate "content guid field" in any row. `row.id` doubles as the cache key. A `column.docRef(cache)` primitive would have zero existing call sites. Branded IDs (`EntryId`, `NoteId`, `FileId`) already provide the type safety via the cache builder's signature. **Drop `column.docRef` from consideration.**

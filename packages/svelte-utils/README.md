@@ -6,8 +6,6 @@ Whispering Open is extracted from the old workspace.
 The active app uses this package for local Svelte helpers:
 
 - `fromTable`
-- `fromKv`
-- `fromDisposableCache`
 - `createPersistedMap`
 - `createPersistedState`
 

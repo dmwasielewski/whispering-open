@@ -457,6 +457,23 @@ Expected next step after verification:
 - inspect the remaining retained package boundaries for stale exports,
   metadata, and docs before package scope renaming
 
+### 2026-05-27: Removed unused Svelte helper exports
+
+`@epicenter/svelte` still carried general workspace bindings that Whispering
+Open does not import. The active app uses table bindings and persisted storage
+helpers only.
+
+Cut made:
+
+- removed unused `fromKv`
+- removed unused `fromDisposableCache`
+- updated the package README to list only app-used helpers
+
+Expected next step after verification:
+
+- continue reviewing retained package exports and metadata before package scope
+  renaming
+
 ## 2026-05-27 Session Stop Point
 
 Last completed pushed commit:
