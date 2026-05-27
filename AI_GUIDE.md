@@ -29,15 +29,17 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Verified Commands
 
-As of 2026-05-25:
+As of 2026-05-27:
 
 ```sh
 bun install
 bun run typecheck
+bun test packages/workspace/src/document/create-kv.test.ts packages/workspace/src/document/create-table.test.ts packages/workspace/src/document/attach-broadcast-channel.test.ts packages/workspace/src/document/local-only-recipe.test.ts packages/workspace/src/index.browser-safe.test.ts
 bun run build:web
 ```
 
-`typecheck` and `build:web` pass. Svelte reports upstream warnings, but no errors.
+`typecheck` and `build:web` pass. Svelte reports 11 existing warnings, but no
+errors. The focused workspace tests above pass.
 
 ## Current Extraction Notes
 
@@ -49,12 +51,33 @@ The app currently still imports:
 - `@epicenter/constants`
 - `@epicenter/workspace`
 
-`@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is narrowed to `apps/whispering`, and `apps/api`, `packages/billing`, `packages/auth-svelte`, `packages/server`, `packages/auth`, `packages/sync`, and `packages/encryption` have been removed. A good next step is to remove stale cloud/auth/sync/encryption source files from `packages/workspace`.
+`@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is
+narrowed to `apps/whispering`, and `apps/api`, `packages/billing`,
+`packages/auth-svelte`, `packages/server`, `packages/auth`, `packages/sync`, and
+`packages/encryption` have been removed.
+
+`packages/workspace` has also been reduced substantially. Removed areas include
+encrypted helpers, daemon runtime, collaboration/sync source, AI bridge, editor
+document primitives, markdown/SQLite materializers, Yjs logs, workspace path/link
+helpers, action/id helpers, benchmarks, and reference storage tooling.
+
+Next session should start by inspecting the remaining `packages/workspace/src`
+helpers for actual app usage:
+
+- `packages/workspace/src/document/doc-guid.ts`
+- `packages/workspace/src/shared/client-id.ts`
+- `packages/workspace/src/shared/test-utils.ts`
+- `packages/workspace/src/shared/errors.ts`
+- `packages/workspace/src/shared/types.ts`
+- `packages/workspace/src/shared/standard-schema.ts`
+- `packages/workspace/src/__tests__/create-tables.ts`
 
 Known cleanup items:
 
 - Resolve the 11 existing Svelte warnings from `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
+- Keep package/Tauri renaming as a later dedicated migration after dependency
+  cleanup is stable.
 
 ## Documentation Contract
 

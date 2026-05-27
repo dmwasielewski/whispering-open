@@ -27,8 +27,17 @@ Still carrying old workspace technical debt:
 
 - Resolve the 11 existing Svelte warnings reported by `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Remove stale source files from `packages/workspace` if they are not needed by
-  Whispering Open.
+- Inspect the remaining `packages/workspace/src` helpers for actual Whispering
+  Open usage:
+  - `document/doc-guid.ts`
+  - `shared/client-id.ts`
+  - `shared/test-utils.ts`
+  - `shared/errors.ts`
+  - `shared/types.ts`
+  - `shared/standard-schema.ts`
+  - `__tests__/create-tables.ts`
+- Remove stale source files from `packages/workspace` only after import checks
+  and verification.
 
 ## Completed Cuts
 
@@ -353,6 +362,19 @@ Cut made:
 Expected next step after verification:
 
 - inspect remaining package source helpers for actual Whispering Open usage
+
+## 2026-05-27 Session Stop Point
+
+Last completed pushed commit:
+
+- `76326de Update workspace package metadata`
+
+The working tree was clean after that push. Gitleaks reported no leaks during
+push. GitHub still reported 21 Dependabot vulnerabilities.
+
+Start the next session from the cleanup backlog above. Do not start with package
+scope renaming or Tauri identifier renaming; those should remain dedicated later
+migrations after the remaining dependency graph is smaller.
 
 ## Safe Cleanup Order
 

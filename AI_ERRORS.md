@@ -131,3 +131,19 @@ linux|x86_64|amd64|appimage|rpm|tar|zip
 ```
 
 If release asset naming changes, update `dotfiles-sway/scripts/setup-whispering-open.sh` or document the required override.
+
+## Running the App Does Not Rebuild It
+
+Launching Whispering Open from the desktop entry or `Super+D` runs the currently
+installed binary. It does not automatically rebuild from the latest source code.
+
+Rules:
+
+- Source changes become visible in the installed desktop app only after building
+  and installing a new Tauri artifact.
+- `bun run build:web` verifies the web frontend bundle, but it does not replace
+  the installed desktop app by itself.
+- `bun run dev` / Tauri dev mode can show current source during development, but
+  that is not the same as the installed app launched from Sway.
+- Before saying a runtime fix is installed, verify the exact launcher or desktop
+  entry Damian uses.

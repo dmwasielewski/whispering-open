@@ -44,3 +44,37 @@ Next cleanup candidates:
 2. Remove unused auth/cloud/sync packages after checking actual imports from Whispering Open.
 3. Rename package/app identifiers away from old workspace names.
 4. Remove analytics/cloud/account UI if not needed.
+
+## 2026-05-27
+
+Continued the staged extraction and cleanup of Whispering Open.
+
+Removed and pushed:
+
+- unused workspace materializer tooling
+- unused workspace benchmarks
+- old reference storage tooling
+- stale workspace package metadata that still described removed Epicenter cloud
+  runtime pieces
+
+Current verified state:
+
+- `bun install` passed during dependency cleanup.
+- `bun run typecheck` passed with 0 errors and 11 known Svelte warnings.
+- focused `packages/workspace` tests passed.
+- `bun run build:web` passed.
+- pushes went through the configured gitleaks pre-push hook.
+
+Current known backlog:
+
+- GitHub reports 21 Dependabot vulnerabilities after push.
+- The 11 Svelte warnings remain.
+- Some package names still use `@epicenter/*`.
+- Tauri identifier rename is intentionally deferred.
+
+Recommended next cleanup candidates:
+
+1. Inspect remaining `packages/workspace/src` helpers for actual Whispering Open usage.
+2. Check `doc-guid.ts`, `client-id.ts`, `test-utils.ts`, `errors.ts`, `types.ts`, `standard-schema.ts`, and `__tests__/create-tables.ts`.
+3. Remove only unused files in a small commit.
+4. Run typecheck, focused tests, and build before pushing.
