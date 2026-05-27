@@ -16,7 +16,6 @@ Copied:
 - `packages/svelte-utils`
 - `packages/sync`
 - `packages/ui`
-- `packages/util`
 - `packages/workspace`
 - root build/config files and `patches`
 
@@ -73,6 +72,7 @@ Current known backlog:
 
 Recommended next cleanup candidates:
 
-1. Inspect `@epicenter/util` usage and remove or inline it if practical.
+1. Inspect the remaining `@epicenter/svelte`, `@epicenter/ui`, and
+   `@epicenter/workspace` package boundaries for stale exports or metadata.
 2. Keep package scope renaming as a dedicated migration after dependency cleanup.
 3. Run typecheck, focused tests, and build before pushing.

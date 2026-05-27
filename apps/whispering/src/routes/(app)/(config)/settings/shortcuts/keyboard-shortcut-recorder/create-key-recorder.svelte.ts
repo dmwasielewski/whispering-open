@@ -1,8 +1,27 @@
-import { debounce } from '@epicenter/util';
 import type { KeyboardEventSupportedKey } from '$lib/constants/keyboard';
 import type { PressedKeys } from '$lib/utils/createPressedKeys.svelte';
 
 const CAPTURE_WINDOW_MS = 300; // Time to wait for additional keys in a combination
+
+function debounce(fn: () => void, ms: number): { (): void; cancel(): void } {
+	let timer: ReturnType<typeof setTimeout> | undefined;
+
+	function debounced(): void {
+		if (timer !== undefined) clearTimeout(timer);
+		timer = setTimeout(() => {
+			timer = undefined;
+			fn();
+		}, ms);
+	}
+
+	debounced.cancel = (): void => {
+		if (timer === undefined) return;
+		clearTimeout(timer);
+		timer = undefined;
+	};
+
+	return debounced;
+}
 
 /**
  * Creates a keyboard shortcut recorder that captures key combinations

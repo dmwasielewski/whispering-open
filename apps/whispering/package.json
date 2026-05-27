@@ -48,7 +48,6 @@
 		"@aptabase/tauri": "^0.4.1",
 		"@aptabase/web": "^0.4.3",
 		"@epicenter/svelte": "workspace:*",
-		"@epicenter/util": "workspace:*",
 		"@epicenter/workspace": "workspace:*",
 		"@google/generative-ai": "^0.24.1",
 		"@mistralai/mistralai": "^1.9.18",

@@ -70,7 +70,6 @@ These pieces may remain only because the current build still needs them.
 
 - `@epicenter/ui`
 - `@epicenter/svelte`
-- `@epicenter/util`
 - `@epicenter/workspace`
 - other `packages/*` copied from the original workspace
 

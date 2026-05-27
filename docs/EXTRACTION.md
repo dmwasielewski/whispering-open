@@ -11,7 +11,7 @@ Included intentionally:
 - `apps/whispering` - the product app.
 - `packages/ui` - UI components used by Whispering Open.
 - `packages/svelte-utils` - Svelte helpers used by state and persistence.
-- `packages/util`, `packages/workspace` - shared helpers still used by the app.
+- `packages/workspace` - local-first document/table helpers still used by the app.
 - `packages/workspace` still carries some legacy non-exported document helpers
   that are being reviewed in small verified cuts.
 
@@ -437,6 +437,25 @@ Expected next step after verification:
 
 - inspect `@epicenter/util` usage and remove or inline it if the app no longer
   needs a separate utility package
+
+### 2026-05-27: Removed util package
+
+`@epicenter/util` only exported a trailing-edge `debounce` helper, and the app
+only used it in the keyboard shortcut recorder. Keeping a workspace package for
+that single local behavior added an unnecessary dependency edge.
+
+Cut made:
+
+- inlined the recorder's debounce helper in
+  `create-key-recorder.svelte.ts`
+- removed the `@epicenter/util` dependency from the app
+- removed `packages/util`
+- refreshed `bun.lock`
+
+Expected next step after verification:
+
+- inspect the remaining retained package boundaries for stale exports,
+  metadata, and docs before package scope renaming
 
 ## 2026-05-27 Session Stop Point
 

@@ -47,13 +47,13 @@ The app currently still imports:
 
 - `@epicenter/ui`
 - `@epicenter/svelte`
-- `@epicenter/util`
 - `@epicenter/workspace`
 
 `@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is
 narrowed to `apps/whispering`, and `apps/api`, `packages/billing`,
 `packages/auth-svelte`, `packages/server`, `packages/auth`, `packages/sync`,
-`packages/encryption`, and `packages/constants` have been removed.
+`packages/encryption`, `packages/constants`, and `packages/util` have been
+removed.
 
 `packages/workspace` has also been reduced substantially. Removed areas include
 encrypted helpers, daemon runtime, collaboration/sync source, AI bridge, editor

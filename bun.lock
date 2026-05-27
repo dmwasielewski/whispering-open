@@ -18,7 +18,6 @@
         "@aptabase/tauri": "^0.4.1",
         "@aptabase/web": "^0.4.3",
         "@epicenter/svelte": "workspace:*",
-        "@epicenter/util": "workspace:*",
         "@epicenter/workspace": "workspace:*",
         "@google/generative-ai": "^0.24.1",
         "@mistralai/mistralai": "^1.9.18",
@@ -137,14 +136,6 @@
       },
       "peerDependencies": {
         "svelte": ">=5.0.0",
-      },
-    },
-    "packages/util": {
-      "name": "@epicenter/util",
-      "version": "0.0.1",
-      "devDependencies": {
-        "@types/bun": "catalog:",
-        "typescript": "catalog:",
       },
     },
     "packages/workspace": {
@@ -297,8 +288,6 @@
     "@epicenter/svelte": ["@epicenter/svelte@workspace:packages/svelte-utils"],
 
     "@epicenter/ui": ["@epicenter/ui@workspace:packages/ui"],
-
-    "@epicenter/util": ["@epicenter/util@workspace:packages/util"],
 
     "@epicenter/workspace": ["@epicenter/workspace@workspace:packages/workspace"],
 

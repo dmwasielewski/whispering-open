@@ -23,7 +23,6 @@ Important areas:
 ```text
 packages/ui
 packages/svelte-utils
-packages/util
 packages/workspace
 ```
 
@@ -32,7 +31,6 @@ Current purpose:
 - `packages/ui` - Svelte UI component library used heavily by Whispering Open.
 - `packages/svelte-utils` - persisted state/session/workspace helpers.
 - `packages/workspace` - local-first document/table helpers used by Whispering Open state.
-- `packages/util` - shared runtime utilities.
 - No cloud/auth/sync/encryption shared package should be treated as required unless the active app imports it.
 
 ## Root Files
