@@ -1,11 +1,11 @@
 {
 	"name": "@epicenter/ui",
 	"version": "0.1.0",
-	"description": "Svelte 5 UI components for Epicenter apps. Built with shadcn-svelte and Tailwind CSS.",
+	"description": "Svelte 5 UI components used by Whispering Open. Built with shadcn-svelte and Tailwind CSS.",
 	"keywords": [
 		"svelte",
 		"UI",
-		"epicenter",
+		"whispering-open",
 		"components",
 		"local-first",
 		"CRDT",
@@ -14,10 +14,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/EpicenterHQ/epicenter.git",
+		"url": "https://github.com/dmwasielewski/whispering-open.git",
 		"directory": "packages/ui"
 	},
-	"homepage": "https://epicenter.so",
+	"homepage": "https://github.com/dmwasielewski/whispering-open",
 	"type": "module",
 	"exports": {
 		"./*": "./src/*/index.ts",

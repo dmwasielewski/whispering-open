@@ -1,6 +1,6 @@
 {
 	"name": "@epicenter/constants",
-	"description": "Shared URLs, ports, and version info for the Epicenter monorepo",
+	"description": "Compatibility constants retained for Whispering Open during extraction.",
 	"private": true,
 	"version": "0.1.0",
 	"type": "module",

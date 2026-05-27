@@ -26,3 +26,4 @@
 - Removed unused workspace benchmark and reference storage tooling.
 - Updated workspace package metadata for the extracted local-only surface.
 - Removed unused non-exported workspace helper leftovers from the old runtime.
+- Updated package metadata and README files to describe the Whispering Open extraction.

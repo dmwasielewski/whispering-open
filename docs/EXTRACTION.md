@@ -376,6 +376,26 @@ Expected next step after verification:
 - inspect remaining package metadata and docs that still describe old Epicenter
   surfaces before package scope renaming
 
+### 2026-05-27: Updated local package metadata
+
+Several retained local packages still described themselves as general Epicenter
+monorepo packages even though they are now compatibility packages for
+Whispering Open.
+
+Cut made:
+
+- updated package descriptions and repository metadata for retained local
+  packages
+- replaced stale `packages/constants` and `packages/svelte-utils` READMEs with
+  extraction-focused notes
+- clarified that old workspace cloud-sync documentation is historical unless
+  active exports import it
+
+Expected next step after verification:
+
+- inspect stale constants and Svelte utility exports that are no longer imported
+  by Whispering Open
+
 ## 2026-05-27 Session Stop Point
 
 Last completed pushed commit:

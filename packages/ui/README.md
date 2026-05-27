@@ -1,6 +1,7 @@
 # UI Package Guide
 
-This guide explains the UI package import boundary and component update workflow.
+This guide explains the UI package import boundary and component update workflow
+for the Whispering Open compatibility UI package.
 
 ## Component Library Overview
 
@@ -40,7 +41,7 @@ We use different component types based on the interaction pattern:
 
 ### 1. Import Boundary
 
-Apps import UI through the public package API:
+Whispering Open imports UI through the public package API:
 
 ```typescript
 import { Button } from '@epicenter/ui/button';
@@ -148,7 +149,8 @@ This keeps the committed package free of generator aliases.
 
 ### Import Path Convention
 
-Use relative imports within the UI package and public package imports from apps:
+Use relative imports within the UI package and public package imports from app
+code:
 
 ```typescript
 // App code

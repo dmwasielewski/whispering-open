@@ -1,6 +1,11 @@
-# Epicenter Documentation
+# Workspace Documentation
 
-Technical documentation for the Epicenter package.
+Historical and local-first documentation for the workspace package retained
+during the Whispering Open extraction.
+
+Documents that describe cloud sync, action dispatch, auth, or hosted relay
+behavior are historical references only. They are not part of the active
+Whispering Open runtime unless the current package export surface imports them.
 
 ## Documentation Structure
 

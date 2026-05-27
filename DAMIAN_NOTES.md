@@ -74,6 +74,6 @@ Current known backlog:
 
 Recommended next cleanup candidates:
 
-1. Inspect package metadata and docs that still describe old Epicenter surfaces.
-2. Keep package scope renaming as a dedicated migration after metadata cleanup.
+1. Inspect stale constants and Svelte utility exports that are no longer imported by Whispering Open.
+2. Keep package scope renaming as a dedicated migration after dependency cleanup.
 3. Run typecheck, focused tests, and build before pushing.

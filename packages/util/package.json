@@ -1,6 +1,6 @@
 {
 	"name": "@epicenter/util",
-	"description": "Framework-agnostic runtime utilities shared across the Epicenter monorepo",
+	"description": "Framework-agnostic runtime utilities retained for Whispering Open during extraction.",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
