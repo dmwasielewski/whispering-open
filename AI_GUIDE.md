@@ -59,18 +59,11 @@ narrowed to `apps/whispering`, and `apps/api`, `packages/billing`,
 `packages/workspace` has also been reduced substantially. Removed areas include
 encrypted helpers, daemon runtime, collaboration/sync source, AI bridge, editor
 document primitives, markdown/SQLite materializers, Yjs logs, workspace path/link
-helpers, action/id helpers, benchmarks, and reference storage tooling.
+helpers, action/id helpers, benchmarks, reference storage tooling, and
+non-exported helper leftovers from the old runtime.
 
-Next session should start by inspecting the remaining `packages/workspace/src`
-helpers for actual app usage:
-
-- `packages/workspace/src/document/doc-guid.ts`
-- `packages/workspace/src/shared/client-id.ts`
-- `packages/workspace/src/shared/test-utils.ts`
-- `packages/workspace/src/shared/errors.ts`
-- `packages/workspace/src/shared/types.ts`
-- `packages/workspace/src/shared/standard-schema.ts`
-- `packages/workspace/src/__tests__/create-tables.ts`
+Next cleanup should inspect package metadata and docs that still describe
+Epicenter-only surfaces before attempting any package scope rename.
 
 Known cleanup items:
 

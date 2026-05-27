@@ -74,7 +74,6 @@ Current known backlog:
 
 Recommended next cleanup candidates:
 
-1. Inspect remaining `packages/workspace/src` helpers for actual Whispering Open usage.
-2. Check `doc-guid.ts`, `client-id.ts`, `test-utils.ts`, `errors.ts`, `types.ts`, `standard-schema.ts`, and `__tests__/create-tables.ts`.
-3. Remove only unused files in a small commit.
-4. Run typecheck, focused tests, and build before pushing.
+1. Inspect package metadata and docs that still describe old Epicenter surfaces.
+2. Keep package scope renaming as a dedicated migration after metadata cleanup.
+3. Run typecheck, focused tests, and build before pushing.
