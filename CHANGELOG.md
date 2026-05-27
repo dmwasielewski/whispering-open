@@ -24,3 +24,4 @@
 - Removed unused workspace editor document primitives.
 - Removed unused workspace materializer tooling.
 - Removed unused workspace benchmark and reference storage tooling.
+- Updated workspace package metadata for the extracted local-only surface.

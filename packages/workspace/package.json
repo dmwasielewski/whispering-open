@@ -1,28 +1,24 @@
 {
 	"name": "@epicenter/workspace",
 	"version": "0.2.0",
-	"description": "Local-first workspace library. CRDT-backed tables, key-value stores, and sync, built on Yjs.",
+	"description": "Local-first table and key-value helpers used by Whispering Open.",
 	"keywords": [
 		"local-first",
 		"CRDT",
-		"epicenter",
 		"Yjs",
 		"offline-first",
-		"SQLite",
-		"markdown",
-		"personal knowledge base",
-		"PKM",
-		"second brain",
-		"sync",
+		"IndexedDB",
+		"BroadcastChannel",
+		"whispering-open",
 		"workspace",
 		"typed schema"
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/EpicenterHQ/epicenter.git",
+		"url": "https://github.com/dmwasielewski/whispering-open.git",
 		"directory": "packages/workspace"
 	},
-	"homepage": "https://epicenter.so",
+	"homepage": "https://github.com/dmwasielewski/whispering-open",
 	"exports": {
 		".": "./src/index.ts"
 	},

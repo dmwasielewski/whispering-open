@@ -337,6 +337,23 @@ Expected next step after verification:
 - inspect remaining non-exported workspace helpers and stale package metadata
   for actual Whispering Open usage
 
+### 2026-05-27: Updated workspace package metadata
+
+The workspace package README and package metadata still described the removed
+Epicenter cloud workspace runtime, including encryption, collaboration,
+materializers, and upstream repository links.
+
+Cut made:
+
+- narrowed the package description and keywords to the local Whispering Open
+  table/KV surface
+- pointed package repository metadata at the Whispering Open repository
+- replaced the stale upstream README with extraction-focused package notes
+
+Expected next step after verification:
+
+- inspect remaining package source helpers for actual Whispering Open usage
+
 ## Safe Cleanup Order
 
 1. Verify current build:
