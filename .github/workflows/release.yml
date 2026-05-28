@@ -108,8 +108,9 @@ jobs:
               sys.exit(0)
 
           signature = open(sig_path).read().strip()
-          encoded = urllib.parse.quote(appimage_name)
-          url = f'https://github.com/dmwasielewski/whispering-open/releases/download/{tag}/{encoded}'
+          # GitHub Releases converts spaces to dots in asset filenames on upload
+          gh_asset_name = appimage_name.replace(' ', '.')
+          url = f'https://github.com/dmwasielewski/whispering-open/releases/download/{tag}/{gh_asset_name}'
 
           manifest = {
               'version': version,
