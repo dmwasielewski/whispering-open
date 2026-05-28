@@ -16,25 +16,17 @@ Items to investigate, fix, or implement. Ordered by priority within each phase.
 ---
 
 ### P2-2: Tray icon — run app in background without open window
-**Status:** needs investigation + code change  
-**What:** There is no tray icon near the clock. The user does not want the window always
-open on screen — the app should run silently in the background and be reachable via tray.  
-**Context:** Sway has no traditional taskbar. Waybar is used. `tauri-plugin-autostart`
-starts the app but opens the full window.  
-**Options to investigate:**
-- Does `tauri-plugin-system-tray` / `tauri-plugin-tray-icon` already exist in the codebase?
-- Can the app start minimized / hidden to tray on launch?
-- Can the app be configured to show only a tray icon and hide the window by default?
-**Goal:** app runs in background, tray icon visible in Waybar, click icon → show window.
+**Status:** ✅ DONE (v7.11.0-4, session 9)  
+**What was done:** Implemented `tray.ts` with lazy-init TrayIcon, Show/Hide/Settings/Quit menu,
+icon sync with recorder state. Added `core:tray:default` capability and `bundle.resources` for
+`recorder-state-icons`. Tray icon visible in Waybar, click → show/hide window.
 
 ---
 
 ### P2-3: No minimize-to-tray button visible (Sway has no taskbar)
-**Status:** blocked by P2-2  
-**What:** Standard minimize button hides to taskbar. Sway has no taskbar, so minimizing
-loses the window. The tray icon (P2-2) is the correct solution — close button should
-hide to tray, not kill the app.  
-**Depends on:** P2-2 (tray icon must exist first).
+**Status:** ✅ DONE (v7.11.0-4, session 9)  
+**What was done:** Close button now hides window to tray via `CloseRequested` handler in
+`app.run()`. App does not exit on window close — use Quit from tray menu to exit.
 
 ---
 

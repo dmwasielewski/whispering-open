@@ -1,5 +1,73 @@
 # Damian Notes
 
+## 2026-05-28 (session 9)
+
+Fixed SIGILL crash from v7.11.0-3. Established local build workflow. Tray icon and hide-to-tray confirmed working.
+
+### What was done
+
+**SIGILL crash root cause and fix:**
+
+v7.11.0-3 crashed immediately on startup with `SIGILL` (Illegal Instruction). The cause: `app.run()` in `lib.rs` used two separate match blocks — `match &event { ... }` (borrow) followed by `match event { ... }` (move). In release mode with `panic = "abort"`, this pattern compiled but crashed at runtime. Fixed by consolidating into a single `match event` with `ref` patterns:
+
+```rust
+// Before (broken)
+match &event { ... }
+if !aptabase_key.is_empty() { match event { ... } }
+
+// After (fixed)
+match event {
+    tauri::RunEvent::WindowEvent { ref label, event: tauri::WindowEvent::CloseRequested { ref api, .. }, .. }
+        if label == "main" => { api.prevent_close(); ... }
+    tauri::RunEvent::Exit { .. } if !aptabase_key.is_empty() => { ... }
+    _ => {}
+}
+```
+
+**Local build workflow established:**
+
+Previously all test builds went to CI (13 min). Now:
+
+```sh
+# Quick syntax check (2.8 seconds)
+toolbox run --container damianf bash -c \
+  "cd /var/home/damian/whispering-open/apps/whispering/src-tauri && cargo check"
+
+# Full release build (Rust: 37s if deps cached, frontend: ~30s)
+toolbox run --container damianf bash -c \
+  "cd /var/home/damian/whispering-open/apps/whispering && bun run tauri build --bundles rpm"
+
+# Install without sudo (binary only, no RPM needed)
+cp --remove-destination \
+  apps/whispering/src-tauri/target/release/whispering-open \
+  ~/.local/opt/whispering-open/root/usr/bin/whispering-open
+```
+
+AppImage cannot be built in the toolbox (requires FUSE). CI still needed for AppImage + signed release.
+
+**Tray icon and hide-to-tray confirmed working:**
+
+- Waybar shows the tray icon (StatusNotifierItem via `core:tray:default` permission)
+- Closing the window hides to tray (close button no longer kills the app)
+- `recorder-state-icons` installed at `~/.local/opt/whispering-open/root/usr/lib/Whispering Open/recorder-state-icons/`
+- Icon syncs with recorder state: IDLE → 🎙, RECORDING → 🟥
+
+**v7.11.0-4 released:**
+
+- GitHub Release: AppImage + RPM + DEB + sig files + `latest.json`
+- Locally installed via direct binary copy (no RPM needed for minor updates)
+
+### End state of session 9
+
+- App starts without crash: ✅
+- Tray icon visible in Waybar: ✅
+- Close button hides to tray: ✅
+- Local build workflow: `cargo check` (2.8s) → `bun run tauri build` (37s Rust) → copy binary
+- GitHub Release v7.11.0-4: all assets present and signed
+- BACKLOG: P2-2 and P2-3 done; P2-1, P2-4, P2-5, P2-6, P2-7 remain
+
+---
+
 ## 2026-05-28 (session 8)
 
 Set up GitHub Actions CI/CD for automated Linux release builds (AppImage + RPM + DEB).

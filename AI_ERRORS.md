@@ -98,17 +98,22 @@ For this app, use a strict programmer/tester workflow:
 
 Do not combine risky desktop behavior changes with launcher cleanup, packaging changes, or dependency cleanup in the same commit.
 
-## Do Not Reintroduce Minimize To Tray Without Runtime Testing
+## Tray Icon and Hide-to-Tray — Verified Working (session 9)
 
-The first minimize-to-tray attempt was reverted because it was not verified end-to-end before being installed and pushed.
+Tray icon + hide-to-tray are fully working as of v7.11.0-4. The implementation is in:
 
-Future tray work must be done in smaller steps:
+- `apps/whispering/src/lib/services/desktop/tray.ts` — lazy-init TrayIcon, menu, icon sync
+- `apps/whispering/src-tauri/src/lib.rs` — `CloseRequested` handler in `app.run()`
+- `apps/whispering/src-tauri/capabilities/default.json` — `core:tray:default` permission required
+- `apps/whispering/src-tauri/tauri.conf.json` — `bundle.resources` for `recorder-state-icons`
 
-- First verify the existing tray icon appears in Waybar.
-- Then test a simple explicit `Hide` action without intercepting window close.
-- Only after that test close-request interception.
-- Keep `Quit` in the tray as the only real app exit path.
-- Do not push tray behavior until Damian confirms the installed app can hide, restore, and quit correctly.
+Required files on disk (alongside installed binary):
+```
+~/.local/opt/whispering-open/root/usr/lib/Whispering Open/recorder-state-icons/
+  studio_microphone.png
+  red_large_square.png
+  arrows_counterclockwise.png
+```
 
 ## Public Repo Means No Private Runtime Data
 
@@ -226,6 +231,49 @@ In Tauri v2, `tauri build` with `createUpdaterArtifacts: true` creates `.sig` si
 files but does NOT produce `latest.json`. That file must be generated separately in CI,
 reading the version from `tauri.conf.json`, the signature from the `.sig` file, and
 constructing the download URL from the tag and asset name (with spaces replaced by dots).
+
+## SIGILL in Release Binary — Use Single match event with ref Patterns
+
+`panic = "abort"` in `[profile.release]` converts Rust panics to `ud2` = SIGILL.
+A `match &event { ... }` borrow followed by `match event { ... }` move in the same
+scope compiled without error but caused SIGILL at runtime in the release binary.
+
+Fix: consolidate into a single `match event` using `ref` to borrow inner fields:
+
+```rust
+// WRONG — compiles but SIGILLs in release mode
+match &event { ... }
+if condition { match event { ... } }
+
+// CORRECT
+match event {
+    SomeVariant { ref field, .. } => { field.method(); }
+    _ => {}
+}
+```
+
+## Local Build Workflow — Always Test Locally Before CI
+
+CI builds take 13 minutes (cold) or 5-8 minutes (warm cache). Use the local toolbox instead:
+
+```sh
+# Syntax check — 2.8 seconds
+toolbox run --container damianf bash -c \
+  "cd /var/home/damian/whispering-open/apps/whispering/src-tauri && cargo check"
+
+# Full release binary — ~37 seconds Rust + 30s frontend
+toolbox run --container damianf bash -c \
+  "cd /var/home/damian/whispering-open/apps/whispering && bun run tauri build --bundles rpm"
+
+# Install (no sudo needed)
+cp --remove-destination \
+  apps/whispering/src-tauri/target/release/whispering-open \
+  ~/.local/opt/whispering-open/root/usr/bin/whispering-open
+```
+
+Push to CI only for final tagged releases (CI adds AppImage + signing).
+
+**AppImage cannot be built in toolbox** — requires FUSE which toolbox containers lack.
 
 ## Running the App Does Not Rebuild It
 
