@@ -84,22 +84,38 @@ Check `register-commands.ts` — are shortcuts registered in the app init flow?
 **6c — Conflict check: do default shortcuts clash with Sway or other system shortcuts?**
 
 Default global shortcuts (Linux, `CommandOrControl` = `Control`):
-| Shortcut | Action | Potential conflict |
-|----------|--------|--------------------|
-| `Control+Shift+;` | Toggle recording | Sway: none (Sway uses Super/mod key) |
-| `Control+Shift+'` | Cancel recording | Possible: some terminal emulators |
-| `Control+Shift+X` | Stop and transcribe | VS Code: "Cut line" (app-local, not global) |
-| `Control+Shift+R` | Toggle transformation | Firefox: hard reload (app-local, not global) |
+| Shortcut | Action | Sway conflict? |
+|----------|--------|----------------|
+| `Control+Shift+;` | Toggle recording | ✅ None — Sway uses `Super` (`Mod4`) |
+| `Control+Shift+'` | Cancel recording | ✅ None |
+| `Control+Shift+X` | Stop and transcribe | ✅ None |
+| `Control+Shift+R` | Toggle transformation | ✅ None |
+
+**Checked 2026-05-28:** `~/.config/sway/config` uses `set $mod Mod4` (Super/Win key). All Sway
+bindings use `$mod+...` — zero conflicts with `Control+Shift+*`.
 
 **Source:** `apps/whispering/src/lib/state/device-config.svelte.ts`
 
-**Test:** open Sway config (`~/.config/sway/config`), search for `Control+Shift` bindings.
-Also test each shortcut while common apps are open (terminal, Firefox, VS Code).
+**Still needs manual test:** each shortcut while Firefox/terminal/VS Code is in focus.
+
+**6d — XWayland limitation: global shortcuts may not capture from Wayland-native apps**
+
+The app runs with `GDK_BACKEND=x11` (XWayland). `tauri-plugin-global-shortcut` on Linux
+uses `XGrabKey` (X11 API). On Sway:
+- `XGrabKey` via XWayland captures keys from **XWayland apps** (Firefox in XWayland, Electron apps)
+- `XGrabKey` may **NOT** capture keys from **Wayland-native apps** (native Wayland terminals,
+  Wayland-native Firefox, wl-clipboard tools) when they are focused
+
+This is a known Wayland limitation — X11 global grabs do not extend to Wayland clients.
+
+**Workaround if needed:** `ydotool` or a Sway keybinding that calls the app's IPC. But test first —
+the impact may be small if most apps in use are XWayland-based.
 
 **Pass criteria:**
-- [ ] All 4 shortcuts trigger from any focused window
-- [ ] No conflicts with Sway's built-in shortcuts
+- [ ] All 4 shortcuts trigger from any focused window (at minimum: XWayland apps)
+- [ ] No conflicts with Sway's built-in shortcuts ✅ confirmed
 - [ ] App registers shortcuts immediately at startup (not only after visiting Settings)
+- [ ] Document whether Wayland-native apps are a problem in practice
 
 ---
 
