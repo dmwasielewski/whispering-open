@@ -1,5 +1,35 @@
 # Damian Notes
 
+## 2026-05-27 (session 4)
+
+Fixed all 11 Svelte typecheck warnings. `bun run typecheck` now reports 0 errors and 0 warnings.
+
+Changed:
+
+- `apps/whispering/src/lib/components/copyable/TextPreviewDialog.svelte` — fixed self-closing `<div />` → `<div></div>`
+- `apps/whispering/src/routes/(app)/(config)/settings/transcription/+page.svelte` — fixed 6 self-closing `<span />` → `<span></span>`
+- `apps/whispering/src/routes/(app)/(config)/recordings/row-actions/EditRecordingModal.svelte` — wrapped `recording.id` capture in `untrack()` to silence `state_referenced_locally` warning; intent (non-reactive teardown capture) preserved
+- `apps/whispering/src/routes/(app)/(config)/settings/shortcuts/keyboard-shortcut-recorder/KeyboardShortcutRecorder.svelte` — wrapped initial `rawKeyCombination` prop access in `untrack()` for `manualValue` initial state
+- `apps/whispering/src/routes/(app)/(config)/settings/shortcuts/keyboard-shortcut-recorder/GlobalKeyboardShortcutRecorder.svelte` — wrapped `createKeyRecorder(...)` call in `untrack()` to silence prop-captured-locally warning for `pressedKeys`
+- `apps/whispering/src/routes/(app)/(config)/settings/shortcuts/keyboard-shortcut-recorder/LocalKeyboardShortcutRecorder.svelte` — same as above
+
+Current verified state:
+
+- `bun run typecheck` passes with **0 errors and 0 warnings**.
+- `bun run build:web` passes.
+- Push went through gitleaks pre-push hook.
+
+Current known backlog:
+
+- GitHub reports 21 Dependabot vulnerabilities.
+- Tauri identifier rename: `tauri.conf.json` already uses `io.github.dmwasielewski.whisperingopen`; capabilities files and `Cargo.toml` still use old value — dedicated migration needed.
+
+Recommended next cleanup candidates:
+
+1. Finish Tauri identifier rename (capabilities + Cargo.toml).
+2. Review 21 Dependabot vulnerabilities.
+3. Prove local Tauri build and Linux release asset.
+
 ## 2026-05-25
 
 Created `/var/home/damian/whispering-open` as a standalone Whispering Open extraction.

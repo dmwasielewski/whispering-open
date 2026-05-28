@@ -29,7 +29,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Verified Commands
 
-As of 2026-05-27 (session 3):
+As of 2026-05-27 (session 4):
 
 ```sh
 bun install
@@ -38,8 +38,8 @@ bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps
 bun run build:web
 ```
 
-`typecheck` and `build:web` pass. Svelte reports 11 existing warnings, but no
-errors. The focused workspace tests above pass (45 tests, 0 failures).
+`typecheck` reports **0 errors and 0 warnings** (all 11 Svelte warnings fixed).
+The focused workspace tests above pass (45 tests, 0 failures).
 
 ## Current Extraction Notes
 
@@ -60,8 +60,18 @@ Known cleanup items:
 - Rename the Tauri identifier from `com.bradenwong.whispering` to
   `io.github.dmwasielewski.whisperingopen`. Dedicated migration; affects app data
   path, desktop entry, and release identity.
-- Resolve the 11 existing Svelte warnings from `bun run typecheck`.
+  Note: `tauri.conf.json` already uses `io.github.dmwasielewski.whisperingopen`,
+  but capabilities files and `Cargo.toml` still reference the old identifier.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
+
+Completed:
+
+- All 11 Svelte warnings fixed (session 4, commit a4dc7fd):
+  - 7 self-closing void element warnings (div, span) in TextPreviewDialog.svelte
+    and transcription settings page — replaced with explicit closing tags.
+  - 4 `state_referenced_locally` warnings fixed with `untrack()` in
+    EditRecordingModal.svelte, KeyboardShortcutRecorder.svelte,
+    GlobalKeyboardShortcutRecorder.svelte, LocalKeyboardShortcutRecorder.svelte.
 
 ## Documentation Contract
 
