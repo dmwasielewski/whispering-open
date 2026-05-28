@@ -17,7 +17,6 @@
         "@anthropic-ai/sdk": "^0.55.0",
         "@aptabase/tauri": "^0.4.1",
         "@aptabase/web": "^0.4.3",
-        "@epicenter/svelte": "workspace:*",
         "@epicenter/workspace": "workspace:*",
         "@google/generative-ai": "^0.24.1",
         "@mistralai/mistralai": "^1.9.18",
@@ -82,22 +81,6 @@
         "vite": "catalog:",
         "vite-plugin-devtools-json": "^1.0.0",
         "wrangler": "catalog:",
-      },
-    },
-    "packages/svelte-utils": {
-      "name": "@epicenter/svelte",
-      "version": "0.1.0",
-      "dependencies": {
-        "@epicenter/workspace": "workspace:*",
-        "arktype": "catalog:",
-        "wellcrafted": "catalog:",
-      },
-      "devDependencies": {
-        "@standard-schema/spec": "catalog:",
-        "@types/bun": "catalog:",
-        "svelte": "catalog:",
-        "svelte-check": "catalog:",
-        "typescript": "catalog:",
       },
     },
     "packages/ui": {
@@ -284,8 +267,6 @@
     "@emnapi/wasi-threads": ["@emnapi/wasi-threads@1.2.1", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w=="],
 
     "@emoji-mart/data": ["@emoji-mart/data@1.2.1", "", {}, "sha512-no2pQMWiBy6gpBEiqGeU77/bFejDqUTRY7KX+0+iur13op3bqUsXdnwoZs6Xb1zbv0gAj5VvS1PWoUUckSr5Dw=="],
-
-    "@epicenter/svelte": ["@epicenter/svelte@workspace:packages/svelte-utils"],
 
     "@epicenter/ui": ["@epicenter/ui@workspace:packages/ui"],
 

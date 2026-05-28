@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createPersistedState } from '@epicenter/svelte';
+	import { createPersistedState } from '$lib/utils/svelte-utils';
 	import { Badge } from '@epicenter/ui/badge';
 	import { Button } from '@epicenter/ui/button';
 	import * as ButtonGroup from '@epicenter/ui/button-group';

@@ -82,7 +82,7 @@ type PersistedStateOptions<TSchema extends StandardSchemaV1> = {
  *
  * @example
  * ```ts
- * import { createPersistedState } from '@epicenter/svelte';
+ * import { createPersistedState } from '$lib/utils/svelte-utils';
  * import { type } from 'arktype';
  *
  * const theme = createPersistedState({

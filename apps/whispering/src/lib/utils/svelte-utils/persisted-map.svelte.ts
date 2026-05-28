@@ -88,7 +88,7 @@ export function defineEntry<TSchema extends StandardSchemaV1>(
  *
  * @example
  * ```ts
- * import { createPersistedMap, defineEntry } from '@epicenter/svelte';
+ * import { createPersistedMap, defineEntry } from '$lib/utils/svelte-utils';
  * import { type } from 'arktype';
  *
  * const config = createPersistedMap({

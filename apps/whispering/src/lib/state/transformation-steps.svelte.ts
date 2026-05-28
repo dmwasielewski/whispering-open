@@ -18,7 +18,7 @@
  * ```
  */
 
-import { fromTable } from '@epicenter/svelte';
+import { fromTable } from '$lib/utils/svelte-utils';
 import { nanoid } from 'nanoid/non-secure';
 import { whispering } from '$lib/whispering/client';
 import type { TransformationStep } from '$lib/workspace';

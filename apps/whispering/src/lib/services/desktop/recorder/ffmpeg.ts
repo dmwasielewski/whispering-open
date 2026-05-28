@@ -1,4 +1,4 @@
-import { createPersistedState } from '@epicenter/svelte';
+import { createPersistedState } from '$lib/utils/svelte-utils';
 import { invoke } from '@tauri-apps/api/core';
 import { join } from '@tauri-apps/api/path';
 import { exists, remove, stat } from '@tauri-apps/plugin-fs';

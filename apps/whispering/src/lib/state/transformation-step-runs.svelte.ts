@@ -13,7 +13,7 @@
  * const steps = transformationStepRuns.getByTransformationRunId(runId);
  * ```
  */
-import { fromTable } from '@epicenter/svelte';
+import { fromTable } from '$lib/utils/svelte-utils';
 import { whispering } from '$lib/whispering/client';
 import type { TransformationStepRun } from '$lib/workspace';
 

@@ -17,7 +17,7 @@
  * const recordingRuns = transformationRuns.getByRecordingId(recordingId);
  * ```
  */
-import { fromTable } from '@epicenter/svelte';
+import { fromTable } from '$lib/utils/svelte-utils';
 import { whispering } from '$lib/whispering/client';
 import type { TransformationRun } from '$lib/workspace';
 

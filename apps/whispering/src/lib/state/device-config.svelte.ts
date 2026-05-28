@@ -2,7 +2,7 @@ import {
 	createPersistedMap,
 	defineEntry,
 	type PersistedMap,
-} from '@epicenter/svelte';
+} from '$lib/utils/svelte-utils';
 import { type } from 'arktype';
 import { extractErrorMessage } from 'wellcrafted/error';
 import { BITRATES_KBPS, DEFAULT_BITRATE_KBPS } from '$lib/constants/audio';
