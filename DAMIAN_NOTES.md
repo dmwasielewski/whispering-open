@@ -35,9 +35,31 @@ Set up GitHub Actions CI/CD for automated Linux release builds (AppImage + RPM +
 - `gh workflow run release.yml --repo dmwasielewski/whispering-open --field tag=''` — manual build-only trigger works
 - Tag-based release: `git tag vX.Y.Z-N && git push origin vX.Y.Z-N` → GitHub Release created automatically
 
+### Additional fixes during session 8
+
+**Auto-updater URL bug:** `latest.json` had `%20` (space) in the AppImage URL, but GitHub
+Releases converts spaces to dots on upload. Fixed in workflow and re-uploaded `latest.json`
+to the v7.11.0-2 release.
+
+**Signing key mismatch:** Generating a new keypair in session 8 meant the installed v7.11.0-1
+(old pubkey) could not verify v7.11.0-2's signature. The auto-updater showed
+`The signature was created with a different key`. Manually installed v7.11.0-2 via RPM extract.
+This is a one-time migration — future updates will work automatically.
+
+**`GITHUB_TOKEN` permissions:** Added `permissions: contents: write` to the workflow job.
+Removed `generate_release_notes: true` (requires `pull-requests: read`).
+
+### End state of session 8
+
+- CI: green, full release pipeline working
+- GitHub Release v7.11.0-2: AppImage + RPM + DEB + sig files + latest.json
+- Locally installed: v7.11.0-2 at `~/.local/opt/whispering-open/root/usr/bin/whispering-open`
+- Auto-updater: latest.json correct, will work for v7.11.0-2 → future versions
+- Docs: AI_ERRORS.md, AI_GUIDE.md, DAMIAN_NOTES.md, BUILD_AND_RELEASE.md all updated
+
 ### Remaining known items
 
-- Phase 2: Verify desktop integration on Fedora Sway Atomic (global shortcuts, tray icon, auto-updater).
+- Phase 2: Verify desktop integration on Fedora Sway Atomic — global keyboard shortcuts, tray icon, auto-updater flow (v7.11.0-2 → v7.11.0-3).
 - Cosmetic cleanup of remaining bradenwong/Epicenter text references in comments.
 - Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred — requires vite.config.ts type audit).
 
