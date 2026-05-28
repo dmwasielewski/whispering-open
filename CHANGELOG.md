@@ -30,3 +30,4 @@
 - Removed unused legacy constants and the unused Svelte AI chat fetch helper.
 - Replaced the remaining constants package usage with app-local constants.
 - Removed unused Svelte helper exports from the temporary compatibility package.
+- Inlined `packages/ui` (`@whispering-open/ui`) into `apps/whispering/src/lib/ui/`.

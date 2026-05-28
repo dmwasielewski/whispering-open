@@ -615,13 +615,34 @@ bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps
 bun run build:web
 ```
 
+### 2026-05-28: Inlined packages/ui into apps/whispering
+
+`@whispering-open/ui` provided all UI components (shadcn-svelte based, Tailwind CSS).
+With `svelte-utils` and `workspace` already inlined, this was the last remaining
+shared workspace package.
+
+Cut made:
+
+- copied `packages/ui/src/` to `apps/whispering/src/lib/ui/`
+- updated 79 import sites from `@whispering-open/ui` to `$lib/ui`
+- removed `@whispering-open/ui` from `apps/whispering/package.json`
+- removed `packages/ui` directory
+- refreshed `bun.lock`
+- fixed JSDoc example in `use-combobox.svelte.ts` to use `$lib/ui`
+
+No remaining shared packages. The workspace now contains only `apps/whispering`.
+
+Expected next step after verification:
+
+- Add GitHub Actions CI/CD for automated AppImage builds (Ubuntu runner required for FUSE).
+
 ## Safe Cleanup Order
 
 1. Rename Tauri bundle ID (see above — dedicated migration, requires runtime test on Fedora Sway).
 2. Resolve the 11 existing Svelte warnings.
 3. Review the 21 GitHub Dependabot vulnerabilities.
 4. Prove local Tauri build and Linux release asset.
-5. Add stable release automation.
+5. ~~Inline `packages/ui` into `apps/whispering/src/lib/ui/`.~~ **Done** (session 7). Phase 1 complete.
 
 ## Verification Rule
 

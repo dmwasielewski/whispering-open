@@ -1,5 +1,28 @@
 # Damian Notes
 
+## 2026-05-28 (session 7)
+
+Inlined packages/ui into apps/whispering.
+
+Copied `packages/ui/src/` to `apps/whispering/src/lib/ui/`. Updated 79
+import sites from `@whispering-open/ui` to `$lib/ui`. Removed `packages/ui`.
+
+No remaining shared packages. The workspace now contains only `apps/whispering`.
+
+Current verified state:
+
+- `bun run typecheck`: 0 errors, 0 warnings
+- `bun run build:web`: passes
+- 45 workspace tests pass + 1 datetime-string test pass
+- Commit: `f6677ef`
+
+Remaining known items:
+
+- Add stable release automation (GitHub Actions — AppImage requires FUSE on Ubuntu runner).
+- Manually reinstall on host using v7.11.0-1 release (old binary from May 26 still at ~/.local/opt/whispering-open/).
+- Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred — requires vite.config.ts type audit).
+- Cosmetic cleanup of remaining bradenwong/Epicenter text references in comments and source files.
+
 ## 2026-05-28 (session 6)
 
 Proven local Tauri desktop build, published first GitHub Release, verified dotfiles-sway integration.

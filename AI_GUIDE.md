@@ -42,7 +42,7 @@ Work strictly in this order. Do not personalise before cleaning. Do not adapt fo
 
 ## Verified Commands
 
-As of 2026-05-28 (session 6):
+As of 2026-05-28 (session 7):
 
 ```sh
 bun install
@@ -68,11 +68,13 @@ The focused workspace tests above pass (45 tests, 0 failures).
 
 The app currently has no remaining `@epicenter/*` import references.
 
-All packages have been either removed or renamed:
+All packages have been either removed or renamed, then inlined:
 
 - `@epicenter/svelte` → inlined into `$lib/utils/svelte-utils/`
 - `@epicenter/workspace` → inlined into `$lib/utils/workspace/`
-- `@epicenter/ui` → renamed to `@whispering-open/ui` (`packages/ui`)
+- `@epicenter/ui` → renamed to `@whispering-open/ui`, then inlined into `$lib/ui/` (session 7)
+
+No remaining shared packages. The workspace now contains only `apps/whispering`.
 
 The only remaining Epicenter-origin identifier is the Tauri app bundle ID:
 `com.bradenwong.whispering`. That rename requires a dedicated migration because
@@ -80,7 +82,7 @@ it affects app data storage paths and desktop launcher identity.
 
 Known cleanup items (Phase 1 — remaining):
 
-- Inline `packages/ui` (`@whispering-open/ui`) into `apps/whispering/src/lib/` — last shared package.
+- ~~Inline `packages/ui` (`@whispering-open/ui`) into `apps/whispering/src/lib/` — last shared package.~~ **Done** (session 7).
 - Remove remaining Epicenter/bradenwong text references in docs and source comments (non-import, cosmetic).
 - Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred: vite.config.ts type work needed).
 - Add stable release automation (GitHub Actions — AppImage requires Ubuntu CI with FUSE).

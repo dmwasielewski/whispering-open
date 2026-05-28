@@ -20,14 +20,11 @@ Important areas:
 
 ## Shared Packages
 
-```text
-packages/ui
-```
+No remaining shared packages. All UI components and utilities are owned by `apps/whispering`:
 
-Current purpose:
-
-- `packages/ui` (`@whispering-open/ui`) - Svelte UI component library used by Whispering Open.
-- `packages/svelte-utils` and `packages/workspace` have been inlined into `apps/whispering/src/lib/utils/`.
+- `apps/whispering/src/lib/ui/` — UI components (was `packages/ui`, `@whispering-open/ui`)
+- `apps/whispering/src/lib/utils/svelte-utils/` — Svelte helpers (inlined earlier)
+- `apps/whispering/src/lib/utils/workspace/` — Yjs/IndexedDB helpers (inlined earlier)
 
 ## Root Files
 
@@ -69,4 +66,4 @@ Recommended order:
 2. ~~Resolve the 11 existing Svelte warnings from `bun run typecheck`.~~ **Done** (session 4).
 3. ~~Review the 21 GitHub Dependabot vulnerabilities.~~ **Done** (session 5) — `bun audit` 0 vulnerabilities.
 4. ~~Prove local Tauri build and Linux release asset.~~ **Done** (session 6) — RPM + DEB proven in `damianf` toolbox. AppImage deferred to GitHub Actions (requires FUSE).
-5. Add stable release automation (GitHub Actions — optional, manual releases work fine via `tauri build --bundles rpm` + `gh release create`).
+5. ~~Inline `packages/ui` into `apps/whispering/src/lib/ui/`.~~ **Done** (session 7). Phase 1 extraction complete.
