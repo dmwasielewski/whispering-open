@@ -42,7 +42,7 @@ Work strictly in this order. Do not personalise before cleaning. Do not adapt fo
 
 ## Verified Commands
 
-As of 2026-05-28 (session 7):
+As of 2026-05-28 (session 8):
 
 ```sh
 bun install
@@ -59,6 +59,17 @@ toolbox run --container damianf bash -c "
   export WHISPER_DONT_GENERATE_BINDINGS=1
   bun run tauri build --bundles rpm,deb
 "
+```
+
+CI release (GitHub Actions — triggers build + GitHub Release upload):
+
+```sh
+# Tag-based release (production):
+git tag vX.Y.Z-N
+git push origin main && git push origin vX.Y.Z-N
+
+# Manual build-only test (no release):
+gh workflow run release.yml --repo dmwasielewski/whispering-open --field tag=''
 ```
 
 `typecheck` reports **0 errors and 0 warnings** (all 11 Svelte warnings fixed).
@@ -85,7 +96,7 @@ Known cleanup items (Phase 1 — remaining):
 - ~~Inline `packages/ui` (`@whispering-open/ui`) into `apps/whispering/src/lib/` — last shared package.~~ **Done** (session 7).
 - Remove remaining Epicenter/bradenwong text references in docs and source comments (non-import, cosmetic).
 - Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred: vite.config.ts type work needed).
-- Add stable release automation (GitHub Actions — AppImage requires Ubuntu CI with FUSE).
+- ~~Add stable release automation (GitHub Actions — AppImage requires Ubuntu CI with FUSE).~~ **Done** (session 8).
 
 Completed:
 

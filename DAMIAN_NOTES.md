@@ -1,5 +1,46 @@
 # Damian Notes
 
+## 2026-05-28 (session 8)
+
+Set up GitHub Actions CI/CD for automated Linux release builds (AppImage + RPM + DEB).
+
+### What was done
+
+**Tauri signing keypair generated:**
+- New Ed25519 (minisign) keypair generated with `bun run --cwd apps/whispering tauri signer generate`
+- Private key stored as `TAURI_SIGNING_PRIVATE_KEY` GitHub Actions secret (never committed)
+- Key password stored as `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` secret
+- Public key (single-base64-encoded minisign .pub content) stored in `tauri.conf.json → plugins.updater.pubkey`
+- Private key file deleted from disk immediately after storing the secret
+
+**`.github/workflows/release.yml` created:**
+- Trigger: tag push (`v*`) or manual `workflow_dispatch`
+- Runner: `ubuntu-24.04`
+- Builds: AppImage + RPM + DEB + `latest.json` (updater manifest)
+- Uploads artifacts to GitHub Release on tag push
+
+**CI fixes required (multiple failed runs):**
+- Missing JS dependencies: 12 packages from deleted `packages/ui` not in `apps/whispering/package.json` — added them
+- Vulkan SDK: `whisper.cpp`/GGML explicitly enables `-DGGML_VULKAN=ON` which requires `glslc` (shader compiler). Ubuntu's repos don't ship `glslc` → installed LunarG Vulkan SDK via their PPA
+- ALSA: `libasound2-dev` was missing from the apt-get list
+- Pubkey encoding: original pubkey was double-base64 encoded → generated a fresh keypair with correct single-layer base64 encoding
+
+**Documentation:**
+- `docs/BUILD_AND_RELEASE.md` — completely rewritten with beginner-friendly CI/CD explanation covering every workflow step, the Vulkan SDK requirement, signing mechanism, and release workflow
+- `AI_GUIDE.md` — updated verified commands, marked CI automation done
+
+### Current verified state
+
+- CI run green (first successful end-to-end build): artifacts verified
+- `gh workflow run release.yml --repo dmwasielewski/whispering-open --field tag=''` — manual build-only trigger works
+- Tag-based release: `git tag vX.Y.Z-N && git push origin vX.Y.Z-N` → GitHub Release created automatically
+
+### Remaining known items
+
+- Phase 2: Verify desktop integration on Fedora Sway Atomic (global shortcuts, tray icon, auto-updater).
+- Cosmetic cleanup of remaining bradenwong/Epicenter text references in comments.
+- Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred — requires vite.config.ts type audit).
+
 ## 2026-05-28 (session 7)
 
 Inlined packages/ui into apps/whispering.
