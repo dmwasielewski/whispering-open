@@ -65,14 +65,85 @@ a portal or `tauri-plugin-global-shortcut` with Wayland support.
 
 ### P2-7: Remove Privacy & Analytics tab and all tracking code
 **Status:** ready to start  
-**What:** The app has a "Privacy & Analytics" settings tab inherited from upstream Epicenter.
-This includes telemetry, analytics tracking, and data collection features.  
-**Action:** 
-1. Find all analytics/telemetry code (imports, services, settings keys, UI components)
-2. Remove completely — do not leave dead code behind
-3. Remove the settings tab from the UI
-4. Verify typecheck and build still pass after removal  
-**Why:** Personal fork — no analytics needed. Cleaner codebase for future customization.
+**What:** Full analytics infrastructure still exists in TypeScript even though the Rust backend
+is disabled (APTABASE_KEY is empty). The frontend still calls `rpc.analytics.logEvent` in many
+places and the settings tab is visible.  
+**Files to remove/clean:**
+- `src/lib/services/analytics/` (desktop.ts, web.ts, types.ts)
+- `src/lib/query/analytics.ts`
+- `src/lib/query/actions.ts` — remove 3× `rpc.analytics.logEvent` calls
+- `src/lib/query/transcription.ts` — remove 5× `rpc.analytics.logEvent` calls
+- `src/routes/(app)/+layout.svelte` — remove `app_started` logEvent
+- `src/routes/(app)/(config)/settings/analytics/+page.svelte` — delete entire file
+- `src/routes/(app)/(config)/settings/SidebarNav.svelte` — remove Analytics nav entry
+- `Cargo.toml` — remove `tauri-plugin-aptabase` dependency
+- `src-tauri/src/lib.rs` — remove all aptabase code (already guarded but still present)
+**Why:** Dead code, external dependency (aptabase.com), privacy hygiene.
+
+---
+
+## Independence from upstream author — fix external dependencies
+
+### IND-1: Parakeet models hosted on private EpicenterHQ repo
+**Status:** ready to start  
+**What:** Parakeet model files are downloaded from `github.com/EpicenterHQ/epicenter/releases/download/models/parakeet-tdt-0.6b-v3-int8/`. This is the upstream author's private app repo — if it goes private or is deleted, Parakeet downloads break.  
+**Files:** `src/lib/services/transcription/local/parakeet.ts`  
+**Fix:** Re-host model files on our GitHub releases (`dmwasielewski/whispering-open`) or find the official public source. NVIDIA's Parakeet model is on Hugging Face at `nvidia/parakeet-tdt-0.6b-v2` but the int8-quantised ONNX versions need to be sourced or re-exported.  
+**Priority:** medium (works now but fragile)
+
+---
+
+### IND-2: GitHub star counter uses ungh.cc (unofficial third-party proxy)
+**Status:** ready to start  
+**What:** `src/lib/ui/github-button/index.ts` fetches star count from `https://ungh.cc/repos/{owner}/{repo}`. `ungh.cc` is an unofficial GitHub API caching proxy — not affiliated with GitHub, could disappear.  
+**Fix:** Replace with direct GitHub API call (`api.github.com/repos/...`) or remove the star count widget entirely (it shows upstream star count anyway, irrelevant for a fork).  
+**Priority:** low (cosmetic only)
+
+---
+
+### IND-3: Chrome Web Store links point to upstream extension
+**Status:** ready to start  
+**What:** Two pages link to the upstream author's Chrome extension:
+- `src/routes/(app)/(config)/desktop-app/+page.svelte`
+- `src/routes/(app)/(config)/global-shortcut/+page.svelte`
+
+Link: `chromewebstore.google.com/detail/whispering/oilbfihknpdbpfkcncojikmooipnlglo`
+
+We have no Chrome extension. These links are misleading.  
+**Fix:** Remove the links or replace with a note that there is no browser extension for this fork.  
+**Priority:** low (cosmetic)
+
+---
+
+### IND-4: YouTube tutorial videos from upstream author
+**Status:** ready to start  
+**What:** Two pages embed or link to the upstream author's tutorial videos:
+- `install-ffmpeg/+page.svelte` — links to upstream's FFmpeg tutorial
+- `macos-enable-accessibility/+page.svelte` — **embeds** a YouTube video (`<iframe>`) for macOS setup (irrelevant for Linux)
+
+The macOS accessibility page itself is irrelevant on Fedora.  
+**Fix:** Remove the macOS accessibility page from navigation (Linux-only fork), remove/replace YouTube embeds.  
+**Priority:** low
+
+---
+
+### IND-5: Evaluate and choose best local models for transcription + translation
+**Status:** needs investigation  
+**What:** The app supports: Whisper.cpp (tiny/small/medium/large-v3-turbo), Moonshine (base/small), Parakeet. All require local downloads. Need to evaluate:
+- Which are fully free and open-source with no usage restrictions?
+- Which work best for Polish + English transcription?
+- Which support translation (e.g. PL→EN)?
+- What are the size/quality/speed trade-offs on Damian's hardware?
+
+**Known model sources:**
+| Model | Source | Free? | PL support | Translation |
+|-------|--------|-------|-----------|-------------|
+| Whisper tiny/small/medium/large-v3-turbo | HuggingFace (ggerganov) | ✅ MIT | ✅ | ✅ |
+| Moonshine base/small | HuggingFace (UsefulSensors) | ✅ Apache 2.0 | ❓ (EN-only trained) | ❌ |
+| Parakeet tdt-0.6b | EpicenterHQ (private host) | ✅ Apache 2.0 (NVIDIA) | ❌ (EN-only) | ❌ |
+
+**Recommendation to investigate:** Whisper large-v3-turbo is likely best for PL+EN — it's multilingual, fast, MIT licensed, hosted on official HuggingFace. Moonshine and Parakeet are English-only.  
+**Priority:** medium (impacts daily use)
 
 ---
 
