@@ -19,9 +19,20 @@ Current verified state:
 Remaining known items:
 
 - Add stable release automation (GitHub Actions — AppImage requires FUSE on Ubuntu runner).
-- Manually reinstall on host using v7.11.0-1 release (old binary from May 26 still at ~/.local/opt/whispering-open/).
+- ~~Manually reinstall on host using v7.11.0-1 release.~~ **Done** (session 7 followup — see below).
 - Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred — requires vite.config.ts type audit).
 - Cosmetic cleanup of remaining bradenwong/Epicenter text references in comments and source files.
+
+### Host reinstall (session 7 followup)
+
+Replaced old May-26 binary with v7.11.0-1 from GitHub release:
+
+- Downloaded `Whispering.Open-7.11.0-1-1.x86_64.rpm` (19MB) from GitHub releases API
+- Extracted with `rpm2cpio | cpio -idm`
+- Binary: `~/.local/opt/whispering-open/root/usr/bin/whispering-open` (45MB Tauri ELF)
+- Symlink: `~/.local/bin/whispering-open` → binary
+- Desktop file: `~/.local/share/applications/whispering-open.desktop` unchanged
+- `~/.local/opt/whispering-open/version`: `v7.11.0-1`
 
 ## 2026-05-28 (session 6)
 
