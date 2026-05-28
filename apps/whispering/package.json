@@ -97,6 +97,7 @@
 		"vaul-svelte": "^1.0.0-next.7",
 		"tauri-plugin-macos-permissions-api": "^2.3.0",
 		"wellcrafted": "catalog:",
+		"y-indexeddb": "catalog:",
 		"yjs": "catalog:"
 	}
 }
