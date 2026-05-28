@@ -160,6 +160,27 @@ to auto-generate notes from pull request titles. Without `pull-requests: read` p
 this fails with `Resource not accessible by integration`. Since this is a personal project
 without pull requests, just omit `generate_release_notes`.
 
+### NEVER change the Tauri signing keypair — it permanently breaks auto-update for existing users
+
+The Tauri auto-updater works by comparing the signature in `latest.json` against the public key
+**baked into the running app binary**. If the signing keypair changes:
+
+- New builds are signed with the new private key → `latest.json` has new signature
+- Old running app has the old public key → verification fails
+- Error: `The signature was created with a different key than the one provided`
+- The only recovery is a **manual reinstall** — the auto-updater cannot fix itself
+
+**The current keypair (set up in session 8, 2026-05-28) is permanent. Never regenerate it.**
+
+Rules:
+- `TAURI_SIGNING_PRIVATE_KEY` GitHub secret → never replace with a new key
+- `plugins.updater.pubkey` in `tauri.conf.json` → never change
+- If the private key is lost: generate new keypair, publish a new version, document that
+  existing users must manually reinstall that one version, then future updates work again
+
+The signing keypair is a one-way commitment: changing it requires a manual migration for every
+existing installation.
+
 ### Tauri pubkey must be single-base64-encoded, not double-encoded
 
 The `plugins.updater.pubkey` field in `tauri.conf.json` must contain the **raw base64 content**
