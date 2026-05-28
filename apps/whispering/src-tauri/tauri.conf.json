@@ -9,7 +9,7 @@
 		"active": true,
 		"category": "Productivity",
 		"publisher": "Damian Wasielewski",
-		"copyright": "Copyright © 2026 Damian Wasielewski",
+		"copyright": "Copyright \u00a9 2026 Damian Wasielewski",
 		"homepage": "https://github.com/dmwasielewski/whispering-open",
 		"targets": "all",
 		"icon": [
@@ -52,7 +52,7 @@
 	"identifier": "io.github.dmwasielewski.whisperingopen",
 	"plugins": {
 		"updater": {
-			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUwQzE1RjEyRThENzg0OEEKUldTS2hOZm9FbC9CVU1uZ1JLWlluMm1mOHd4N1RWUkNjME9PcHA3Nkg2ek5RMnZyVTVDS2k1QkwK",
+			"pubkey": "ZFc1MGNuVnpkR1ZrSUdOdmJXMWxiblE2SUcxcGJtbHphV2R1SUhCMVlteHBZeUJyWlhrNklEWTNSRFF6TUVORk1qQXhSakpGUlRjS1VsZFVia3hvT0dkNmFrUlZXamxqUkhOWksyaHBiVFpEZFRsU1YxbEhNSGxOZG5WaE5VTTRRbk5WTVVvMmFtUkZLM05PUTNGcVZHWUs=",
 			"endpoints": [
 				"https://github.com/dmwasielewski/whispering-open/releases/latest/download/latest.json"
 			]
