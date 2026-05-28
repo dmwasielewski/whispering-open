@@ -26,7 +26,7 @@ packages/ui
 
 Current purpose:
 
-- `packages/ui` - Svelte UI component library used by Whispering Open. Still named `@epicenter/ui`; rename is deferred.
+- `packages/ui` (`@whispering-open/ui`) - Svelte UI component library used by Whispering Open.
 - `packages/svelte-utils` and `packages/workspace` have been inlined into `apps/whispering/src/lib/utils/`.
 
 ## Root Files
@@ -65,9 +65,8 @@ These were previously shared packages. Now owned entirely by the app:
 
 Recommended order:
 
-1. Rename `@epicenter/ui` → `@whispering-open/ui` (dedicated migration, ~80 import sites).
-2. Rename the Tauri identifier after package rename is stable.
-3. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
-4. Review the 21 GitHub Dependabot vulnerabilities.
-5. Prove local Tauri build and Linux release asset.
-6. Add stable release automation.
+1. Rename the Tauri identifier (`com.bradenwong.whispering` → `io.github.dmwasielewski.whisperingopen`) — dedicated migration.
+2. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
+3. Review the 21 GitHub Dependabot vulnerabilities.
+4. Prove local Tauri build and Linux release asset.
+5. Add stable release automation.

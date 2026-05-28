@@ -29,7 +29,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Verified Commands
 
-As of 2026-05-27 (session 2):
+As of 2026-05-27 (session 3):
 
 ```sh
 bun install
@@ -43,25 +43,23 @@ errors. The focused workspace tests above pass (45 tests, 0 failures).
 
 ## Current Extraction Notes
 
-The app currently still imports:
+The app currently has no remaining `@epicenter/*` import references.
 
-- `@epicenter/ui` — the only remaining shared package with an Epicenter name
+All packages have been either removed or renamed:
 
-`@epicenter/svelte` and `@epicenter/workspace` have been inlined directly into
-`apps/whispering/src/lib/utils/`. The app no longer uses any external workspace
-package reference for its local-first helpers.
+- `@epicenter/svelte` → inlined into `$lib/utils/svelte-utils/`
+- `@epicenter/workspace` → inlined into `$lib/utils/workspace/`
+- `@epicenter/ui` → renamed to `@whispering-open/ui` (`packages/ui`)
 
-`packages/ui` is the only remaining shared package. It still carries the old
-`@epicenter/ui` package name. Its `DateTimeString` type is now defined locally
-within the package, removing the previous dependency on `@epicenter/workspace`.
+The only remaining Epicenter-origin identifier is the Tauri app bundle ID:
+`com.bradenwong.whispering`. That rename requires a dedicated migration because
+it affects app data storage paths and desktop launcher identity.
 
 Known cleanup items:
 
-- Rename `@epicenter/ui` → `@whispering-open/ui` (or inline into app). This is
-  a dedicated migration: update 79+ import sites in `apps/whispering/src/` and
-  the package name in `packages/ui/package.json`.
-- Rename the Tauri identifier from `com.bradenwong.whispering` after the package
-  rename is stable.
+- Rename the Tauri identifier from `com.bradenwong.whispering` to
+  `io.github.dmwasielewski.whisperingopen`. Dedicated migration; affects app data
+  path, desktop entry, and release identity.
 - Resolve the 11 existing Svelte warnings from `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
 

@@ -8,21 +8,21 @@ The current repository is deliberately a mini-workspace, not a fully flattened a
 
 Included intentionally:
 
-- `apps/whispering` - the product app. Now owns all workspace and svelte-utils code directly.
-- `packages/ui` - UI components used by Whispering Open. The only remaining shared package.
+- `apps/whispering` - the product app. Owns all workspace and svelte-utils code directly.
+- `packages/ui` (`@whispering-open/ui`) - UI components used by Whispering Open.
 
 Inlined into the app (no longer separate packages):
 
 - `apps/whispering/src/lib/utils/svelte-utils/` - was `packages/svelte-utils` (`@epicenter/svelte`).
 - `apps/whispering/src/lib/utils/workspace/` - was `packages/workspace` (`@epicenter/workspace`).
 
-Still carrying old workspace technical debt:
+No remaining `@epicenter/*` references in source code or package metadata.
 
-- `packages/ui` still uses the old `@epicenter/ui` package name
-- analytics service
-- remaining references to old upstream release assets where the app still downloads required files
-- some non-exported workspace abstractions that may not be needed for a local
-  dictation app
+Still carrying old Epicenter-origin identifiers:
+
+- Tauri bundle ID `com.bradenwong.whispering` — rename is a dedicated migration
+- Analytics service (Aptabase) — deferred decision on removal vs. keep as opt-in
+- Some upstream release asset URLs for local model downloads
 
 ## Cleanup Backlog
 
@@ -561,12 +561,67 @@ bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps
 bun run build:web
 ```
 
+### 2026-05-27: Renamed @epicenter/ui to @whispering-open/ui
+
+All `@epicenter/*` package names have been removed from source code and
+package metadata. The only remaining Epicenter-origin identifier is the Tauri
+bundle ID.
+
+Cut made:
+
+- updated `packages/ui/package.json` name from `@epicenter/ui` to `@whispering-open/ui`
+- updated `apps/whispering/package.json` devDependency
+- updated 79 import sites in `apps/whispering/src/`
+- updated JSDoc self-reference in `packages/ui/src/hooks/use-combobox.svelte.ts`
+- updated LICENSE index entry
+- removed 3 dead commented-out `@epicenter/extension` imports from source files
+- refreshed `bun.lock`
+
+Expected next step after verification:
+
+- rename Tauri bundle ID from `com.bradenwong.whispering` to
+  `io.github.dmwasielewski.whisperingopen` in a dedicated migration
+
+## 2026-05-27 Session Stop Point (session 3)
+
+Last completed pushed commit:
+
+- `32c2346 Rename @epicenter/ui to @whispering-open/ui`
+
+The working tree was clean after that push. Gitleaks reported no leaks.
+GitHub still reported 21 Dependabot vulnerabilities.
+
+**Start next session here:**
+
+No `@epicenter/*` references remain in source code or package metadata.
+The only remaining Epicenter-origin identifier is the Tauri bundle ID.
+
+Recommended next steps in order:
+
+1. **Rename the Tauri bundle ID** — dedicated migration:
+   - Change `identifier` in `apps/whispering/src-tauri/tauri.conf.json` from
+     `com.bradenwong.whispering` to `io.github.dmwasielewski.whisperingopen`
+   - Update any references to the old identifier in Rust source, capabilities,
+     updater config, and desktop entry files
+   - Test that the installed app still launches correctly on Fedora Sway
+   - Do NOT do this without verifying the installed app after the change
+2. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
+3. Review the 21 GitHub Dependabot vulnerabilities.
+
+Verify commands:
+```sh
+bun run typecheck
+bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps/whispering/src/lib/utils/workspace/document/create-table.test.ts apps/whispering/src/lib/utils/workspace/document/attach-broadcast-channel.test.ts apps/whispering/src/lib/utils/workspace/document/local-only-recipe.test.ts
+bun run build:web
+```
+
 ## Safe Cleanup Order
 
-1. Rename `@epicenter/ui` → `@whispering-open/ui` (see above).
-2. Rename Tauri identity and release metadata in a dedicated migration.
-3. Resolve the 11 existing Svelte warnings.
-4. Review the 21 GitHub Dependabot vulnerabilities.
+1. Rename Tauri bundle ID (see above — dedicated migration, requires runtime test on Fedora Sway).
+2. Resolve the 11 existing Svelte warnings.
+3. Review the 21 GitHub Dependabot vulnerabilities.
+4. Prove local Tauri build and Linux release asset.
+5. Add stable release automation.
 
 ## Verification Rule
 

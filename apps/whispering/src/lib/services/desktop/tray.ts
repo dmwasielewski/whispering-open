@@ -8,10 +8,8 @@ import {
 	extractErrorMessage,
 	type InferErrors,
 } from 'wellcrafted/error';
-// import { commandCallbacks } from '$lib/commands';
 import { tryAsync } from 'wellcrafted/result';
 import { goto } from '$app/navigation';
-// import { extension } from '@epicenter/extension';
 import type { WhisperingRecordingState } from '$lib/constants/audio';
 
 const TRAY_ID = 'whispering-tray';

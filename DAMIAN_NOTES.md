@@ -43,6 +43,30 @@ Next cleanup candidates:
 3. Rename package/app identifiers away from old workspace names.
 4. Remove analytics/cloud/account UI if not needed.
 
+## 2026-05-27 (session 3)
+
+Renamed `@epicenter/ui` → `@whispering-open/ui`.
+
+Changed:
+
+- `packages/ui/package.json` name field
+- `apps/whispering/package.json` devDependency
+- 79 import sites in `apps/whispering/src/`
+- JSDoc self-reference in `packages/ui/src/hooks/use-combobox.svelte.ts`
+- LICENSE index entry
+- Removed 3 dead commented-out `@epicenter/extension` imports from source files
+
+Current verified state:
+
+- `bun install` passed.
+- `bun run typecheck` passed with 0 errors and 11 known Svelte warnings.
+- `bun run build:web` passed.
+
+No remaining `@epicenter/*` references exist in source code or package metadata.
+
+Remaining Epicenter-origin identifier: Tauri bundle ID `com.bradenwong.whispering`.
+That rename is a dedicated migration (affects data path, desktop launcher).
+
 ## 2026-05-27 (session 2)
 
 Continued inline extraction of shared packages into `apps/whispering`.
