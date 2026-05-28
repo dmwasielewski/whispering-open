@@ -68,5 +68,5 @@ Recommended order:
 1. ~~Rename the Tauri identifier.~~ Already done in source (`tauri.conf.json`, capabilities).
 2. ~~Resolve the 11 existing Svelte warnings from `bun run typecheck`.~~ **Done** (session 4).
 3. ~~Review the 21 GitHub Dependabot vulnerabilities.~~ **Done** (session 5) — `bun audit` 0 vulnerabilities.
-4. Prove local Tauri build and Linux release asset.
+4. ~~Prove local Tauri build and Linux release asset.~~ **Done** (session 6) — RPM + DEB proven in `damianf` toolbox. AppImage deferred to GitHub Actions (requires FUSE).
 5. Add stable release automation.

@@ -29,13 +29,23 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Verified Commands
 
-As of 2026-05-28 (session 5):
+As of 2026-05-28 (session 6):
 
 ```sh
 bun install
 bun run typecheck
 bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps/whispering/src/lib/utils/workspace/document/create-table.test.ts apps/whispering/src/lib/utils/workspace/document/attach-broadcast-channel.test.ts apps/whispering/src/lib/utils/workspace/document/local-only-recipe.test.ts
 bun run build:web
+```
+
+Desktop build (inside `damianf` toolbox):
+
+```sh
+toolbox run --container damianf bash -c "
+  cd /var/home/damian/whispering-open
+  export WHISPER_DONT_GENERATE_BINDINGS=1
+  bun run tauri build --bundles rpm,deb
+"
 ```
 
 `typecheck` reports **0 errors and 0 warnings** (all 11 Svelte warnings fixed).
@@ -58,11 +68,11 @@ it affects app data storage paths and desktop launcher identity.
 Known cleanup items:
 
 - Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred: vite.config.ts type work needed).
-- Prove local Tauri build and Linux release asset.
-- Add stable release automation.
+- Add stable release automation (GitHub Actions — AppImage requires Ubuntu CI with FUSE).
 
 Completed:
 
+- Local Tauri desktop build proven (session 6): binary + RPM (19MB) + DEB (19MB) build in `damianf` toolbox. AppImage deferred to CI (requires FUSE). See BUILD_LINUX.md.
 - All 21 Dependabot vulnerabilities resolved (session 5, commit 5402751) — see DAMIAN_NOTES.md for details.
 - All 11 Svelte warnings fixed (session 4, commit a4dc7fd):
   - 7 self-closing void element warnings (div, span) in TextPreviewDialog.svelte

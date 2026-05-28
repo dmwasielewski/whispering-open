@@ -1,5 +1,35 @@
 # Damian Notes
 
+## 2026-05-28 (session 6)
+
+Proven local Tauri desktop build. RPM and DEB artifacts confirmed.
+
+Build command (inside `damianf` Fedora 44 Toolbox):
+
+```sh
+toolbox run --container damianf bash -c "
+  cd /var/home/damian/whispering-open
+  export WHISPER_DONT_GENERATE_BINDINGS=1
+  bun run tauri build --bundles rpm,deb
+"
+```
+
+Artifacts produced:
+
+- `apps/whispering/src-tauri/target/release/whispering-open` — binary (Tauri desktop app)
+- `apps/whispering/src-tauri/target/release/bundle/rpm/Whispering Open-7.11.0-1.x86_64.rpm` (19MB)
+- `apps/whispering/src-tauri/target/release/bundle/deb/Whispering Open_7.11.0_amd64.deb` (19MB)
+
+AppImage deferred: Toolbox containers lack FUSE support — `tauri build --bundles appimage` downloads
+`linuxdeploy-x86_64.AppImage`, which is itself an AppImage requiring FUSE. AppImage will be built in
+GitHub Actions (Ubuntu runners have FUSE). For Fedora Atomic Sway, the RPM is sufficient.
+
+Updated: BUILD_LINUX.md (accurate build steps), AI_GUIDE.md (verified commands, completed items).
+
+Remaining known items:
+
+- Add stable release automation (GitHub Actions CI/CD — AppImage requires Ubuntu runner with FUSE).
+
 ## 2026-05-28 (session 5)
 
 Resolved all 21 Dependabot security vulnerabilities. `bun audit` now reports 0 vulnerabilities.
