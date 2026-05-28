@@ -37,7 +37,9 @@ jobs:
             gstreamer1.0-plugins-bad \
             gstreamer1.0-plugins-ugly \
             gstreamer1.0-libav \
-            gstreamer1.0-alsa
+            gstreamer1.0-alsa \
+            libvulkan-dev \
+            glslang-tools
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
