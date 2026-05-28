@@ -82,6 +82,84 @@ places and the settings tab is visible.
 
 ---
 
+## Independence from upstream author — full clean-up
+
+**Goal:** The app must look and behave as if it was written by Damian from scratch. No traces of upstream author (Braden Wong / Epicenter), no private sources, no fragile third-party services. Every external resource must be: free, open-source, officially hosted by the original model/tool author, and stable.
+
+---
+
+### IND-0: Deep independence audit — run before starting IND-1 through IND-5
+**Status:** ready to start  
+**What:** A thorough automated audit of the entire codebase to find all remaining traces of upstream identity, private infrastructure, or fragile external dependencies.  
+**Why:** The quick audit in session 9 found obvious cases. A deep audit needs to cover every file including UI text, comments, configs, assets, and build scripts.
+
+**Agent instructions for this task:**
+
+Scan the entire repository at `/var/home/damian/whispering-open` and produce a categorised report. For each finding, state: file path + line number, the exact string/URL, and the recommended action.
+
+**Category A — Author identity (must remove/replace):**
+- Any mention of "Braden Wong", "bradenwong", "BradenWong" in source code, UI text, comments, configs
+- Any mention of "Epicenter", "EpicenterHQ", "epicenter-hq" outside of git history
+- Bundle ID `com.bradenwong.whispering` — where does it still appear?
+- App store / extension links pointing to upstream's published apps
+- Any "about" page, footer, or credits referencing upstream author
+
+**Category B — Private or fragile external URLs (must replace):**
+- All `github.com/EpicenterHQ/*` URLs — private repo, could disappear
+- All `ungh.cc/*` URLs — unofficial third-party proxy
+- Any URL not from: GitHub (public repos), HuggingFace (official model authors), official API providers (OpenAI, Groq etc.), official tool authors (ffmpeg, etc.)
+- YouTube links — whose channel? Could be deleted
+
+**Category C — Non-free or non-official model sources:**
+- For each model download URL, verify: is it hosted by the original model creator on an official platform (HuggingFace, official GitHub)?
+- Are the model licences free for personal use? (MIT, Apache 2.0, CC-BY)
+- Flag any model hosted on a third-party mirror or private account
+
+**Category D — Analytics and telemetry (must remove):**
+- Any call to `logEvent`, `trackEvent`, `analytics`, `aptabase`
+- Any network call to analytics endpoints
+- Any settings UI related to analytics/privacy/telemetry
+- Any feature flags or remote config calls
+
+**Category E — Platform-specific content irrelevant for Linux:**
+- macOS-only pages/sections still shown on Linux (e.g. accessibility setup, macOS permissions)
+- Windows-only instructions in the UI
+- iOS/Android references
+
+**Category F — Text and UI strings with upstream branding:**
+- App name references that should be "Whispering Open" not "Whispering"
+- Any UI text linking to upstream's website, docs, or support channels
+- Any hardcoded upstream version numbers in UI text
+
+**Output format for the agent:**
+```
+CATEGORY A — Author identity
+  [REMOVE] apps/whispering/src/routes/.../+page.svelte:81
+    "https://chromewebstore.google.com/detail/whispering/oilbfihknpdbpfkcncojikmooipnlglo"
+    → Remove link, we have no extension
+
+CATEGORY B — Private URLs
+  [REPLACE] apps/whispering/src/lib/services/transcription/local/parakeet.ts:12
+    "https://github.com/EpicenterHQ/epicenter/releases/download/models/..."
+    → Re-host on dmwasielewski/whispering-open releases or find official HuggingFace source
+...
+```
+
+After the report: do NOT apply fixes automatically. Present the full report first, then wait for approval before making any code changes.
+
+---
+
+### IND-0b: Apply independence fixes (after audit approved)
+**Status:** blocked by IND-0  
+**What:** After the IND-0 audit report is reviewed and approved, apply all fixes in one focused session. Group by category: fix all URLs first, then remove analytics, then clean up UI text, then verify build passes.  
+**Verification after each group:**
+1. `toolbox run --container damianf bash -c "cd apps/whispering/src-tauri && cargo check"`
+2. `toolbox run --container damianf bash -c "cd apps/whispering && bun run typecheck"`
+3. `toolbox run --container damianf bash -c "cd apps/whispering && bun run build:web"`
+4. Local build + smoke test (app starts, tray visible, transcription works)
+
+---
+
 ## Independence from upstream author — fix external dependencies
 
 ### IND-1: Parakeet models hosted on private EpicenterHQ repo
