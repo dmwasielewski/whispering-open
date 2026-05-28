@@ -52,7 +52,7 @@
 	"identifier": "io.github.dmwasielewski.whisperingopen",
 	"plugins": {
 		"updater": {
-			"pubkey": "ZFc1MGNuVnpkR1ZrSUdOdmJXMWxiblE2SUcxcGJtbHphV2R1SUhCMVlteHBZeUJyWlhrNklEWTNSRFF6TUVORk1qQXhSakpGUlRjS1VsZFVia3hvT0dkNmFrUlZXamxqUkhOWksyaHBiVFpEZFRsU1YxbEhNSGxOZG5WaE5VTTRRbk5WTVVvMmFtUkZLM05PUTNGcVZHWUs=",
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI4MTUwNEE5RDE5OUI1RjgKUldUNHRablJxUVFWdURvLzM5bWZXNVZSMkFONXkrMWhtcjUvRE1ob01JSVBhSnMxYVhqNTFHSW0K",
 			"endpoints": [
 				"https://github.com/dmwasielewski/whispering-open/releases/latest/download/latest.json"
 			]
