@@ -1,4 +1,4 @@
-import type { DateTimeString } from '@epicenter/workspace';
+import type { DateTimeString } from './datetime-string.js';
 import type { ParsedComponents } from 'chrono-node';
 import * as chrono from 'chrono-node/en';
 

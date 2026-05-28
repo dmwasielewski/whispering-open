@@ -1,4 +1,4 @@
-import { attachKv, attachTables } from '@epicenter/workspace';
+import { attachKv, attachTables } from '$lib/utils/workspace';
 import * as Y from 'yjs';
 import { whisperingKv, whisperingTables } from '$lib/workspace';
 

@@ -43,7 +43,6 @@
 		"svelte": ">=5.0.0"
 	},
 	"devDependencies": {
-		"@epicenter/workspace": "workspace:*",
 		"@emoji-mart/data": "^1.2.1",
 		"@internationalized/date": "^3.10.0",
 		"@types/bun": "catalog:",

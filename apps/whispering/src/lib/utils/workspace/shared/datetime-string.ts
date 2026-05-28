@@ -80,7 +80,7 @@ export type TimezoneId = string & Brand<'TimezoneId'>;
  *
  * @example
  * ```typescript
- * import { DateTimeString } from '@epicenter/workspace';
+ * import { DateTimeString } from '$lib/utils/workspace';
  * import { type } from 'arktype';
  *
  * // In a table schema

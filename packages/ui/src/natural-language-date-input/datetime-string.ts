@@ -1,7 +1,10 @@
-import type { DateTimeString } from '@epicenter/workspace';
+import type { Brand } from 'wellcrafted/brand';
+
+/** Timezone-aware timestamp: `"<ISO 8601 UTC>|<IANA timezone>"`. */
+export type DateTimeString = string & Brand<'DateTimeString'>;
 
 /**
- * Convert a UTC `Date` and IANA timezone into Epicenter's `DateTimeString`
+ * Convert a UTC `Date` and IANA timezone into Whispering Open's `DateTimeString`
  * storage format.
  *
  * The returned value is intentionally plain text: the UTC instant comes first

@@ -13,12 +13,12 @@ import {
 	createTable,
 } from './attach-table.js';
 import { defineTable } from './define-table.js';
-import { YKeyValueLww } from './y-keyvalue/y-keyvalue-lww.js';
+import { YKeyValueLww, type YKeyValueLwwEntry } from './y-keyvalue/y-keyvalue-lww.js';
 
 /** Creates Yjs infrastructure for testing */
 function setup() {
 	const ydoc = new Y.Doc();
-	const yarray = ydoc.getArray('test-table');
+	const yarray = ydoc.getArray<YKeyValueLwwEntry<unknown>>('test-table');
 	const ykv = new YKeyValueLww<unknown>(yarray);
 	return { ydoc, yarray: ykv.yarray, ykv };
 }

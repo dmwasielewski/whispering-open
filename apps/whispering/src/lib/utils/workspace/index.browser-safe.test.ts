@@ -1,5 +1,5 @@
 /**
- * Guard: the root `@epicenter/workspace` barrel must stay browser-safe.
+ * Guard: the root `$lib/utils/workspace` barrel must stay browser-safe.
  *
  * Browser apps (fuji, whispering) import the root entry. If anything reachable
  * from `src/index.ts` (via `export ... from` or `import ... from`) reaches a
@@ -105,7 +105,7 @@ function collectReachableFiles(entry: string): Set<string> {
 	return visited;
 }
 
-describe('root `@epicenter/workspace` barrel is browser-safe', () => {
+describe('root `$lib/utils/workspace` barrel is browser-safe', () => {
 	test('no module reachable from src/index.ts imports node:*, bun:*, env-paths, or references Bun./process.env', () => {
 		const reachable = collectReachableFiles(ROOT_BARREL);
 		const offenders: string[] = [];

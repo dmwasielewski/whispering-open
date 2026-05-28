@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 
-import type { DateTimeString } from '@epicenter/workspace';
+import type { DateTimeString } from './datetime-string.js';
 import { toDateTimeString } from './datetime-string.js';
 
 describe('toDateTimeString', () => {

@@ -10,7 +10,7 @@
  *
  * @example
  * ```typescript
- * import { defineKv } from '@epicenter/workspace';
+ * import { defineKv } from '$lib/utils/workspace';
  * import { type } from 'arktype';
  *
  * // Boolean preference

@@ -8,11 +8,11 @@ import * as Y from 'yjs';
 import { createKv } from './attach-kv.js';
 import { defineKv } from './define-kv.js';
 import { KV_KEY } from './keys.js';
-import { YKeyValueLww } from './y-keyvalue/y-keyvalue-lww.js';
+import { YKeyValueLww, type YKeyValueLwwEntry } from './y-keyvalue/y-keyvalue-lww.js';
 
 function setupKv() {
 	const ydoc = new Y.Doc();
-	const yarray = ydoc.getArray(KV_KEY);
+	const yarray = ydoc.getArray<YKeyValueLwwEntry<unknown>>(KV_KEY);
 	const ykv = new YKeyValueLww<unknown>(yarray);
 	return { ydoc, ykv };
 }

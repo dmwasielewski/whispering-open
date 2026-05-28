@@ -17,7 +17,7 @@
  *
  * @example
  * ```typescript
- * import { KV_KEY, TableKey } from '@epicenter/workspace';
+ * import { KV_KEY, TableKey } from '$lib/utils/workspace';
  *
  * const kvArray = ydoc.getArray(KV_KEY);                 // 'kv'
  * const postsArray = ydoc.getArray(TableKey('posts'));    // 'table:posts'

@@ -9,7 +9,7 @@
  *
  * @example
  * ```typescript
- * import { defineTable } from '@epicenter/workspace';
+ * import { defineTable } from '$lib/utils/workspace';
  * import { type } from 'arktype';
  *
  * // Shorthand for single version

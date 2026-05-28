@@ -2,7 +2,7 @@ import {
 	defineKv,
 	defineTable,
 	type InferTableRow,
-} from '@epicenter/workspace';
+} from '$lib/utils/workspace';
 import { type } from 'arktype';
 
 // ── Constant imports ─────────────────────────────────────────────────────────

@@ -1,4 +1,4 @@
-import type { BaseRow, Table } from '@epicenter/workspace';
+import type { BaseRow, Table } from '$lib/utils/workspace';
 import { SvelteMap } from 'svelte/reactivity';
 
 export type ReactiveTableMap<TRow extends BaseRow> = SvelteMap<string, TRow> &

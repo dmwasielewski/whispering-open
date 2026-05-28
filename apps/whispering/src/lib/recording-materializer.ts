@@ -7,7 +7,7 @@
  * changes never produce overlapping writes.
  */
 
-import type { Table } from '@epicenter/workspace';
+import type { Table } from '$lib/utils/workspace';
 
 type MaybePromise<T> = T | Promise<T>;
 
