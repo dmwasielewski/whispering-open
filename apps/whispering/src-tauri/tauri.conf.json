@@ -22,6 +22,9 @@
 		"longDescription": "Seamlessly integrate speech-to-text transcriptions anywhere on your desktop. Powered by OpenAI's Whisper API.",
 		"shortDescription": "Press shortcut, speak, get text. Free and open source.",
 		"createUpdaterArtifacts": true,
+		"resources": {
+			"recorder-state-icons/*": "recorder-state-icons/"
+		},
 		"macOS": {
 			"entitlements": "entitlements.plist",
 			"hardenedRuntime": true,
@@ -48,7 +51,7 @@
 		}
 	},
 	"productName": "Whispering Open",
-	"version": "7.11.0-2",
+	"version": "7.11.0-3",
 	"identifier": "io.github.dmwasielewski.whisperingopen",
 	"plugins": {
 		"updater": {

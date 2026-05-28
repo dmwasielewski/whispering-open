@@ -141,6 +141,7 @@
         }
       ]
     },
-    "log:default"
+    "log:default",
+    "core:tray:default"
   ]
 }

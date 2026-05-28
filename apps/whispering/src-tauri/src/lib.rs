@@ -199,6 +199,21 @@ pub async fn run() {
         .expect("error while building tauri application");
 
     app.run(|handler, event| {
+        match &event {
+            // Hide to tray instead of closing the window
+            tauri::RunEvent::WindowEvent {
+                label,
+                event: tauri::WindowEvent::CloseRequested { api, .. },
+                ..
+            } if label == "main" => {
+                api.prevent_close();
+                if let Some(window) = handler.get_webview_window("main") {
+                    let _ = window.hide();
+                }
+            }
+            _ => {}
+        }
+
         // Only track events if Aptabase is enabled (key is not empty)
         if !aptabase_key.is_empty() {
             match event {
