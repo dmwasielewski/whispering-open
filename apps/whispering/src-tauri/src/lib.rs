@@ -198,6 +198,32 @@ pub async fn run() {
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
+    // On Linux/Sway, XGrabKey (used by tauri-plugin-global-shortcut) doesn't intercept
+    // keypresses directed at native Wayland windows. Push-to-talk is instead driven by
+    // Sway bindsym sending SIGUSR1 (press) and SIGUSR2 (release) to this process.
+    #[cfg(target_os = "linux")]
+    {
+        let handle = app.handle().clone();
+        tauri::async_runtime::spawn(async move {
+            use tauri::Emitter;
+            use tokio::signal::unix::{signal, SignalKind};
+            let mut sigusr1 = match signal(SignalKind::user_defined1()) {
+                Ok(s) => s,
+                Err(_) => return,
+            };
+            let mut sigusr2 = match signal(SignalKind::user_defined2()) {
+                Ok(s) => s,
+                Err(_) => return,
+            };
+            loop {
+                tokio::select! {
+                    _ = sigusr1.recv() => { let _ = handle.emit("ptt-signal", "start"); }
+                    _ = sigusr2.recv() => { let _ = handle.emit("ptt-signal", "stop"); }
+                }
+            }
+        });
+    }
+
     app.run(|handler, event| {
         match event {
             tauri::RunEvent::WindowEvent {

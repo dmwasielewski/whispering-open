@@ -5,6 +5,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { commandCallbacks } from '$lib/commands';
+	import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 	import MoreDetailsDialog from '$lib/components/MoreDetailsDialog.svelte';
 	import NotificationLog from '$lib/components/NotificationLog.svelte';
 	import UpdateDialog from '$lib/components/UpdateDialog.svelte';
@@ -43,6 +44,7 @@
 
 	let cleanupAccessibilityPermission: (() => void) | undefined;
 	let cleanupMicrophonePermission: (() => void) | undefined;
+	let unlistenPttSignal: UnlistenFn | undefined;
 
 	onMount(() => {
 		// Sync operations - run immediately, these are fast
@@ -61,6 +63,12 @@
 			syncGlobalShortcutsWithSettings();
 			resetGlobalShortcutsToDefaultIfDuplicates();
 
+			// Linux/Sway push-to-talk via SIGUSR1/SIGUSR2 (Wayland workaround)
+			listen<string>('ptt-signal', (event) => {
+				if (event.payload === 'start') commandCallbacks.pushToTalk('Pressed');
+				else if (event.payload === 'stop') commandCallbacks.pushToTalk('Released');
+			}).then((unlisten) => { unlistenPttSignal = unlisten; });
+
 			// Desktop-only async operations - fire and forget
 			Promise.allSettled([
 				checkFfmpegRecordingMethodCompatibility(),
@@ -76,6 +84,7 @@
 	onDestroy(() => {
 		cleanupAccessibilityPermission?.();
 		cleanupMicrophonePermission?.();
+		unlistenPttSignal?.();
 	});
 
 	if (window.__TAURI_INTERNALS__) {
