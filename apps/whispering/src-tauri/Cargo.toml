@@ -1,6 +1,6 @@
 [package]
 name = "whispering-open"
-version = "7.11.0"
+version = "7.11.0-1"
 description = "A Tauri App"
 authors = ["Damian Wasielewski"]
 repository = "https://github.com/dmwasielewski/whispering-open"

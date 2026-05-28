@@ -1,7 +1,7 @@
 {
 	"name": "@whispering-open/app",
 	"private": true,
-	"version": "7.11.0",
+	"version": "7.11.0-1",
 	"description": "Desktop and web speech-to-text with global shortcuts and AI transformations",
 	"exports": {
 		"./commands": "./src/lib/commands.ts",

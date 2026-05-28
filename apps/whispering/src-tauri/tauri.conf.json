@@ -48,7 +48,7 @@
 		}
 	},
 	"productName": "Whispering Open",
-	"version": "7.11.0",
+	"version": "7.11.0-1",
 	"identifier": "io.github.dmwasielewski.whisperingopen",
 	"plugins": {
 		"updater": {
