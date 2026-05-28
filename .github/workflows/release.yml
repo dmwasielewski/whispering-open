@@ -41,8 +41,7 @@ jobs:
             gstreamer1.0-plugins-ugly \
             gstreamer1.0-libav \
             gstreamer1.0-alsa \
-            libvulkan-dev \
-            shaderc
+            vulkan-sdk
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
