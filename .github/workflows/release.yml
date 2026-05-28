@@ -71,10 +71,62 @@ jobs:
           mkdir -p dist
           find apps/whispering/src-tauri/target/release/bundle \
             -type f \
-            \( -name '*.AppImage' -o -name '*.rpm' -o -name '*.deb' -o -name 'latest.json' \) \
+            \( -name '*.AppImage' -o -name '*.AppImage.sig' \
+               -o -name '*.rpm' -o -name '*.rpm.sig' \
+               -o -name '*.deb' -o -name '*.deb.sig' \
+               -o -name 'latest.json' \) \
             -exec cp {} dist/ \;
           echo "=== Collected artifacts ==="
           ls -lh dist/
+
+      - name: Generate updater manifest (latest.json)
+        run: |
+          TAG="${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || github.event.inputs.tag }}"
+          if [ -z "$TAG" ]; then
+            echo "No tag — skipping latest.json generation"
+            exit 0
+          fi
+          python3 - "$TAG" <<'PYEOF'
+          import json, sys, os, glob, urllib.parse
+          from datetime import datetime, timezone
+
+          tag = sys.argv[1]
+          conf = json.load(open('apps/whispering/src-tauri/tauri.conf.json'))
+          version = conf['version']
+
+          appimages = glob.glob('dist/*.AppImage')
+          if not appimages:
+              print("No AppImage found — skipping latest.json")
+              sys.exit(0)
+
+          appimage_name = os.path.basename(appimages[0])
+          sig_path = f'dist/{appimage_name}.sig'
+          if not os.path.exists(sig_path):
+              print(f"No sig file at {sig_path} — skipping latest.json")
+              sys.exit(0)
+
+          signature = open(sig_path).read().strip()
+          encoded = urllib.parse.quote(appimage_name)
+          url = f'https://github.com/dmwasielewski/whispering-open/releases/download/{tag}/{encoded}'
+
+          manifest = {
+              'version': version,
+              'notes': '',
+              'pub_date': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+              'platforms': {
+                  'linux-x86_64': {
+                      'signature': signature,
+                      'url': url,
+                  }
+              }
+          }
+
+          with open('dist/latest.json', 'w') as f:
+              json.dump(manifest, f, indent=2)
+
+          print('Generated latest.json:')
+          print(json.dumps(manifest, indent=2))
+          PYEOF
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
