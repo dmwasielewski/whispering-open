@@ -72,7 +72,7 @@ Known cleanup items:
 
 Completed:
 
-- Local Tauri desktop build proven (session 6): binary + RPM (19MB) + DEB (19MB) build in `damianf` toolbox. AppImage deferred to CI (requires FUSE). See BUILD_LINUX.md.
+- Local Tauri desktop build proven + first release published (session 6): RPM (19MB) builds in `damianf` toolbox. Release `v7.11.0-1` published to GitHub. `dotfiles-sway` integration verified — no changes needed there. AppImage deferred to CI (requires FUSE). See BUILD_LINUX.md.
 - All 21 Dependabot vulnerabilities resolved (session 5, commit 5402751) — see DAMIAN_NOTES.md for details.
 - All 11 Svelte warnings fixed (session 4, commit a4dc7fd):
   - 7 self-closing void element warnings (div, span) in TextPreviewDialog.svelte

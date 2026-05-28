@@ -2,7 +2,7 @@
 
 ## 2026-05-28 (session 6)
 
-Proven local Tauri desktop build. RPM and DEB artifacts confirmed.
+Proven local Tauri desktop build, published first GitHub Release, verified dotfiles-sway integration.
 
 Build command (inside `damianf` Fedora 44 Toolbox):
 
@@ -24,11 +24,27 @@ AppImage deferred: Toolbox containers lack FUSE support — `tauri build --bundl
 `linuxdeploy-x86_64.AppImage`, which is itself an AppImage requiring FUSE. AppImage will be built in
 GitHub Actions (Ubuntu runners have FUSE). For Fedora Atomic Sway, the RPM is sufficient.
 
+**Version convention established:**
+- Internal version (Cargo/semver): `{upstream}-{our_build}`, e.g. `7.11.0-1`
+- GitHub release tag matches: `v7.11.0-1`
+- Next upstream update `7.12.0` → release `v7.12.0-1`
+
+**First release published:** `v7.11.0-1` at https://github.com/dmwasielewski/whispering-open/releases/tag/v7.11.0-1
+- Asset: `Whispering.Open-7.11.0-1-1.x86_64.rpm` (19MB)
+- RPM extracts cleanly with `rpm2cpio`, binary launches on Fedora Sway Atomic
+
+**dotfiles-sway integration verified:**
+- `scripts/setup-whispering-open.sh` already points to `dmwasielewski/whispering-open`
+- Picks up RPM asset automatically from GitHub releases API
+- Desktop file at `applications/whispering-open.desktop` already present
+- No changes needed to dotfiles-sway
+
 Updated: BUILD_LINUX.md (accurate build steps), AI_GUIDE.md (verified commands, completed items).
 
 Remaining known items:
 
 - Add stable release automation (GitHub Actions CI/CD — AppImage requires Ubuntu runner with FUSE).
+- Manually reinstall on host using new v7.11.0-1 release (old binary from May 26 still at ~/.local/opt/whispering-open/).
 
 ## 2026-05-28 (session 5)
 
