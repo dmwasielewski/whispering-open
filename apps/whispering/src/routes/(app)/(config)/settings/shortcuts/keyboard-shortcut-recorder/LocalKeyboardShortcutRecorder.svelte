@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Command } from '$lib/commands';
 	import type { KeyboardEventSupportedKey } from '$lib/constants/keyboard';
+	import { untrack } from 'svelte';
 	import { rpc } from '$lib/query';
 	import {
 		arrayToShortcutString,
@@ -25,7 +26,7 @@
 
 	const shortcutValue = $derived(settings.get(`shortcut.${command.id}`));
 
-	const keyRecorder = createKeyRecorder({
+	const keyRecorder = untrack(() => createKeyRecorder({
 		pressedKeys,
 		onRegister: async (keyCombination: KeyboardEventSupportedKey[]) => {
 			const { error: unregisterError } =
@@ -84,7 +85,7 @@
 				description: `Please set a new shortcut to trigger "${command.title}"`,
 			});
 		},
-	});
+	}));
 </script>
 
 <KeyboardShortcutRecorder

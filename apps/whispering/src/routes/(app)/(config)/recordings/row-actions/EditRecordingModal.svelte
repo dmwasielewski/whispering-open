@@ -8,7 +8,7 @@
 	import { Textarea } from '@whispering-open/ui/textarea';
 	import EditIcon from '@lucide/svelte/icons/pencil';
 	import { createQuery } from '@tanstack/svelte-query';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, untrack } from 'svelte';
 	import { rpc } from '$lib/query';
 	import { services } from '$lib/services';
 	import { type Recording, recordings } from '$lib/state/recordings.svelte';
@@ -25,7 +25,7 @@
 	 * reads the prop directly, it may see undefined and throw. Capturing
 	 * the ID here sidesteps the reactive teardown race entirely.
 	 */
-	const recordingIdForCleanup = recording.id;
+	const recordingIdForCleanup = untrack(() => recording.id);
 
 	let isDialogOpen = $state(false);
 

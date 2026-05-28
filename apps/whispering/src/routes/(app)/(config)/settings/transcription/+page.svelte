@@ -550,7 +550,7 @@
 										<li class="flex items-start gap-2">
 											<span
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
-											/>
+											></span>
 											<span>
 												Download pre-built models from the "Pre-built Models"
 												tab
@@ -559,7 +559,7 @@
 										<li class="flex items-start gap-2">
 											<span
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
-											/>
+											></span>
 											<span>
 												Or download from{' '}
 												<Link
@@ -574,7 +574,7 @@
 										<li class="flex items-start gap-2">
 											<span
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
-											/>
+											></span>
 											<span>
 												Parakeet models are directories containing ONNX files
 											</span>
@@ -656,7 +656,7 @@
 										<li class="flex items-start gap-2">
 											<span
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
-											/>
+											></span>
 											<span>
 												Download pre-built models from the "Pre-built Models"
 												tab
@@ -665,7 +665,7 @@
 										<li class="flex items-start gap-2">
 											<span
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
-											/>
+											></span>
 											<span>
 												Or download from{' '}
 												<Link
@@ -680,7 +680,7 @@
 										<li class="flex items-start gap-2">
 											<span
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
-											/>
+											></span>
 											<span>
 												Moonshine models are directories containing ONNX files
 												and tokenizer

@@ -9,6 +9,7 @@
 	import Keyboard from '@lucide/svelte/icons/keyboard';
 	import Pencil from '@lucide/svelte/icons/pencil';
 	import XIcon from '@lucide/svelte/icons/x';
+	import { untrack } from 'svelte';
 	import {
 		getShortcutDisplayLabel,
 		type KeyboardEventSupportedKey,
@@ -32,7 +33,7 @@
 
 	let isPopoverOpen = $state(false);
 	let isManualMode = $state(false);
-	let manualValue = $state(rawKeyCombination ?? '');
+	let manualValue = $state(untrack(() => rawKeyCombination) ?? '');
 
 	$effect(() => {
 		manualValue = rawKeyCombination ?? '';

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Command } from '$lib/commands';
 	import type { KeyboardEventSupportedKey } from '$lib/constants/keyboard';
+	import { untrack } from 'svelte';
 	import { rpc } from '$lib/query';
 	import { desktopRpc } from '$lib/query/desktop';
 	import {
@@ -28,7 +29,7 @@
 		deviceConfig.get(`shortcuts.global.${command.id}`),
 	);
 
-	const keyRecorder = createKeyRecorder({
+	const keyRecorder = untrack(() => createKeyRecorder({
 		pressedKeys,
 		onRegister: async (keyCombination: KeyboardEventSupportedKey[]) => {
 			if (shortcutValue) {
@@ -117,7 +118,7 @@
 				description: `Please set a new shortcut to trigger "${command.title}"`,
 			});
 		},
-	});
+	}));
 </script>
 
 <KeyboardShortcutRecorder
