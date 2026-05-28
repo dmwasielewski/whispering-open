@@ -7,7 +7,7 @@ const WHISPERING_DEV_PORT = 1420;
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => ({
+export default defineConfig({
 	plugins: [sveltekit(), tailwindcss(), devtoolsJson()],
 	resolve: {
 		dedupe: ['yjs'],
@@ -33,4 +33,4 @@ export default defineConfig(async () => ({
 			ignored: ['**/src-tauri/**'],
 		},
 	},
-}));
+});

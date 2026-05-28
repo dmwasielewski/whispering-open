@@ -1,6 +1,6 @@
 import { MicVAD, utils } from '@ricky0123/vad-web';
 import { extractErrorMessage } from 'wellcrafted/error';
-import { Err, Ok, tryAsync, trySync } from 'wellcrafted/result';
+import { Err, Ok, tryAsync } from 'wellcrafted/result';
 import type { VadState } from '$lib/constants/audio';
 import { defineQuery } from '$lib/query/client';
 import { WhisperingErr } from '$lib/result';
@@ -113,7 +113,9 @@ function createVadRecorder() {
 			const { data: newVad, error: initializeVadError } = await tryAsync({
 				try: () =>
 					MicVAD.new({
-						stream,
+						getStream: async () => stream,
+						pauseStream: async () => {},
+						resumeStream: async (s) => s,
 						submitUserSpeechOnPause: true,
 						onSpeechStart: () => {
 							_state = 'SPEECH_DETECTED';
@@ -150,7 +152,7 @@ function createVadRecorder() {
 			}
 
 			// Start listening
-			const { error: startError } = trySync({
+			const { error: startError } = await tryAsync({
 				try: () => newVad.start(),
 				catch: (error) =>
 					WhisperingErr({
@@ -162,7 +164,7 @@ function createVadRecorder() {
 
 			if (startError) {
 				// Clean up everything on start error
-				trySync({
+				await tryAsync({
 					try: () => newVad.destroy(),
 					catch: () => Ok(undefined),
 				});
@@ -183,7 +185,7 @@ function createVadRecorder() {
 			if (!_session) return Ok(undefined);
 
 			const { vad, stream } = _session;
-			const { error: destroyError } = trySync({
+			const { error: destroyError } = await tryAsync({
 				try: () => vad.destroy(),
 				catch: (error) =>
 					WhisperingErr({
