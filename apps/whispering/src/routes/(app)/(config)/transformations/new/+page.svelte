@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Card from '@whispering-open/ui/card';
+	import { Button } from '$lib/ui/button';
+	import * as Card from '$lib/ui/card';
 	import { goto } from '$app/navigation';
 	import { Editor } from '$lib/components/transformations-editor';
 	import { rpc } from '$lib/query';

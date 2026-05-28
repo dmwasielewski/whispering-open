@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Input } from '@whispering-open/ui/input';
-	import * as Table from '@whispering-open/ui/table';
+	import { Input } from '$lib/ui/input';
+	import * as Table from '$lib/ui/table';
 	import Search from '@lucide/svelte/icons/search';
 	import { commands } from '$lib/commands';
 	import { rpc } from '$lib/query';

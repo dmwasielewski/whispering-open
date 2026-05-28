@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Empty from '@whispering-open/ui/empty';
+	import { Button } from '$lib/ui/button';
+	import * as Empty from '$lib/ui/empty';
 	import { page } from '$app/state';
 </script>
 

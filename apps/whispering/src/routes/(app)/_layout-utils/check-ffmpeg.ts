@@ -1,4 +1,4 @@
-import { toast } from '@whispering-open/ui/sonner';
+import { toast } from '$lib/ui/sonner';
 import { goto } from '$app/navigation';
 import { desktopRpc } from '$lib/query/desktop';
 import { deviceConfig } from '$lib/state/device-config.svelte';

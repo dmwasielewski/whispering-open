@@ -7347,7 +7347,7 @@ dependencies = [
 
 [[package]]
 name = "whispering-open"
-version = "7.11.0"
+version = "7.11.0-1"
 dependencies = [
  "accessibility-sys",
  "core-foundation-sys",

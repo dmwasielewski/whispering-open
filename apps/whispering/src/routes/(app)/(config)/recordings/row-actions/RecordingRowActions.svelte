@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
-	import { CopyButton } from '@whispering-open/ui/copy-button';
-	import { Skeleton } from '@whispering-open/ui/skeleton';
-	import { Spinner } from '@whispering-open/ui/spinner';
+	import { Button } from '$lib/ui/button';
+	import { confirmationDialog } from '$lib/ui/confirmation-dialog';
+	import { CopyButton } from '$lib/ui/copy-button';
+	import { Skeleton } from '$lib/ui/skeleton';
+	import { Spinner } from '$lib/ui/spinner';
 	import DownloadIcon from '@lucide/svelte/icons/download';
 	import EllipsisIcon from '@lucide/svelte/icons/ellipsis';
 	import FileStackIcon from '@lucide/svelte/icons/file-stack';

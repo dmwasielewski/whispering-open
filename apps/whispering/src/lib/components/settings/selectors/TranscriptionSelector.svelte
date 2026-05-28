@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Command from '@whispering-open/ui/command';
-	import { useCombobox } from '@whispering-open/ui/hooks';
-	import * as Popover from '@whispering-open/ui/popover';
-	import { cn } from '@whispering-open/ui/utils';
+	import { Button } from '$lib/ui/button';
+	import * as Command from '$lib/ui/command';
+	import { useCombobox } from '$lib/ui/hooks';
+	import * as Popover from '$lib/ui/popover';
+	import { cn } from '$lib/ui/utils';
 	import CheckIcon from '@lucide/svelte/icons/check';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 	import MicIcon from '@lucide/svelte/icons/mic';

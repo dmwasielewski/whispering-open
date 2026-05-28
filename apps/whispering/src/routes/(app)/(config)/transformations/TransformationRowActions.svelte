@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
-	import { Skeleton } from '@whispering-open/ui/skeleton';
+	import { Button } from '$lib/ui/button';
+	import { confirmationDialog } from '$lib/ui/confirmation-dialog';
+	import { Skeleton } from '$lib/ui/skeleton';
 	import TrashIcon from '@lucide/svelte/icons/trash-2';
 	import { rpc } from '$lib/query';
 	import { transformations } from '$lib/state/transformations.svelte';

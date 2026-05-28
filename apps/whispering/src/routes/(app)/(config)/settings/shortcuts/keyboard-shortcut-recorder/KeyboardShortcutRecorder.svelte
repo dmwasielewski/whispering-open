@@ -1,10 +1,10 @@
 <script lang="ts">
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Button } from '@whispering-open/ui/button';
-	import { Input } from '@whispering-open/ui/input';
-	import * as Kbd from '@whispering-open/ui/kbd';
-	import * as Popover from '@whispering-open/ui/popover';
-	import { cn } from '@whispering-open/ui/utils';
+	import * as Alert from '$lib/ui/alert';
+	import { Button } from '$lib/ui/button';
+	import { Input } from '$lib/ui/input';
+	import * as Kbd from '$lib/ui/kbd';
+	import * as Popover from '$lib/ui/popover';
+	import { cn } from '$lib/ui/utils';
 	import AlertTriangle from '@lucide/svelte/icons/alert-triangle';
 	import Keyboard from '@lucide/svelte/icons/keyboard';
 	import Pencil from '@lucide/svelte/icons/pencil';

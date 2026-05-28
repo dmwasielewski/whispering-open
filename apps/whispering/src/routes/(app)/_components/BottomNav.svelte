@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '@whispering-open/ui/utils';
+	import { cn } from '$lib/ui/utils';
 	import { page } from '$app/state';
 	import { NAV_ITEMS } from '$lib/constants/ui';
 </script>

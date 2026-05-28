@@ -21,7 +21,6 @@
 	},
 	"license": "AGPL-3.0-or-later",
 	"devDependencies": {
-		"@whispering-open/ui": "workspace:*",
 		"@types/bun": "catalog:",
 		"@lucide/svelte": "catalog:",
 		"@sveltejs/adapter-static": "catalog:",

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { CopyButton } from '@whispering-open/ui/copy-button';
-	import * as InputGroup from '@whispering-open/ui/input-group';
-	import * as Modal from '@whispering-open/ui/modal';
-	import { Spinner } from '@whispering-open/ui/spinner';
-	import { Textarea } from '@whispering-open/ui/textarea';
+	import { Button } from '$lib/ui/button';
+	import { CopyButton } from '$lib/ui/copy-button';
+	import * as InputGroup from '$lib/ui/input-group';
+	import * as Modal from '$lib/ui/modal';
+	import { Spinner } from '$lib/ui/spinner';
+	import { Textarea } from '$lib/ui/textarea';
 	import TrashIcon from '@lucide/svelte/icons/trash';
 	import { createCopyFn } from '$lib/utils/createCopyFn';
 

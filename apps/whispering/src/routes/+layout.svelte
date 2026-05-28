@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Toaster } from '@whispering-open/ui/sonner';
+	import { Toaster } from '$lib/ui/sonner';
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { SvelteQueryDevtools } from '@tanstack/svelte-query-devtools';
 	import { ModeWatcher } from 'mode-watcher';
 	import { queryClient } from '$lib/query/client';
-	import '@whispering-open/ui/app.css';
-	import * as Tooltip from '@whispering-open/ui/tooltip';
+	import '$lib/ui/app.css';
+	import * as Tooltip from '$lib/ui/tooltip';
 
 	let { children } = $props();
 </script>

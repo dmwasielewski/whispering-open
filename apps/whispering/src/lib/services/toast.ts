@@ -1,4 +1,4 @@
-import { toast as sonnerToast } from '@whispering-open/ui/sonner';
+import { toast as sonnerToast } from '$lib/ui/sonner';
 import { nanoid } from 'nanoid/non-secure';
 import { goto } from '$app/navigation';
 import { moreDetailsDialog } from '$lib/components/MoreDetailsDialog.svelte';

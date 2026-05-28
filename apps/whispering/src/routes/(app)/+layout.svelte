@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Sidebar from '@whispering-open/ui/sidebar';
+	import * as Sidebar from '$lib/ui/sidebar';
 	import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 	import { onDestroy, onMount } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';

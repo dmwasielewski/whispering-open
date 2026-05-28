@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Button } from '@whispering-open/ui/button';
-	import * as Kbd from '@whispering-open/ui/kbd';
-	import * as Modal from '@whispering-open/ui/modal';
+	import * as Alert from '$lib/ui/alert';
+	import { Button } from '$lib/ui/button';
+	import * as Kbd from '$lib/ui/kbd';
+	import * as Modal from '$lib/ui/modal';
 	import AlertTriangle from '@lucide/svelte/icons/alert-triangle';
 	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import HelpCircle from '@lucide/svelte/icons/help-circle';

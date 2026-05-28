@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Field from '@whispering-open/ui/field';
-	import * as RadioGroup from '@whispering-open/ui/radio-group';
-	import * as Select from '@whispering-open/ui/select';
-	import { Switch } from '@whispering-open/ui/switch';
+	import * as Field from '$lib/ui/field';
+	import * as RadioGroup from '$lib/ui/radio-group';
+	import * as Select from '$lib/ui/select';
+	import { Switch } from '$lib/ui/switch';
 	import { createMutation, createQuery } from '@tanstack/svelte-query';
 	import { ALWAYS_ON_TOP_MODE_OPTIONS } from '$lib/constants/ui';
 	import { rpc } from '$lib/query';

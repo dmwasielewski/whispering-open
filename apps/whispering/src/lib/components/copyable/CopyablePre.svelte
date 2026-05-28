@@ -18,8 +18,8 @@
 </script>
 
 <script lang="ts">
-	import { CopyButton } from '@whispering-open/ui/copy-button';
-	import { cn } from '@whispering-open/ui/utils';
+	import { CopyButton } from '$lib/ui/copy-button';
+	import { cn } from '$lib/ui/utils';
 	import { createCopyFn } from '$lib/utils/createCopyFn';
 
 	const {

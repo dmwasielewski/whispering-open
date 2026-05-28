@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Field from '@whispering-open/ui/field';
-	import { Input } from '@whispering-open/ui/input';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import * as Select from '@whispering-open/ui/select';
+	import { Button } from '$lib/ui/button';
+	import * as Field from '$lib/ui/field';
+	import { Input } from '$lib/ui/input';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import * as Select from '$lib/ui/select';
 	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { join } from '@tauri-apps/api/path';

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
-	import { Input } from '@whispering-open/ui/input';
-	import { Label } from '@whispering-open/ui/label';
-	import * as Modal from '@whispering-open/ui/modal';
-	import { Spinner } from '@whispering-open/ui/spinner';
-	import { Textarea } from '@whispering-open/ui/textarea';
+	import { Button } from '$lib/ui/button';
+	import { confirmationDialog } from '$lib/ui/confirmation-dialog';
+	import { Input } from '$lib/ui/input';
+	import { Label } from '$lib/ui/label';
+	import * as Modal from '$lib/ui/modal';
+	import { Spinner } from '$lib/ui/spinner';
+	import { Textarea } from '$lib/ui/textarea';
 	import EditIcon from '@lucide/svelte/icons/pencil';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { onDestroy, untrack } from 'svelte';

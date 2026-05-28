@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Button } from '@whispering-open/ui/button';
-	import * as Card from '@whispering-open/ui/card';
-	import { toast } from '@whispering-open/ui/sonner';
+	import { Badge } from '$lib/ui/badge';
+	import { Button } from '$lib/ui/button';
+	import * as Card from '$lib/ui/card';
+	import { toast } from '$lib/ui/sonner';
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 	import CheckIcon from '@lucide/svelte/icons/check';
 	import SettingsIcon from '@lucide/svelte/icons/settings';

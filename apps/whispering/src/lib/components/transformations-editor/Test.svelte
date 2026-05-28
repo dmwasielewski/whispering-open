@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Field from '@whispering-open/ui/field';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import { Separator } from '@whispering-open/ui/separator';
-	import { Spinner } from '@whispering-open/ui/spinner';
-	import { Textarea } from '@whispering-open/ui/textarea';
+	import { Button } from '$lib/ui/button';
+	import * as Field from '$lib/ui/field';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import { Separator } from '$lib/ui/separator';
+	import { Spinner } from '$lib/ui/spinner';
+	import { Textarea } from '$lib/ui/textarea';
 	import PlayIcon from '@lucide/svelte/icons/play';
 	import { createMutation } from '@tanstack/svelte-query';
 	import { rpc } from '$lib/query';

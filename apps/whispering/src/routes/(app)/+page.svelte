@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
+	import { Button } from '$lib/ui/button';
+	import { confirmationDialog } from '$lib/ui/confirmation-dialog';
 	import {
 		ACCEPT_AUDIO,
 		ACCEPT_VIDEO,
 		FileDropZone,
 		MEGABYTE,
-	} from '@whispering-open/ui/file-drop-zone';
-	import * as Kbd from '@whispering-open/ui/kbd';
-	import { Link } from '@whispering-open/ui/link';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import * as ToggleGroup from '@whispering-open/ui/toggle-group';
+	} from '$lib/ui/file-drop-zone';
+	import * as Kbd from '$lib/ui/kbd';
+	import { Link } from '$lib/ui/link';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import * as ToggleGroup from '$lib/ui/toggle-group';
 	import { createQuery } from '@tanstack/svelte-query';
 	import type { UnlistenFn } from '@tauri-apps/api/event';
 	import { nanoid } from 'nanoid/non-secure';

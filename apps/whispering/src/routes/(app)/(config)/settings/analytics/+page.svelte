@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Badge } from '@whispering-open/ui/badge';
-	import * as Card from '@whispering-open/ui/card';
-	import { Label } from '@whispering-open/ui/label';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import { Switch } from '@whispering-open/ui/switch';
+	import { Badge } from '$lib/ui/badge';
+	import * as Card from '$lib/ui/card';
+	import { Label } from '$lib/ui/label';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import { Switch } from '$lib/ui/switch';
 	import { rpc } from '$lib/query';
 	import { settings } from '$lib/state/settings.svelte';
 </script>

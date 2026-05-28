@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Field from '@whispering-open/ui/field';
-	import { Switch } from '@whispering-open/ui/switch';
+	import * as Field from '$lib/ui/field';
+	import { Switch } from '$lib/ui/switch';
 	import { settings } from '$lib/state/settings.svelte';
 </script>
 

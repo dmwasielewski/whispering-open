@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
+	import { Button } from '$lib/ui/button';
 	import CheckCircleIcon from '@lucide/svelte/icons/check-circle';
 	import CircleIcon from '@lucide/svelte/icons/circle';
 	import { settings } from '$lib/state/settings.svelte';

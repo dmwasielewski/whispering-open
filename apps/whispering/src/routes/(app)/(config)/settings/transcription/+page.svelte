@@ -1,14 +1,14 @@
 <script lang="ts">
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Button } from '@whispering-open/ui/button';
-	import * as Card from '@whispering-open/ui/card';
-	import { CopyButton } from '@whispering-open/ui/copy-button';
-	import * as Field from '@whispering-open/ui/field';
-	import { Input } from '@whispering-open/ui/input';
-	import { Link } from '@whispering-open/ui/link';
-	import * as Select from '@whispering-open/ui/select';
-	import { Textarea } from '@whispering-open/ui/textarea';
+	import * as Alert from '$lib/ui/alert';
+	import { Badge } from '$lib/ui/badge';
+	import { Button } from '$lib/ui/button';
+	import * as Card from '$lib/ui/card';
+	import { CopyButton } from '$lib/ui/copy-button';
+	import * as Field from '$lib/ui/field';
+	import { Input } from '$lib/ui/input';
+	import { Link } from '$lib/ui/link';
+	import * as Select from '$lib/ui/select';
+	import { Textarea } from '$lib/ui/textarea';
 	import InfoIcon from '@lucide/svelte/icons/info';
 	import CopyablePre from '$lib/components/copyable/CopyablePre.svelte';
 	import {

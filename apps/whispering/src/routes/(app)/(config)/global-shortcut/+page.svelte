@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Empty from '@whispering-open/ui/empty';
+	import { Button } from '$lib/ui/button';
+	import * as Empty from '$lib/ui/empty';
 	import DesktopIcon from '@lucide/svelte/icons/laptop';
 	import { ChromeWebStoreIcon } from '$lib/components/icons';
 </script>

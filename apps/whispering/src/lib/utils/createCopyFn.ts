@@ -1,4 +1,4 @@
-import type { CopyFn } from '@whispering-open/ui/copy-button';
+import type { CopyFn } from '$lib/ui/copy-button';
 import { rpc } from '$lib/query';
 
 /**

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Button } from '@whispering-open/ui/button';
-	import * as Command from '@whispering-open/ui/command';
-	import { useCombobox } from '@whispering-open/ui/hooks';
-	import * as Popover from '@whispering-open/ui/popover';
-	import { Spinner } from '@whispering-open/ui/spinner';
-	import { cn } from '@whispering-open/ui/utils';
+	import { Badge } from '$lib/ui/badge';
+	import { Button } from '$lib/ui/button';
+	import * as Command from '$lib/ui/command';
+	import { useCombobox } from '$lib/ui/hooks';
+	import * as Popover from '$lib/ui/popover';
+	import { Spinner } from '$lib/ui/spinner';
+	import { cn } from '$lib/ui/utils';
 	import CheckIcon from '@lucide/svelte/icons/check';
 	import MicIcon from '@lucide/svelte/icons/mic';
 	import RefreshCwIcon from '@lucide/svelte/icons/refresh-cw';

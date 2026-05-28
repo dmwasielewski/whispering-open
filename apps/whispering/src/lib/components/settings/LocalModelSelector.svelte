@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Card from '@whispering-open/ui/card';
-	import { Input } from '@whispering-open/ui/input';
-	import { toast } from '@whispering-open/ui/sonner';
-	import * as Tabs from '@whispering-open/ui/tabs';
+	import { Button } from '$lib/ui/button';
+	import * as Card from '$lib/ui/card';
+	import { Input } from '$lib/ui/input';
+	import { toast } from '$lib/ui/sonner';
+	import * as Tabs from '$lib/ui/tabs';
 	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import Paperclip from '@lucide/svelte/icons/paperclip';
 	import X from '@lucide/svelte/icons/x';

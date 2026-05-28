@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button, buttonVariants } from '@whispering-open/ui/button';
-	import * as Empty from '@whispering-open/ui/empty';
-	import { Link } from '@whispering-open/ui/link';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import { Separator } from '@whispering-open/ui/separator';
+	import { Button, buttonVariants } from '$lib/ui/button';
+	import * as Empty from '$lib/ui/empty';
+	import { Link } from '$lib/ui/link';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import { Separator } from '$lib/ui/separator';
 	import Layers2Icon from '@lucide/svelte/icons/layers-2';
 	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
 	import { rpc } from '$lib/query';

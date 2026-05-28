@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Badge } from '@whispering-open/ui/badge';
-	import * as Field from '@whispering-open/ui/field';
-	import * as Tabs from '@whispering-open/ui/tabs';
+	import { Badge } from '$lib/ui/badge';
+	import * as Field from '$lib/ui/field';
+	import * as Tabs from '$lib/ui/tabs';
 	import {
 		AnthropicApiKeyInput,
 		CustomEndpointInput,

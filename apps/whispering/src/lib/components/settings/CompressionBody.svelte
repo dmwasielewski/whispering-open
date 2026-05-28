@@ -1,12 +1,12 @@
 <script lang="ts">
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Button } from '@whispering-open/ui/button';
-	import { Checkbox } from '@whispering-open/ui/checkbox';
-	import * as Field from '@whispering-open/ui/field';
-	import { Input } from '@whispering-open/ui/input';
-	import { Link } from '@whispering-open/ui/link';
-	import { cn } from '@whispering-open/ui/utils';
+	import * as Alert from '$lib/ui/alert';
+	import { Badge } from '$lib/ui/badge';
+	import { Button } from '$lib/ui/button';
+	import { Checkbox } from '$lib/ui/checkbox';
+	import * as Field from '$lib/ui/field';
+	import { Input } from '$lib/ui/input';
+	import { Link } from '$lib/ui/link';
+	import { cn } from '$lib/ui/utils';
 	import AlertTriangle from '@lucide/svelte/icons/alert-triangle';
 	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
 	import { createQuery } from '@tanstack/svelte-query';

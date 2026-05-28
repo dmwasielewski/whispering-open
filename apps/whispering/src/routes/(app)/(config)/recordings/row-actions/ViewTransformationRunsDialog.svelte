@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Modal from '@whispering-open/ui/modal';
+	import { Button } from '$lib/ui/button';
+	import * as Modal from '$lib/ui/modal';
 	import HistoryIcon from '@lucide/svelte/icons/history';
 	import { Runs } from '$lib/components/transformations-editor';
 	import { transformationRuns } from '$lib/state/transformation-runs.svelte';

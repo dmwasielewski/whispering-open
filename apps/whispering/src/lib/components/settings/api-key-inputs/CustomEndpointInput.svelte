@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Field from '@whispering-open/ui/field';
-	import { Input } from '@whispering-open/ui/input';
+	import * as Field from '$lib/ui/field';
+	import { Input } from '$lib/ui/input';
 	import { deviceConfig } from '$lib/state/device-config.svelte';
 
 	type Props = {

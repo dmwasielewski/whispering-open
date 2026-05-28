@@ -1,9 +1,9 @@
 <script lang="ts">
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Button } from '@whispering-open/ui/button';
-	import * as Field from '@whispering-open/ui/field';
-	import { Link } from '@whispering-open/ui/link';
-	import * as Select from '@whispering-open/ui/select';
+	import * as Alert from '$lib/ui/alert';
+	import { Button } from '$lib/ui/button';
+	import * as Field from '$lib/ui/field';
+	import { Link } from '$lib/ui/link';
+	import * as Select from '$lib/ui/select';
 	import InfoIcon from '@lucide/svelte/icons/info';
 	import {
 		BITRATE_OPTIONS,

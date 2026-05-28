@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { useCombobox } from '@whispering-open/ui/hooks';
-	import * as Popover from '@whispering-open/ui/popover';
+	import { Button } from '$lib/ui/button';
+	import { useCombobox } from '$lib/ui/hooks';
+	import * as Popover from '$lib/ui/popover';
 	import LayersIcon from '@lucide/svelte/icons/layers';
 	import { createMutation } from '@tanstack/svelte-query';
 	import { nanoid } from 'nanoid/non-secure';

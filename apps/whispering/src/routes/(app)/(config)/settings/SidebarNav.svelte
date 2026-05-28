@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { cn } from '@whispering-open/ui/utils';
+	import { Button } from '$lib/ui/button';
+	import { cn } from '$lib/ui/utils';
 	import { cubicInOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 	import { page } from '$app/state';

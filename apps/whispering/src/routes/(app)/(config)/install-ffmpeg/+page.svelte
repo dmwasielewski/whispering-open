@@ -1,14 +1,14 @@
 <script lang="ts">
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Button, buttonVariants } from '@whispering-open/ui/button';
-	import * as Card from '@whispering-open/ui/card';
-	import * as Kbd from '@whispering-open/ui/kbd';
-	import { Link } from '@whispering-open/ui/link';
-	import { Separator } from '@whispering-open/ui/separator';
-	import { Snippet } from '@whispering-open/ui/snippet';
-	import { Spinner } from '@whispering-open/ui/spinner';
-	import * as Tabs from '@whispering-open/ui/tabs';
+	import * as Alert from '$lib/ui/alert';
+	import { Badge } from '$lib/ui/badge';
+	import { Button, buttonVariants } from '$lib/ui/button';
+	import * as Card from '$lib/ui/card';
+	import * as Kbd from '$lib/ui/kbd';
+	import { Link } from '$lib/ui/link';
+	import { Separator } from '$lib/ui/separator';
+	import { Snippet } from '$lib/ui/snippet';
+	import { Spinner } from '$lib/ui/spinner';
+	import * as Tabs from '$lib/ui/tabs';
 	import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left';
 	import CheckCircleIcon from '@lucide/svelte/icons/check-circle';
 	import DownloadIcon from '@lucide/svelte/icons/download';

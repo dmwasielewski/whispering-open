@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Field from '@whispering-open/ui/field';
-	import * as Select from '@whispering-open/ui/select';
+	import * as Field from '$lib/ui/field';
+	import * as Select from '$lib/ui/select';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { rpc } from '$lib/query';
 	import type { DeviceIdentifier } from '$lib/services/recorder/types';

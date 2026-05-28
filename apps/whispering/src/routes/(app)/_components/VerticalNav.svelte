@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Sidebar from '@whispering-open/ui/sidebar';
-	import { useSidebar } from '@whispering-open/ui/sidebar';
+	import * as Sidebar from '$lib/ui/sidebar';
+	import { useSidebar } from '$lib/ui/sidebar';
 	import Database from '@lucide/svelte/icons/database';
 	import Minimize2Icon from '@lucide/svelte/icons/minimize-2';
 	import MoonIcon from '@lucide/svelte/icons/moon';

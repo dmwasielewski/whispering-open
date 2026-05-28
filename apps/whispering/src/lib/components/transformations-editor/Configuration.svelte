@@ -1,15 +1,15 @@
 <script lang="ts">
-	import * as Accordion from '@whispering-open/ui/accordion';
-	import * as Alert from '@whispering-open/ui/alert';
-	import { Button } from '@whispering-open/ui/button';
-	import * as Card from '@whispering-open/ui/card';
-	import * as Field from '@whispering-open/ui/field';
-	import { Input } from '@whispering-open/ui/input';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import * as Select from '@whispering-open/ui/select';
-	import { Separator } from '@whispering-open/ui/separator';
-	import { Switch } from '@whispering-open/ui/switch';
-	import { Textarea } from '@whispering-open/ui/textarea';
+	import * as Accordion from '$lib/ui/accordion';
+	import * as Alert from '$lib/ui/alert';
+	import { Button } from '$lib/ui/button';
+	import * as Card from '$lib/ui/card';
+	import * as Field from '$lib/ui/field';
+	import { Input } from '$lib/ui/input';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import * as Select from '$lib/ui/select';
+	import { Separator } from '$lib/ui/separator';
+	import { Switch } from '$lib/ui/switch';
+	import { Textarea } from '$lib/ui/textarea';
 	import CopyIcon from '@lucide/svelte/icons/copy';
 	import PlusIcon from '@lucide/svelte/icons/plus';
 	import TrashIcon from '@lucide/svelte/icons/trash-2';

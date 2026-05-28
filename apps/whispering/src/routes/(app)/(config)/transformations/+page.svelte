@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { createPersistedState } from '$lib/utils/svelte-utils';
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Button } from '@whispering-open/ui/button';
-	import * as ButtonGroup from '@whispering-open/ui/button-group';
-	import { Checkbox } from '@whispering-open/ui/checkbox';
-	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
-	import * as Empty from '@whispering-open/ui/empty';
-	import { Input } from '@whispering-open/ui/input';
-	import * as SectionHeader from '@whispering-open/ui/section-header';
-	import * as Table from '@whispering-open/ui/table';
-	import { SelectAllPopover, SortableTableHeader } from '@whispering-open/ui/table';
+	import { Badge } from '$lib/ui/badge';
+	import { Button } from '$lib/ui/button';
+	import * as ButtonGroup from '$lib/ui/button-group';
+	import { Checkbox } from '$lib/ui/checkbox';
+	import { confirmationDialog } from '$lib/ui/confirmation-dialog';
+	import * as Empty from '$lib/ui/empty';
+	import { Input } from '$lib/ui/input';
+	import * as SectionHeader from '$lib/ui/section-header';
+	import * as Table from '$lib/ui/table';
+	import { SelectAllPopover, SortableTableHeader } from '$lib/ui/table';
 	import SearchIcon from '@lucide/svelte/icons/search';
 	import TrashIcon from '@lucide/svelte/icons/trash-2';
 	import WandSparklesIcon from '@lucide/svelte/icons/wand-sparkles';

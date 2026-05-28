@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import * as Dialog from '@whispering-open/ui/dialog';
-	import * as Field from '@whispering-open/ui/field';
+	import { Button } from '$lib/ui/button';
+	import * as Dialog from '$lib/ui/dialog';
+	import * as Field from '$lib/ui/field';
 	import type { Snippet } from 'svelte';
 	import { migrationDialog } from './migration-dialog.svelte';
 	import { MOCK_RECORDING_COUNT } from './migration-test-data';

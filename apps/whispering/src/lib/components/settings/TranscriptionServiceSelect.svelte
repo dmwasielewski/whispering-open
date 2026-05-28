@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Badge } from '@whispering-open/ui/badge';
-	import { Label } from '@whispering-open/ui/label';
-	import * as Select from '@whispering-open/ui/select';
-	import { cn } from '@whispering-open/ui/utils';
+	import { Badge } from '$lib/ui/badge';
+	import { Label } from '$lib/ui/label';
+	import * as Select from '$lib/ui/select';
+	import { cn } from '$lib/ui/utils';
 	import type { Snippet } from 'svelte';
 	import { type TranscriptionServiceId } from '$lib/constants/transcription';
 	import {

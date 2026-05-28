@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Resizable from '@whispering-open/ui/resizable';
+	import * as Resizable from '$lib/ui/resizable';
 	import { transformationRuns } from '$lib/state/transformation-runs.svelte';
 	import type { Transformation, TransformationStep } from '$lib/workspace';
 	import Configuration from './Configuration.svelte';

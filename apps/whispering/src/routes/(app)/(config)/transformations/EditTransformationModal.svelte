@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
-	import * as Modal from '@whispering-open/ui/modal';
-	import { Separator } from '@whispering-open/ui/separator';
+	import { Button } from '$lib/ui/button';
+	import { confirmationDialog } from '$lib/ui/confirmation-dialog';
+	import * as Modal from '$lib/ui/modal';
+	import { Separator } from '$lib/ui/separator';
 	import HistoryIcon from '@lucide/svelte/icons/history';
 	import EditIcon from '@lucide/svelte/icons/pencil';
 	import PlayIcon from '@lucide/svelte/icons/play';

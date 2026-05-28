@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@whispering-open/ui/button';
-	import { Input } from '@whispering-open/ui/input';
+	import { Button } from '$lib/ui/button';
+	import { Input } from '$lib/ui/input';
 	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';

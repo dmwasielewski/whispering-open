@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Badge } from '@whispering-open/ui/badge';
-	import * as Command from '@whispering-open/ui/command';
-	import { Kbd } from '@whispering-open/ui/kbd';
+	import { Badge } from '$lib/ui/badge';
+	import * as Command from '$lib/ui/command';
+	import { Kbd } from '$lib/ui/kbd';
 	import LayersIcon from '@lucide/svelte/icons/layers';
 	import { onMount } from 'svelte';
 	import { PLATFORM_TYPE } from '$lib/constants/platform';
