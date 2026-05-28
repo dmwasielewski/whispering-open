@@ -39,7 +39,7 @@ jobs:
             gstreamer1.0-libav \
             gstreamer1.0-alsa \
             libvulkan-dev \
-            glslang-tools
+            shaderc
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
