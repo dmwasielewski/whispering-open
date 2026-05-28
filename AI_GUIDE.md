@@ -19,6 +19,19 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 - Keep `dotfiles-sway` integration in mind: releases from this repo are consumed by `scripts/setup-whispering-open.sh` there.
 - Public repo rule: assume every commit is visible and permanent. Do not commit secrets, local tokens, private logs, or user data.
 
+## Project Goal (three phases)
+
+**Phase 1 — Clean Epicenter extraction (current):**
+Remove all remaining Epicenter/bradenwong references. Inline `packages/ui` into the app. Zero errors, clean build throughout.
+
+**Phase 2 — Fedora Sway Atomic adaptation:**
+Verify and fix desktop integration on Fedora Sway Atomic (Wayland, Sway WM): global shortcuts, tray icon, rpm-ostree install flow, dotfiles-sway automation.
+
+**Phase 3 — Personal customisation:**
+Adapt logic and GUI to Damian's personal needs: recording flow, transcription options, keyboard shortcuts, UI layout.
+
+Work strictly in this order. Do not personalise before cleaning. Do not adapt for Sway before cleaning is done.
+
 ## Priority Order
 
 1. Keep the current app buildable.
@@ -65,8 +78,10 @@ The only remaining Epicenter-origin identifier is the Tauri app bundle ID:
 `com.bradenwong.whispering`. That rename requires a dedicated migration because
 it affects app data storage paths and desktop launcher identity.
 
-Known cleanup items:
+Known cleanup items (Phase 1 — remaining):
 
+- Inline `packages/ui` (`@whispering-open/ui`) into `apps/whispering/src/lib/` — last shared package.
+- Remove remaining Epicenter/bradenwong text references in docs and source comments (non-import, cosmetic).
 - Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred: vite.config.ts type work needed).
 - Add stable release automation (GitHub Actions — AppImage requires Ubuntu CI with FUSE).
 
