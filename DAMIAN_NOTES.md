@@ -43,6 +43,47 @@ Next cleanup candidates:
 3. Rename package/app identifiers away from old workspace names.
 4. Remove analytics/cloud/account UI if not needed.
 
+## 2026-05-27 (session 2)
+
+Continued inline extraction of shared packages into `apps/whispering`.
+
+Removed and pushed:
+
+- `packages/svelte-utils` — inlined into `apps/whispering/src/lib/utils/svelte-utils/`.
+  Nine import sites updated from `@epicenter/svelte` to `$lib/utils/svelte-utils`.
+- `packages/workspace` — inlined into `apps/whispering/src/lib/utils/workspace/`.
+  Five app import sites updated from `@epicenter/workspace` to `$lib/utils/workspace`.
+  One import in the inlined `from-table.svelte.ts` also updated.
+  `DateTimeString` type moved to `packages/ui/src/natural-language-date-input/datetime-string.ts`
+  so `packages/ui` no longer depends on workspace.
+- Empty leftover `packages/constants/src` and `packages/util/src` directories cleaned up locally.
+
+Current verified state:
+
+- `bun install` passed.
+- `bun run typecheck` passed with 0 errors and 11 known Svelte warnings.
+- `bun run build:web` passed.
+- 45 inlined workspace tests pass.
+- Pushes went through the configured gitleaks pre-push hook.
+
+Current repository structure after these cuts:
+
+- `apps/whispering` — the app (now owns all workspace and svelte-utils code)
+- `packages/ui` — the only remaining shared package, still named `@epicenter/ui`
+
+Current known backlog:
+
+- GitHub still reports 21 Dependabot vulnerabilities.
+- The 11 Svelte warnings remain.
+- `packages/ui` is still named `@epicenter/ui` — rename is deferred.
+
+Recommended next cleanup candidates:
+
+1. Rename `@epicenter/ui` to `@whispering-open/ui` (or flatten into app) — package scope rename.
+2. Rename the Tauri identifier from `com.bradenwong.whispering` — dedicated migration after rename.
+3. Resolve 11 Svelte warnings.
+4. Review 21 Dependabot vulnerabilities.
+
 ## 2026-05-27
 
 Continued the staged extraction and cleanup of Whispering Open.

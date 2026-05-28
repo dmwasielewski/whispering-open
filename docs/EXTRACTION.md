@@ -8,16 +8,17 @@ The current repository is deliberately a mini-workspace, not a fully flattened a
 
 Included intentionally:
 
-- `apps/whispering` - the product app.
-- `packages/ui` - UI components used by Whispering Open.
-- `packages/svelte-utils` - Svelte helpers used by state and persistence.
-- `packages/workspace` - local-first document/table helpers still used by the app.
-- `packages/workspace` still carries some legacy non-exported document helpers
-  that are being reviewed in small verified cuts.
+- `apps/whispering` - the product app. Now owns all workspace and svelte-utils code directly.
+- `packages/ui` - UI components used by Whispering Open. The only remaining shared package.
+
+Inlined into the app (no longer separate packages):
+
+- `apps/whispering/src/lib/utils/svelte-utils/` - was `packages/svelte-utils` (`@epicenter/svelte`).
+- `apps/whispering/src/lib/utils/workspace/` - was `packages/workspace` (`@epicenter/workspace`).
 
 Still carrying old workspace technical debt:
 
-- package names such as `@epicenter/*`
+- `packages/ui` still uses the old `@epicenter/ui` package name
 - analytics service
 - remaining references to old upstream release assets where the app still downloads required files
 - some non-exported workspace abstractions that may not be needed for a local
@@ -474,7 +475,7 @@ Expected next step after verification:
 - continue reviewing retained package exports and metadata before package scope
   renaming
 
-## 2026-05-27 Session Stop Point
+## 2026-05-27 Session Stop Point (session 1)
 
 Last completed pushed commit:
 
@@ -483,25 +484,89 @@ Last completed pushed commit:
 The working tree was clean after that push. Gitleaks reported no leaks during
 push. GitHub still reported 21 Dependabot vulnerabilities.
 
-Start the next session from the cleanup backlog above. Do not start with Tauri
-identifier renaming; that should remain a dedicated later migration after the
-remaining dependency graph and package metadata are smaller.
+---
+
+### 2026-05-27: Inlined packages/svelte-utils into apps/whispering
+
+`@epicenter/svelte` exported only three helpers used by the app: `fromTable`,
+`createPersistedState`, and `createPersistedMap`. Keeping a shared workspace
+package for three functions added more dependency surface than value.
+
+Cut made:
+
+- copied `packages/svelte-utils/src/` to `apps/whispering/src/lib/utils/svelte-utils/`
+- updated 9 import sites from `@epicenter/svelte` to `$lib/utils/svelte-utils`
+- removed `@epicenter/svelte` from `apps/whispering/package.json`
+- removed `packages/svelte-utils`
+- refreshed `bun.lock`
+
+Expected next step after verification:
+
+- inline `packages/workspace` into the app
+
+### 2026-05-27: Inlined packages/workspace into apps/whispering
+
+`@epicenter/workspace` provided table/KV helpers, IndexedDB, and
+BroadcastChannel binding used in 5 app files. With svelte-utils removed, this
+was the last remaining `@epicenter` package dependency besides UI.
+
+Before removing, `packages/ui` was also importing `DateTimeString` type from
+`@epicenter/workspace`. That type was moved into
+`packages/ui/src/natural-language-date-input/datetime-string.ts` using
+`wellcrafted/brand` (already a devDependency of `packages/ui`), so `packages/ui`
+no longer depends on workspace.
+
+Cut made:
+
+- copied `packages/workspace/src/` to `apps/whispering/src/lib/utils/workspace/`
+- updated 6 import sites from `@epicenter/workspace` to `$lib/utils/workspace`
+- fixed two test files where `ydoc.getArray()` needed an explicit type parameter
+  (`YKeyValueLwwEntry<unknown>`) for the stricter svelte-check environment
+- removed `@epicenter/workspace` from `apps/whispering/package.json`
+- removed `@epicenter/workspace` from `packages/ui/package.json`
+- removed `packages/workspace`
+- refreshed `bun.lock`
+
+Expected next step after verification:
+
+- rename `@epicenter/ui` → `@whispering-open/ui` (or inline into app)
+
+## 2026-05-27 Session Stop Point (session 2)
+
+Last completed pushed commits:
+
+- `ace4825 Inline packages/svelte-utils into apps/whispering`
+- `8e59f6c Inline packages/workspace into apps/whispering`
+
+The working tree was clean after those pushes. Gitleaks reported no leaks.
+GitHub still reported 21 Dependabot vulnerabilities.
+
+**Start next session here:**
+
+The only remaining shared package with an Epicenter name is `packages/ui`
+(`@epicenter/ui`). Recommended next steps in order:
+
+1. Rename `@epicenter/ui` → `@whispering-open/ui`:
+   - update `packages/ui/package.json` name field
+   - update `apps/whispering/package.json` devDependency
+   - update ~79 import sites in `apps/whispering/src/` that import from `@epicenter/ui`
+   - verify: `bun install`, `bun run typecheck`, `bun run build:web`
+2. Rename Tauri identifier (`com.bradenwong.whispering` → `io.github.dmwasielewski.whisperingopen`)
+   — only after package rename is verified and stable, as a separate dedicated commit.
+
+Verify commands:
+```sh
+bun run typecheck
+bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps/whispering/src/lib/utils/workspace/document/create-table.test.ts apps/whispering/src/lib/utils/workspace/document/attach-broadcast-channel.test.ts apps/whispering/src/lib/utils/workspace/document/local-only-recipe.test.ts
+bun run build:web
+```
 
 ## Safe Cleanup Order
 
-1. Verify current build:
-   ```sh
-   bun run typecheck
-   bun run build:web
-   ```
-2. Identify exact imports from `@epicenter/svelte`.
-3. Remove unused package metadata dependencies from `packages/svelte-utils`.
-4. Narrow the root workspace so only `apps/whispering` remains under `apps`.
-5. Remove `apps/api`.
-6. Inspect and remove unused auth/server/sync/encryption packages.
-7. Move or copy only the needed Svelte helpers into a Whispering Open-owned package or local module.
-8. Rename package scopes after dependency graph is small.
-9. Rename Tauri identity and release metadata in a dedicated migration.
+1. Rename `@epicenter/ui` → `@whispering-open/ui` (see above).
+2. Rename Tauri identity and release metadata in a dedicated migration.
+3. Resolve the 11 existing Svelte warnings.
+4. Review the 21 GitHub Dependabot vulnerabilities.
 
 ## Verification Rule
 

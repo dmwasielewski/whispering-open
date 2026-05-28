@@ -22,16 +22,12 @@ Important areas:
 
 ```text
 packages/ui
-packages/svelte-utils
-packages/workspace
 ```
 
 Current purpose:
 
-- `packages/ui` - Svelte UI component library used heavily by Whispering Open.
-- `packages/svelte-utils` - persisted state/session/workspace helpers.
-- `packages/workspace` - local-first document/table helpers used by Whispering Open state.
-- No cloud/auth/sync/encryption shared package should be treated as required unless the active app imports it.
+- `packages/ui` - Svelte UI component library used by Whispering Open. Still named `@epicenter/ui`; rename is deferred.
+- `packages/svelte-utils` and `packages/workspace` have been inlined into `apps/whispering/src/lib/utils/`.
 
 ## Root Files
 
@@ -53,14 +49,25 @@ Current purpose:
 - `RELEASES.md` - release expectations.
 - `CHANGELOG.md` - user-facing change history.
 
+## App-local workspace helpers
+
+```text
+apps/whispering/src/lib/utils/svelte-utils/
+apps/whispering/src/lib/utils/workspace/
+```
+
+These were previously shared packages. Now owned entirely by the app:
+
+- `src/lib/utils/svelte-utils/` - `fromTable`, `createPersistedState`, `createPersistedMap`.
+- `src/lib/utils/workspace/` - Yjs table/KV helpers, IndexedDB, BroadcastChannel, `DateTimeString`.
+
 ## Cleanup Direction
 
 Recommended order:
 
-1. Prove local Tauri build and Linux release asset.
-2. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
-3. Review the 21 GitHub Dependabot vulnerabilities reported after push.
-4. Remove stale cloud/auth/sync/encryption source files from `packages/workspace`.
-5. Rename app identity and package scopes.
-6. Replace old workspace links and branding.
-7. Add stable release automation.
+1. Rename `@epicenter/ui` → `@whispering-open/ui` (dedicated migration, ~80 import sites).
+2. Rename the Tauri identifier after package rename is stable.
+3. Resolve the 11 existing Svelte warnings from `bun run typecheck`.
+4. Review the 21 GitHub Dependabot vulnerabilities.
+5. Prove local Tauri build and Linux release asset.
+6. Add stable release automation.

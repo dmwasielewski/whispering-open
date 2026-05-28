@@ -29,47 +29,41 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Verified Commands
 
-As of 2026-05-27:
+As of 2026-05-27 (session 2):
 
 ```sh
 bun install
 bun run typecheck
-bun test packages/workspace/src/document/create-kv.test.ts packages/workspace/src/document/create-table.test.ts packages/workspace/src/document/attach-broadcast-channel.test.ts packages/workspace/src/document/local-only-recipe.test.ts packages/workspace/src/index.browser-safe.test.ts
+bun test apps/whispering/src/lib/utils/workspace/document/create-kv.test.ts apps/whispering/src/lib/utils/workspace/document/create-table.test.ts apps/whispering/src/lib/utils/workspace/document/attach-broadcast-channel.test.ts apps/whispering/src/lib/utils/workspace/document/local-only-recipe.test.ts
 bun run build:web
 ```
 
 `typecheck` and `build:web` pass. Svelte reports 11 existing warnings, but no
-errors. The focused workspace tests above pass.
+errors. The focused workspace tests above pass (45 tests, 0 failures).
 
 ## Current Extraction Notes
 
 The app currently still imports:
 
-- `@epicenter/ui`
-- `@epicenter/svelte`
-- `@epicenter/workspace`
+- `@epicenter/ui` — the only remaining shared package with an Epicenter name
 
-`@epicenter/svelte` no longer depends on `@epicenter/api`, the root workspace is
-narrowed to `apps/whispering`, and `apps/api`, `packages/billing`,
-`packages/auth-svelte`, `packages/server`, `packages/auth`, `packages/sync`,
-`packages/encryption`, `packages/constants`, and `packages/util` have been
-removed.
+`@epicenter/svelte` and `@epicenter/workspace` have been inlined directly into
+`apps/whispering/src/lib/utils/`. The app no longer uses any external workspace
+package reference for its local-first helpers.
 
-`packages/workspace` has also been reduced substantially. Removed areas include
-encrypted helpers, daemon runtime, collaboration/sync source, AI bridge, editor
-document primitives, markdown/SQLite materializers, Yjs logs, workspace path/link
-helpers, action/id helpers, benchmarks, reference storage tooling, and
-non-exported helper leftovers from the old runtime.
-
-Next cleanup should inspect package metadata and docs that still describe
-Epicenter-only surfaces before attempting any package scope rename.
+`packages/ui` is the only remaining shared package. It still carries the old
+`@epicenter/ui` package name. Its `DateTimeString` type is now defined locally
+within the package, removing the previous dependency on `@epicenter/workspace`.
 
 Known cleanup items:
 
+- Rename `@epicenter/ui` → `@whispering-open/ui` (or inline into app). This is
+  a dedicated migration: update 79+ import sites in `apps/whispering/src/` and
+  the package name in `packages/ui/package.json`.
+- Rename the Tauri identifier from `com.bradenwong.whispering` after the package
+  rename is stable.
 - Resolve the 11 existing Svelte warnings from `bun run typecheck`.
 - Review the 21 GitHub Dependabot vulnerabilities reported after push.
-- Keep package/Tauri renaming as a later dedicated migration after dependency
-  cleanup is stable.
 
 ## Documentation Contract
 
