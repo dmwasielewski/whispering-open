@@ -51,13 +51,55 @@ ALSA/PulseAudio/PipeWire. On Fedora Sway with PipeWire, behavior may differ from
 
 ---
 
-### P2-6: Keyboard shortcuts — verify global hotkeys work on Fedora Sway
+### P2-6: Keyboard shortcuts — verify global hotkeys and installation defaults on Fedora Sway
 **Status:** needs testing  
-**What:** The app has configurable keyboard shortcuts (shortcuts settings tab). On Wayland,
-global hotkeys (captured while the app is in the background) require special permissions.  
-**Test:** set a shortcut in settings, focus another app, press the shortcut — does the app respond?  
-**Known risk:** Wayland does not allow apps to capture global input by default. May need
-a portal or `tauri-plugin-global-shortcut` with Wayland support.
+
+**Three separate concerns to verify:**
+
+**6a — Are shortcuts GLOBAL (system-wide) or only LOCAL (app window must be focused)?**
+
+Suspicion: shortcuts may only trigger when the app window is active, not when another app
+is in the foreground. On Wayland, global input capture is restricted.
+
+The app uses `tauri-plugin-global-shortcut` which registers system-wide shortcuts. However:
+- The app runs with `GDK_BACKEND=x11` (XWayland mode), so Tauri's shortcut plugin uses
+  the X11 global hotkey API (`XGrabKey`) via XWayland
+- `XGrabKey` DOES work for global shortcuts even on Sway/Wayland via XWayland
+- BUT: if Sway is running in pure Wayland mode and XWayland is not active, it will fail
+
+**Test:** open a text editor, type something, then press `Control+Shift+;` — does the app
+react (start recording) even though another window is focused?
+
+**6b — Do default shortcuts get installed at system/session level at startup?**
+
+Shortcuts are NOT installed at package install time. They are registered at runtime when
+the app starts, via `tauri-plugin-global-shortcut`. This means:
+- Shortcuts only work while the app is RUNNING (even if hidden to tray) ✅ (expected)
+- Shortcuts do NOT work if the app is not running ✅ (expected — not a bug)
+- If the app crashes/is killed, shortcuts are automatically unregistered
+
+**Test:** confirm the app registers shortcuts on startup (before any user interaction).
+Check `register-commands.ts` — are shortcuts registered in the app init flow?
+
+**6c — Conflict check: do default shortcuts clash with Sway or other system shortcuts?**
+
+Default global shortcuts (Linux, `CommandOrControl` = `Control`):
+| Shortcut | Action | Potential conflict |
+|----------|--------|--------------------|
+| `Control+Shift+;` | Toggle recording | Sway: none (Sway uses Super/mod key) |
+| `Control+Shift+'` | Cancel recording | Possible: some terminal emulators |
+| `Control+Shift+X` | Stop and transcribe | VS Code: "Cut line" (app-local, not global) |
+| `Control+Shift+R` | Toggle transformation | Firefox: hard reload (app-local, not global) |
+
+**Source:** `apps/whispering/src/lib/state/device-config.svelte.ts`
+
+**Test:** open Sway config (`~/.config/sway/config`), search for `Control+Shift` bindings.
+Also test each shortcut while common apps are open (terminal, Firefox, VS Code).
+
+**Pass criteria:**
+- [ ] All 4 shortcuts trigger from any focused window
+- [ ] No conflicts with Sway's built-in shortcuts
+- [ ] App registers shortcuts immediately at startup (not only after visiting Settings)
 
 ---
 
