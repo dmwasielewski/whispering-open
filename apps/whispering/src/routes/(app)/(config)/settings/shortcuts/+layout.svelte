@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as SectionHeader from '@epicenter/ui/section-header';
-	import { cn } from '@epicenter/ui/utils';
+	import { Button } from '@whispering-open/ui/button';
+	import * as SectionHeader from '@whispering-open/ui/section-header';
+	import { cn } from '@whispering-open/ui/utils';
 	import { cubicInOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 	import { page } from '$app/state';

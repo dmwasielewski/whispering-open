@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import { useCombobox } from '@epicenter/ui/hooks';
-	import * as Popover from '@epicenter/ui/popover';
-	import { Separator } from '@epicenter/ui/separator';
-	import { cn } from '@epicenter/ui/utils';
+	import { Button } from '@whispering-open/ui/button';
+	import { useCombobox } from '@whispering-open/ui/hooks';
+	import * as Popover from '@whispering-open/ui/popover';
+	import { Separator } from '@whispering-open/ui/separator';
+	import { cn } from '@whispering-open/ui/utils';
 	import PackageIcon from '@lucide/svelte/icons/package';
 	import SettingsIcon from '@lucide/svelte/icons/settings';
 	import { goto } from '$app/navigation';

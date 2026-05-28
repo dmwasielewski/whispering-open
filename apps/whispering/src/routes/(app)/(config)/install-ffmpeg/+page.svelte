@@ -1,14 +1,14 @@
 <script lang="ts">
-	import * as Alert from '@epicenter/ui/alert';
-	import { Badge } from '@epicenter/ui/badge';
-	import { Button, buttonVariants } from '@epicenter/ui/button';
-	import * as Card from '@epicenter/ui/card';
-	import * as Kbd from '@epicenter/ui/kbd';
-	import { Link } from '@epicenter/ui/link';
-	import { Separator } from '@epicenter/ui/separator';
-	import { Snippet } from '@epicenter/ui/snippet';
-	import { Spinner } from '@epicenter/ui/spinner';
-	import * as Tabs from '@epicenter/ui/tabs';
+	import * as Alert from '@whispering-open/ui/alert';
+	import { Badge } from '@whispering-open/ui/badge';
+	import { Button, buttonVariants } from '@whispering-open/ui/button';
+	import * as Card from '@whispering-open/ui/card';
+	import * as Kbd from '@whispering-open/ui/kbd';
+	import { Link } from '@whispering-open/ui/link';
+	import { Separator } from '@whispering-open/ui/separator';
+	import { Snippet } from '@whispering-open/ui/snippet';
+	import { Spinner } from '@whispering-open/ui/spinner';
+	import * as Tabs from '@whispering-open/ui/tabs';
 	import ArrowLeftIcon from '@lucide/svelte/icons/arrow-left';
 	import CheckCircleIcon from '@lucide/svelte/icons/check-circle';
 	import DownloadIcon from '@lucide/svelte/icons/download';

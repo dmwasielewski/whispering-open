@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as Card from '@epicenter/ui/card';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Card from '@whispering-open/ui/card';
 	import { goto } from '$app/navigation';
 	import { Editor } from '$lib/components/transformations-editor';
 	import { rpc } from '$lib/query';

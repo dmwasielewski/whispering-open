@@ -1,4 +1,4 @@
-import { confirmationDialog } from '@epicenter/ui/confirmation-dialog';
+import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
 import { rpc } from '$lib/query';
 import { services } from '$lib/services';
 import { type Recording, recordings } from '$lib/state/recordings.svelte';

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Badge } from '@epicenter/ui/badge';
-	import { Label } from '@epicenter/ui/label';
-	import * as Select from '@epicenter/ui/select';
-	import { cn } from '@epicenter/ui/utils';
+	import { Badge } from '@whispering-open/ui/badge';
+	import { Label } from '@whispering-open/ui/label';
+	import * as Select from '@whispering-open/ui/select';
+	import { cn } from '@whispering-open/ui/utils';
 	import type { Snippet } from 'svelte';
 	import { type TranscriptionServiceId } from '$lib/constants/transcription';
 	import {

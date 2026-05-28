@@ -18,7 +18,7 @@ them in a closed-source product.
 
     - packages/workspace        (@epicenter/workspace)   typed schemas,
                                                          CRDT tables, sync
-    - packages/ui               (@epicenter/ui)          shadcn-svelte
+    - packages/ui               (@whispering-open/ui)    shadcn-svelte
                                                          component library
     - packages/svelte-utils     (@epicenter/svelte)      Svelte 5
                                                          framework bridge

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as Dialog from '@epicenter/ui/dialog';
-	import * as Field from '@epicenter/ui/field';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Dialog from '@whispering-open/ui/dialog';
+	import * as Field from '@whispering-open/ui/field';
 	import type { Snippet } from 'svelte';
 	import { migrationDialog } from './migration-dialog.svelte';
 	import { MOCK_RECORDING_COUNT } from './migration-test-data';

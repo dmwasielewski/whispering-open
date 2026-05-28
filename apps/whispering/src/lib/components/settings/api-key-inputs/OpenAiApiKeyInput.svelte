@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Field from '@epicenter/ui/field';
-	import { Input } from '@epicenter/ui/input';
-	import { Link } from '@epicenter/ui/link';
+	import * as Field from '@whispering-open/ui/field';
+	import { Input } from '@whispering-open/ui/input';
+	import { Link } from '@whispering-open/ui/link';
 	import { deviceConfig } from '$lib/state/device-config.svelte';
 </script>
 

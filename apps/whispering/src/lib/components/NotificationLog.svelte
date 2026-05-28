@@ -25,11 +25,11 @@
 </script>
 
 <script lang="ts">
-	import * as Alert from '@epicenter/ui/alert';
-	import * as Empty from '@epicenter/ui/empty';
-	import * as Modal from '@epicenter/ui/modal';
-	import { ScrollArea } from '@epicenter/ui/scroll-area';
-	import { Spinner } from '@epicenter/ui/spinner';
+	import * as Alert from '@whispering-open/ui/alert';
+	import * as Empty from '@whispering-open/ui/empty';
+	import * as Modal from '@whispering-open/ui/modal';
+	import { ScrollArea } from '@whispering-open/ui/scroll-area';
+	import { Spinner } from '@whispering-open/ui/spinner';
 	import AlertCircle from '@lucide/svelte/icons/alert-circle';
 	import AlertTriangle from '@lucide/svelte/icons/alert-triangle';
 	import BellIcon from '@lucide/svelte/icons/bell';

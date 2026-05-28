@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import { cn } from '@epicenter/ui/utils';
+	import { Button } from '@whispering-open/ui/button';
+	import { cn } from '@whispering-open/ui/utils';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { commandCallbacks } from '$lib/commands';
 	import {

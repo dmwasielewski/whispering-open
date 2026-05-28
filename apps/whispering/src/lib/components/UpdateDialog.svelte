@@ -59,13 +59,13 @@
 </script>
 
 <script lang="ts">
-	import * as Alert from '@epicenter/ui/alert';
-	import { Button } from '@epicenter/ui/button';
-	import * as Dialog from '@epicenter/ui/dialog';
-	import { Link } from '@epicenter/ui/link';
-	import { Progress } from '@epicenter/ui/progress';
-	import { ScrollArea } from '@epicenter/ui/scroll-area';
-	import { Separator } from '@epicenter/ui/separator';
+	import * as Alert from '@whispering-open/ui/alert';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Dialog from '@whispering-open/ui/dialog';
+	import { Link } from '@whispering-open/ui/link';
+	import { Progress } from '@whispering-open/ui/progress';
+	import { ScrollArea } from '@whispering-open/ui/scroll-area';
+	import { Separator } from '@whispering-open/ui/separator';
 	import AlertTriangleIcon from '@lucide/svelte/icons/alert-triangle';
 	import DownloadIcon from '@lucide/svelte/icons/download';
 	import { relaunch } from '@tauri-apps/plugin-process';

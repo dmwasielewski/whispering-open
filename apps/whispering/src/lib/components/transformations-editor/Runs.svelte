@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Badge } from '@epicenter/ui/badge';
-	import { Button } from '@epicenter/ui/button';
-	import * as Card from '@epicenter/ui/card';
-	import { confirmationDialog } from '@epicenter/ui/confirmation-dialog';
-	import * as Empty from '@epicenter/ui/empty';
-	import { Label } from '@epicenter/ui/label';
-	import * as Table from '@epicenter/ui/table';
+	import { Badge } from '@whispering-open/ui/badge';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Card from '@whispering-open/ui/card';
+	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
+	import * as Empty from '@whispering-open/ui/empty';
+	import { Label } from '@whispering-open/ui/label';
+	import * as Table from '@whispering-open/ui/table';
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import PlayIcon from '@lucide/svelte/icons/play';

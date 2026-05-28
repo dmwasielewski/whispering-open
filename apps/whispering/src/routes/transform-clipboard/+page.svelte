@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import { useCombobox } from '@epicenter/ui/hooks';
-	import * as Popover from '@epicenter/ui/popover';
-	import { Textarea } from '@epicenter/ui/textarea';
+	import { Button } from '@whispering-open/ui/button';
+	import { useCombobox } from '@whispering-open/ui/hooks';
+	import * as Popover from '@whispering-open/ui/popover';
+	import { Textarea } from '@whispering-open/ui/textarea';
 	import LayersIcon from '@lucide/svelte/icons/layers';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { emit, listen, type UnlistenFn } from '@tauri-apps/api/event';

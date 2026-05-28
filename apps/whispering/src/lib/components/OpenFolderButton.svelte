@@ -20,7 +20,7 @@
 	@component
 -->
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
+	import { Button } from '@whispering-open/ui/button';
 	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import { Ok, tryAsync } from 'wellcrafted/result';
 	import { rpc } from '$lib/query';

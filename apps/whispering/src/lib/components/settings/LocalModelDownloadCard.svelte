@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Badge } from '@epicenter/ui/badge';
-	import { Button } from '@epicenter/ui/button';
-	import { Progress } from '@epicenter/ui/progress';
-	import { toast } from '@epicenter/ui/sonner';
-	import { Spinner } from '@epicenter/ui/spinner';
+	import { Badge } from '@whispering-open/ui/badge';
+	import { Button } from '@whispering-open/ui/button';
+	import { Progress } from '@whispering-open/ui/progress';
+	import { toast } from '@whispering-open/ui/sonner';
+	import { Spinner } from '@whispering-open/ui/spinner';
 	import CheckIcon from '@lucide/svelte/icons/check';
 	import Download from '@lucide/svelte/icons/download';
 	import X from '@lucide/svelte/icons/x';

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Field from '@epicenter/ui/field';
-	import { Switch } from '@epicenter/ui/switch';
+	import * as Field from '@whispering-open/ui/field';
+	import { Switch } from '@whispering-open/ui/switch';
 	import { settings } from '$lib/state/settings.svelte';
 </script>
 

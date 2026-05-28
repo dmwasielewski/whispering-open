@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import { confirmationDialog } from '@epicenter/ui/confirmation-dialog';
-	import { Link } from '@epicenter/ui/link';
-	import * as SectionHeader from '@epicenter/ui/section-header';
-	import { Separator } from '@epicenter/ui/separator';
+	import { Button } from '@whispering-open/ui/button';
+	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
+	import { Link } from '@whispering-open/ui/link';
+	import * as SectionHeader from '@whispering-open/ui/section-header';
+	import { Separator } from '@whispering-open/ui/separator';
 	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
 	import { rpc } from '$lib/query';
 	import { deviceConfig } from '$lib/state/device-config.svelte';

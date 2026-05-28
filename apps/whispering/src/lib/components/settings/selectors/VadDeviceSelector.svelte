@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as Command from '@epicenter/ui/command';
-	import { useCombobox } from '@epicenter/ui/hooks';
-	import * as Popover from '@epicenter/ui/popover';
-	import { Spinner } from '@epicenter/ui/spinner';
-	import { cn } from '@epicenter/ui/utils';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Command from '@whispering-open/ui/command';
+	import { useCombobox } from '@whispering-open/ui/hooks';
+	import * as Popover from '@whispering-open/ui/popover';
+	import { Spinner } from '@whispering-open/ui/spinner';
+	import { cn } from '@whispering-open/ui/utils';
 	import CheckIcon from '@lucide/svelte/icons/check';
 	import MicIcon from '@lucide/svelte/icons/mic';
 	import RefreshCwIcon from '@lucide/svelte/icons/refresh-cw';

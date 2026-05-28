@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as SectionHeader from '@epicenter/ui/section-header';
-	import { Separator } from '@epicenter/ui/separator';
+	import { Button } from '@whispering-open/ui/button';
+	import * as SectionHeader from '@whispering-open/ui/section-header';
+	import { Separator } from '@whispering-open/ui/separator';
 	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
 	import { rpc } from '$lib/query';
 	import { resetLocalShortcuts } from '$routes/(app)/_layout-utils/register-commands';

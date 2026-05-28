@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Badge } from '@epicenter/ui/badge';
-	import * as Field from '@epicenter/ui/field';
-	import * as Tabs from '@epicenter/ui/tabs';
+	import { Badge } from '@whispering-open/ui/badge';
+	import * as Field from '@whispering-open/ui/field';
+	import * as Tabs from '@whispering-open/ui/tabs';
 	import {
 		AnthropicApiKeyInput,
 		CustomEndpointInput,

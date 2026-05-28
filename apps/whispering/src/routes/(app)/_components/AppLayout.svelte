@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ConfirmationDialog } from '@epicenter/ui/confirmation-dialog';
-	import * as Dialog from '@epicenter/ui/dialog';
+	import { ConfirmationDialog } from '@whispering-open/ui/confirmation-dialog';
+	import * as Dialog from '@whispering-open/ui/dialog';
 	// import { extension } from '@epicenter/extension';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { onDestroy, onMount } from 'svelte';

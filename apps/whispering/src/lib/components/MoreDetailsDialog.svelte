@@ -58,8 +58,8 @@
 </script>
 
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as Modal from '@epicenter/ui/modal';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Modal from '@whispering-open/ui/modal';
 </script>
 
 <Modal.Root bind:open={moreDetailsDialog.isOpen}>

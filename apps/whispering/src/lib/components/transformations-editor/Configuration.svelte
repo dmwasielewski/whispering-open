@@ -1,15 +1,15 @@
 <script lang="ts">
-	import * as Accordion from '@epicenter/ui/accordion';
-	import * as Alert from '@epicenter/ui/alert';
-	import { Button } from '@epicenter/ui/button';
-	import * as Card from '@epicenter/ui/card';
-	import * as Field from '@epicenter/ui/field';
-	import { Input } from '@epicenter/ui/input';
-	import * as SectionHeader from '@epicenter/ui/section-header';
-	import * as Select from '@epicenter/ui/select';
-	import { Separator } from '@epicenter/ui/separator';
-	import { Switch } from '@epicenter/ui/switch';
-	import { Textarea } from '@epicenter/ui/textarea';
+	import * as Accordion from '@whispering-open/ui/accordion';
+	import * as Alert from '@whispering-open/ui/alert';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Card from '@whispering-open/ui/card';
+	import * as Field from '@whispering-open/ui/field';
+	import { Input } from '@whispering-open/ui/input';
+	import * as SectionHeader from '@whispering-open/ui/section-header';
+	import * as Select from '@whispering-open/ui/select';
+	import { Separator } from '@whispering-open/ui/separator';
+	import { Switch } from '@whispering-open/ui/switch';
+	import { Textarea } from '@whispering-open/ui/textarea';
 	import CopyIcon from '@lucide/svelte/icons/copy';
 	import PlusIcon from '@lucide/svelte/icons/plus';
 	import TrashIcon from '@lucide/svelte/icons/trash-2';

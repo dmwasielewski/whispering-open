@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import { confirmationDialog } from '@epicenter/ui/confirmation-dialog';
-	import { CopyButton } from '@epicenter/ui/copy-button';
-	import { Skeleton } from '@epicenter/ui/skeleton';
-	import { Spinner } from '@epicenter/ui/spinner';
+	import { Button } from '@whispering-open/ui/button';
+	import { confirmationDialog } from '@whispering-open/ui/confirmation-dialog';
+	import { CopyButton } from '@whispering-open/ui/copy-button';
+	import { Skeleton } from '@whispering-open/ui/skeleton';
+	import { Spinner } from '@whispering-open/ui/spinner';
 	import DownloadIcon from '@lucide/svelte/icons/download';
 	import EllipsisIcon from '@lucide/svelte/icons/ellipsis';
 	import FileStackIcon from '@lucide/svelte/icons/file-stack';

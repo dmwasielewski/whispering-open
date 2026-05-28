@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from '@epicenter/ui/button';
-	import * as Card from '@epicenter/ui/card';
-	import * as SectionHeader from '@epicenter/ui/section-header';
-	import * as Select from '@epicenter/ui/select';
+	import { Button } from '@whispering-open/ui/button';
+	import * as Card from '@whispering-open/ui/card';
+	import * as SectionHeader from '@whispering-open/ui/section-header';
+	import * as Select from '@whispering-open/ui/select';
 	import DatabaseIcon from '@lucide/svelte/icons/database';
 	import FlaskConicalIcon from '@lucide/svelte/icons/flask-conical';
 	import RefreshCwIcon from '@lucide/svelte/icons/refresh-cw';
