@@ -83,13 +83,17 @@ Check `register-commands.ts` — are shortcuts registered in the app init flow?
 
 **6c — Conflict check: do default shortcuts clash with Sway or other system shortcuts?**
 
-Default global shortcuts (Linux, `CommandOrControl` = `Control`):
+Default global shortcuts (Linux — `CommandOrControl`=`Control`, `CommandOrAlt`=`Alt`):
 | Shortcut | Action | Sway conflict? |
 |----------|--------|----------------|
 | `Control+Shift+;` | Toggle recording | ✅ None — Sway uses `Super` (`Mod4`) |
 | `Control+Shift+'` | Cancel recording | ✅ None |
-| `Control+Shift+X` | Stop and transcribe | ✅ None |
-| `Control+Shift+R` | Toggle transformation | ✅ None |
+| `Alt+Shift+D` | Push-to-talk | ✅ None |
+| `Control+Shift+X` | Open transformation picker | ✅ None |
+| `Control+Shift+R` | Run transformation on clipboard | ✅ None |
+
+Note: `startManualRecording`, `stopManualRecording`, `toggleVadRecording`, `stopVadRecording`
+have `null` defaults — no shortcut assigned unless user sets one manually.
 
 **Checked 2026-05-28:** `~/.config/sway/config` uses `set $mod Mod4` (Super/Win key). All Sway
 bindings use `$mod+...` — zero conflicts with `Control+Shift+*`.
