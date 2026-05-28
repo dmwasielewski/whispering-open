@@ -1,5 +1,58 @@
 # Damian Notes
 
+## 2026-05-28 (session 5)
+
+Resolved all 21 Dependabot security vulnerabilities. `bun audit` now reports 0 vulnerabilities.
+
+Changed:
+
+**Package updates (direct dependencies):**
+- `svelte` ^5.45.2 → ^5.55.10 (SSR XSS, ReDoS)
+- `@sveltejs/kit` ^2.49.0 → ^2.61.1 (query batch, redirect DoS)
+- `vite` ^7.2.4 → ^7.3.2 (path traversal, arbitrary file read)
+- `@sveltejs/vite-plugin-svelte` kept at ^6.2.4 (v7 requires vite 8 — deferred)
+- `svelte-check` ^4.3.4 → ^4.4.8
+- `turbo` ^2.8.19 → ^2.9.15 (CSRF, local code execution)
+- `dompurify` ^3.3.1 → ^3.4.7 (multiple XSS bypasses)
+- `@ricky0123/vad-web` ^0.0.24 → ^0.0.30 (drops protobufjs critical CVE)
+
+**Overrides in root `package.json` (transitive, no upstream fix available):**
+- `ws` → ^8.20.1 (memory disclosure via openai/mistralai/wrangler)
+- `cookie` → ^0.7.0 (out-of-bounds chars via kit/wrangler)
+- `qs` → ^6.15.2 (stringify DoS via elevenlabs)
+- `uuid` → ^11.1.1 (buffer bounds check via vite-plugin-devtools-json)
+- `dompurify` → ^3.4.7 (nested dep under @types/dompurify)
+
+**Removed:**
+- `@types/dompurify` — DOMPurify 3.x bundles its own TypeScript types.
+- Root `dependencies` section added erroneously by `bun update` — removed.
+
+**Code changes:**
+- `apps/whispering/src/lib/state/vad-recorder.svelte.ts` — migrated to `@ricky0123/vad-web@0.0.30` API:
+  `stream` option → `getStream: async () => stream`; `trySync(start/destroy)` → `await tryAsync`.
+- `apps/whispering/vite.config.ts` — converted async config factory to plain object
+  (no actual async ops; removes TypeScript overload depth error from new package types).
+
+Pitfalls encountered during this session:
+- `bun update` added a spurious `"dependencies"` section to root `package.json` with vite 8 — had to remove manually.
+- `@sveltejs/vite-plugin-svelte@7.x` requires vite 8; kept at v6 to stay on vite 7.
+- Stale `apps/whispering/node_modules/vite@7.3.1` caused dual-module TypeScript conflict — fixed by `rm -rf apps/whispering/node_modules && bun install`.
+- `@types/dompurify@3.2.0` had its own nested `dompurify@3.3.3` — fixed by removing `@types/dompurify` (types are bundled in the main package).
+
+Current verified state:
+
+- `bun audit`: 0 vulnerabilities.
+- `bun run typecheck`: 0 errors, 0 warnings.
+- `bun run build:web`: passes.
+- Push went through gitleaks hook.
+- GitHub Dependabot will re-scan on next run; count will drop from 21.
+
+Remaining known items:
+
+- Upgrade to `@sveltejs/vite-plugin-svelte@7.x` + vite 8 (requires vite.config.ts type audit).
+- Prove local Tauri build and Linux release asset.
+- Add stable release automation.
+
 ## 2026-05-27 (session 4)
 
 Fixed all 11 Svelte typecheck warnings. `bun run typecheck` now reports 0 errors and 0 warnings.

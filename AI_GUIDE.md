@@ -29,7 +29,7 @@ Whispering Open should become a standalone speech-to-text desktop app that Damia
 
 ## Verified Commands
 
-As of 2026-05-27 (session 4):
+As of 2026-05-28 (session 5):
 
 ```sh
 bun install
@@ -57,15 +57,13 @@ it affects app data storage paths and desktop launcher identity.
 
 Known cleanup items:
 
-- Rename the Tauri identifier from `com.bradenwong.whispering` to
-  `io.github.dmwasielewski.whisperingopen`. Dedicated migration; affects app data
-  path, desktop entry, and release identity.
-  Note: `tauri.conf.json` already uses `io.github.dmwasielewski.whisperingopen`,
-  but capabilities files and `Cargo.toml` still reference the old identifier.
-- Review the 21 GitHub Dependabot vulnerabilities reported after push.
+- Upgrade `@sveltejs/vite-plugin-svelte` to v7 + vite 8 (deferred: vite.config.ts type work needed).
+- Prove local Tauri build and Linux release asset.
+- Add stable release automation.
 
 Completed:
 
+- All 21 Dependabot vulnerabilities resolved (session 5, commit 5402751) — see DAMIAN_NOTES.md for details.
 - All 11 Svelte warnings fixed (session 4, commit a4dc7fd):
   - 7 self-closing void element warnings (div, span) in TextPreviewDialog.svelte
     and transcription settings page — replaced with explicit closing tags.

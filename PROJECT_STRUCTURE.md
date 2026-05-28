@@ -65,9 +65,8 @@ These were previously shared packages. Now owned entirely by the app:
 
 Recommended order:
 
-1. Rename the Tauri identifier (`com.bradenwong.whispering` → `io.github.dmwasielewski.whisperingopen`) — dedicated migration.
-   `tauri.conf.json` already updated; capabilities files and `Cargo.toml` still have old value.
+1. ~~Rename the Tauri identifier.~~ Already done in source (`tauri.conf.json`, capabilities).
 2. ~~Resolve the 11 existing Svelte warnings from `bun run typecheck`.~~ **Done** (session 4).
-3. Review the 21 GitHub Dependabot vulnerabilities.
+3. ~~Review the 21 GitHub Dependabot vulnerabilities.~~ **Done** (session 5) — `bun audit` 0 vulnerabilities.
 4. Prove local Tauri build and Linux release asset.
 5. Add stable release automation.
