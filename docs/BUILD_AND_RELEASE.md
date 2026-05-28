@@ -339,6 +339,11 @@ with AppImage + RPM + DEB + `latest.json` attached.
 - [ ] Tag pushed → GitHub Actions run is green
 - [ ] GitHub Release has: `.AppImage`, `.rpm`, `.deb`, `latest.json`
 - [ ] `dotfiles-sway/scripts/setup-whispering-open.sh` can download and install the release
+- [ ] **Auto-updater test**: install the previous version, then trigger "Check for updates" in the app and confirm it downloads and installs the new version without errors
+
+> **Do not skip the auto-updater test.** The signing key, URL format, and manifest structure
+> must all be correct end-to-end. A build that produces correct files is not the same as a
+> build whose update flow actually works.
 
 ---
 
