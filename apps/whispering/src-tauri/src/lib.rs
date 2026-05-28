@@ -199,11 +199,10 @@ pub async fn run() {
         .expect("error while building tauri application");
 
     app.run(|handler, event| {
-        match &event {
-            // Hide to tray instead of closing the window
+        match event {
             tauri::RunEvent::WindowEvent {
-                label,
-                event: tauri::WindowEvent::CloseRequested { api, .. },
+                ref label,
+                event: tauri::WindowEvent::CloseRequested { ref api, .. },
                 ..
             } if label == "main" => {
                 api.prevent_close();
@@ -211,21 +210,14 @@ pub async fn run() {
                     let _ = window.hide();
                 }
             }
-            _ => {}
-        }
-
-        // Only track events if Aptabase is enabled (key is not empty)
-        if !aptabase_key.is_empty() {
-            match event {
-                tauri::RunEvent::Exit { .. } => {
-                    let _ = handler.track_event("app_exited", None);
-                    handler.flush_events_blocking();
-                }
-                tauri::RunEvent::Ready { .. } => {
-                    let _ = handler.track_event("app_started", None);
-                }
-                _ => {}
+            tauri::RunEvent::Exit { .. } if !aptabase_key.is_empty() => {
+                let _ = handler.track_event("app_exited", None);
+                handler.flush_events_blocking();
             }
+            tauri::RunEvent::Ready { .. } if !aptabase_key.is_empty() => {
+                let _ = handler.track_event("app_started", None);
+            }
+            _ => {}
         }
     });
 }
