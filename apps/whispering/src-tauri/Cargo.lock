@@ -7357,6 +7357,7 @@ dependencies = [
  "fix-path-env",
  "hound",
  "lazy_static",
+ "libc",
  "log",
  "nix 0.29.0",
  "rayon",

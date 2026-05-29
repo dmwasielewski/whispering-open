@@ -1,3 +1,6 @@
+#[cfg(target_os = "linux")]
+extern crate libc;
+
 use log::{info, warn};
 use tauri::Manager;
 use tauri_plugin_aptabase::EventTracker;
@@ -201,24 +204,30 @@ pub async fn run() {
     // On Linux/Sway, XGrabKey (used by tauri-plugin-global-shortcut) doesn't intercept
     // keypresses directed at native Wayland windows. Push-to-talk is instead driven by
     // Sway bindsym sending SIGUSR1 (press) and SIGUSR2 (release) to this process.
+    // On Linux/Sway, XGrabKey (used by tauri-plugin-global-shortcut) doesn't intercept
+    // keypresses directed at native Wayland windows. Push-to-talk is instead driven by
+    // Sway bindsym sending SIGRTMIN+1 (press) and SIGRTMIN+2 (release) to this process.
+    // SIGUSR1/SIGUSR2 are intentionally avoided — WebKit uses SIGUSR1 internally for
+    // GC thread suspend/resume and overriding it causes crashes.
     #[cfg(target_os = "linux")]
     {
         let handle = app.handle().clone();
         tauri::async_runtime::spawn(async move {
             use tauri::Emitter;
             use tokio::signal::unix::{signal, SignalKind};
-            let mut sigusr1 = match signal(SignalKind::user_defined1()) {
+            let sigrtmin = libc::SIGRTMIN();
+            let mut sig_start = match signal(SignalKind::from_raw(sigrtmin + 1)) {
                 Ok(s) => s,
                 Err(_) => return,
             };
-            let mut sigusr2 = match signal(SignalKind::user_defined2()) {
+            let mut sig_stop = match signal(SignalKind::from_raw(sigrtmin + 2)) {
                 Ok(s) => s,
                 Err(_) => return,
             };
             loop {
                 tokio::select! {
-                    _ = sigusr1.recv() => { let _ = handle.emit("ptt-signal", "start"); }
-                    _ = sigusr2.recv() => { let _ = handle.emit("ptt-signal", "stop"); }
+                    _ = sig_start.recv() => { let _ = handle.emit("ptt-signal", "start"); }
+                    _ = sig_stop.recv() => { let _ = handle.emit("ptt-signal", "stop"); }
                 }
             }
         });
