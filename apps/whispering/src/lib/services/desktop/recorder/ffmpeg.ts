@@ -11,7 +11,7 @@ import type {
 	CancelRecordingResult,
 	WhisperingRecordingState,
 } from '$lib/constants/audio';
-import { PLATFORM_TYPE } from '$lib/constants/platform';
+import { IS_LINUX, PLATFORM_TYPE } from '$lib/constants/platform';
 import {
 	asShellCommand,
 	CommandServiceLive,
@@ -235,8 +235,8 @@ const enumerateDevices = async (): Promise<Result<Device[], RecorderError>> => {
 		return RecorderError.EnumerateDevices({ cause: executeError });
 	}
 
-	// FFmpeg lists devices to stderr, not stdout
-	const output = result.stderr;
+	// FFmpeg (macOS/Windows) lists devices to stderr; arecord (Linux) lists to stdout
+	const output = IS_LINUX ? result.stdout : result.stderr;
 
 	const devices = parseDevices(output);
 
