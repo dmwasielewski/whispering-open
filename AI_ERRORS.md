@@ -35,18 +35,19 @@ From Sway: `kill -RTMIN+1 $(pgrep -x whispering-open)` and `kill -RTMIN+2 ...`
 
 **Root cause:** `enigo` on Linux uses X11 `XSendEvent`/`XTestFakeKeyEvent` to simulate Ctrl+V. Native Wayland windows do not receive X11 input events — the Wayland compositor routes input directly and never passes it through XWayland.
 
-**Fix:** On Linux, use `wl-copy` (clipboard) + `wtype` (key simulation) instead:
+**Fix:** On Linux, use `wtype` to type text directly as Wayland virtual keyboard input. This works in all apps (browsers, terminals, editors) without clipboard manipulation and without needing to detect the app type:
 
 ```rust
 #[cfg(target_os = "linux")]
 {
-    std::process::Command::new("wl-copy").arg(&text).status()?;
-    tokio::time::sleep(Duration::from_millis(50)).await;
-    std::process::Command::new("wtype").args(["-M", "ctrl", "-k", "v", "-m", "ctrl"]).status()?;
+    std::process::Command::new("wtype").arg(&text).status()?;
+    return Ok(());
 }
 ```
 
-Both `wl-copy` (`wl-clipboard` package) and `wtype` are installed on Damian's Fedora Sway setup. Always check with `which wtype wl-copy` before assuming availability.
+Do NOT use `Ctrl+V` via wtype — terminals use `Ctrl+Shift+V` for paste. Direct typing with `wtype` avoids this distinction entirely.
+
+`wtype` is installed on Damian's Fedora Sway setup (`/usr/bin/wtype`). Always check with `which wtype` before assuming availability.
 
 ## Do Not Automate Upstream Whispering Binaries
 
