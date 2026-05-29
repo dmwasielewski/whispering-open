@@ -276,33 +276,15 @@ use tauri_plugin_clipboard_manager::ClipboardExt;
 async fn write_text(app: tauri::AppHandle, text: String) -> Result<(), String> {
     #[cfg(target_os = "linux")]
     let _ = &app;
-    // On Linux/Wayland, enigo uses X11 XSendEvent which native Wayland windows ignore.
-    // Use wl-copy (Wayland clipboard) + wtype (Wayland virtual keyboard) instead.
+    // On Linux/Wayland, use wtype to type text directly as Wayland virtual keyboard input.
+    // This works universally in all apps (browsers, terminals, editors) without needing
+    // to know the paste shortcut (Ctrl+V vs Ctrl+Shift+V in terminals).
     #[cfg(target_os = "linux")]
     {
-        let original = std::process::Command::new("wl-paste")
-            .arg("--no-newline")
-            .output()
-            .ok()
-            .and_then(|o| String::from_utf8(o.stdout).ok());
-
-        std::process::Command::new("wl-copy")
+        std::process::Command::new("wtype")
             .arg(&text)
             .status()
-            .map_err(|e| format!("wl-copy failed: {}", e))?;
-
-        tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
-
-        std::process::Command::new("wtype")
-            .args(["-M", "ctrl", "-k", "v", "-m", "ctrl"])
-            .status()
             .map_err(|e| format!("wtype failed: {}", e))?;
-
-        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-
-        if let Some(content) = original {
-            std::process::Command::new("wl-copy").arg(&content).status().ok();
-        }
 
         return Ok(());
     }
