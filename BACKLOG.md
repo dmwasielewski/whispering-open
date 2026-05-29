@@ -235,6 +235,57 @@ The macOS accessibility page itself is irrelevant on Fedora.
 
 ## Phase 3 — Personalisation
 
+### P3-0a: Configure Groq for grammar correction (short-term)
+**Status:** ready to start  
+**What:** Set up Groq free API as the transformation provider for grammar correction.
+
+**Why:** Whisper's `transcription.prompt` goes to the STT model — it cannot correct grammar.
+Grammar correction requires a separate LLM. Groq free tier:
+- No credit card required
+- 14 400 req/day free (llama-3.1-8b-instant)
+- Very fast (~1-2s latency)
+- Excellent English grammar correction
+
+**Steps:**
+1. User: go to `console.groq.com` → create account → copy API key
+2. Whispering Open → Settings → API Keys → Groq → paste key
+3. In transformation step: select Groq → `llama-3.1-8b-instant`
+4. Prompt: translate to English + correct grammar + remove profanity
+
+**Goal:** speak Polish or English → Whisper translates to English → Groq corrects grammar → clean English output typed at cursor.
+
+---
+
+### P3-0b: Local text-to-text LLM for grammar correction (long-term)
+**Status:** planned — waiting for suitable local model  
+**What:** Embed a local text-to-text model for grammar correction directly in the app (like Whisper for STT).
+
+**Why:** User wants 100% local pipeline. Cloud providers (Groq, Gemini) are the interim solution.
+When a good small multilingual LLM becomes downloadable (Google/Meta/Mistral will release better small models), this should be ready to use.
+
+**Architecture plan:**
+- Add `llama-cpp-rs` crate to Cargo.toml (Rust bindings for llama.cpp)
+- New `text_correction` module in src-tauri/src/ (mirrors `transcription` module)
+- New Tauri command: `correct_text(text: String, model_path: String) → Result<String>`
+- Model stored at `~/.local/share/io.github.dmwasielewski.whisperingopen/models/llm/`
+- New UI in Settings → Transformation: "Local LLM" option with model file picker + download
+- Transformation step type: `local-llm` (alongside existing cloud providers)
+
+**Model criteria (when evaluating candidates):**
+- Polish + English grammar correction (or English-only as minimum)
+- GGUF format, Q4 quantization under 1GB ideally
+- Instruction-following (must respond to "correct the grammar of:")
+- Currently best candidate: Qwen2.5-1.5B-Instruct Q4 (~986MB) — Polish support unconfirmed
+
+**Status trigger:** Re-evaluate when any of these is released:
+- Gemma 3 with confirmed Polish support under 1GB GGUF
+- Qwen2.5-1B Polish-confirmed instruction model
+- Any Google/Meta/Mistral local release specifically targeting multilingual grammar correction
+
+**How to apply:** When implementing — follow the Parakeet ONNX pattern (ModelManager + async Tauri command). Start with English-only SmolLM2-360M (227MB) to validate the pipeline, then swap for multilingual model when available.
+
+---
+
 ### P3-1: Visual improvements
 **Status:** deferred (logic and correctness first)  
 **What:** UI/UX improvements tailored to Damian's preferences.  
