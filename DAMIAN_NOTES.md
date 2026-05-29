@@ -1,5 +1,51 @@
 # Damian Notes
 
+## 2026-05-29 (session 10)
+
+Fixed global push-to-talk on Wayland, text paste in all apps, and startup error toast.
+
+### What was done
+
+**Push-to-talk (Alt+Shift+D) — Wayland fix:**
+
+`tauri-plugin-global-shortcut` uses `XGrabKey` which doesn't intercept keypresses directed at native Wayland windows. Replaced with Sway `bindsym` + POSIX real-time signals:
+
+```sway
+bindsym --no-repeat Alt+Shift+d exec kill -RTMIN+1 $(pgrep -x whispering-open)
+bindsym --release    Alt+Shift+d exec kill -RTMIN+2 $(pgrep -x whispering-open)
+```
+
+App listens for SIGRTMIN+1 (start recording) and SIGRTMIN+2 (stop recording) in a background async task, emits `ptt-signal` Tauri event, frontend calls `commandCallbacks.pushToTalk`.
+
+Note: SIGUSR1/SIGUSR2 were tried first but SIGUSR1 is reserved by WebKit (GC thread suspend/resume) and caused crashes. SIGRTMIN+N are safe.
+
+**Global shortcut registration error toast — fixed:**
+
+`syncGlobalShortcutsWithSettings()` was running on Linux, trying to register XGrabKey shortcuts, and showing an error toast at every startup. Skipped on Linux (`if (!IS_LINUX)`).
+
+**Text paste in terminal/browser — fixed:**
+
+`enigo` uses X11 `XSendEvent` which native Wayland windows ignore. Ctrl+V also doesn't work in terminals (they use Ctrl+Shift+V). Fixed by using `wtype` directly:
+
+```rust
+#[cfg(target_os = "linux")]
+std::process::Command::new("wtype").arg(&text).status()?;
+```
+
+`wtype` types text as Wayland virtual keyboard input — works universally in all apps.
+
+All three Wayland pitfalls documented in `AI_ERRORS.md`.
+
+### End state of session 10
+
+- Alt+Shift+D push-to-talk works globally on Sway (hold to record, release to stop): ✅
+- Text paste works in browser and terminal: ✅
+- No error toast at startup: ✅
+- Local build → binary install workflow: `bun run tauri build --bundles rpm` then `cp --remove-destination`
+- BACKLOG: P2-4 done; P2-1, P2-5, P2-6 (test), P2-7 (analytics removal) remain
+
+---
+
 ## 2026-05-28 (session 9)
 
 Fixed SIGILL crash from v7.11.0-3. Established local build workflow. Tray icon and hide-to-tray confirmed working.

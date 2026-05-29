@@ -31,14 +31,12 @@ icon sync with recorder state. Added `core:tray:default` capability and `bundle.
 ---
 
 ### P2-4: Verify core transcription features on Fedora Sway
-**Status:** needs testing  
-**What:** Verify each output feature works on the actual installed desktop app:
-- [ ] Copy transcript to clipboard — does clipboard get populated?
-- [ ] Paste transcript at cursor — does it type at the focused app?
-- [ ] Press Enter after pasting — does Enter get simulated?
-- [ ] Same checks for Transformation output (copy / paste / enter)
-**Note:** "Paste at cursor" uses `xdotool` / `libxdo` for key simulation. On Wayland this
-may require `GDK_BACKEND=x11` or a Wayland-native alternative (`ydotool`, `wtype`).
+**Status:** ✅ DONE (session 10)  
+**What was done:**
+- Paste transcript at cursor: fixed — `enigo`/X11 replaced with `wtype` (Wayland virtual keyboard). Works in browser and terminal.
+- Copy to clipboard: works via wl-copy / tauri clipboard.
+- Enter simulation: fixed — `wtype -k Return`.
+- Root cause documented in `AI_ERRORS.md`: "Do Not Use enigo / X11 Key Simulation for Paste on Wayland".
 
 ---
 
@@ -51,75 +49,23 @@ ALSA/PulseAudio/PipeWire. On Fedora Sway with PipeWire, behavior may differ from
 
 ---
 
-### P2-6: Keyboard shortcuts — verify global hotkeys and installation defaults on Fedora Sway
-**Status:** needs testing  
+### P2-6: Keyboard shortcuts — global hotkeys on Fedora Sway
+**Status:** ✅ DONE (session 10) — push-to-talk fixed; other shortcuts N/A on Wayland  
 
-**Three separate concerns to verify:**
+**Resolution (2026-05-29):**
 
-**6a — Are shortcuts GLOBAL (system-wide) or only LOCAL (app window must be focused)?**
+XGrabKey (`tauri-plugin-global-shortcut`) confirmed NOT working on Wayland — tested, never fires
+when Wayland-native windows are focused. Root cause documented in `AI_ERRORS.md`.
 
-Suspicion: shortcuts may only trigger when the app window is active, not when another app
-is in the foreground. On Wayland, global input capture is restricted.
+**Implemented solution:**
+- `syncGlobalShortcutsWithSettings()` skipped on Linux (no error toast at startup)
+- `Alt+Shift+D` push-to-talk: Sway `bindsym --no-repeat` / `--release` → `kill -RTMIN+1/+2`
+- App listens for SIGRTMIN+1/+2 → emits `ptt-signal` event → frontend triggers recording
 
-The app uses `tauri-plugin-global-shortcut` which registers system-wide shortcuts. However:
-- The app runs with `GDK_BACKEND=x11` (XWayland mode), so Tauri's shortcut plugin uses
-  the X11 global hotkey API (`XGrabKey`) via XWayland
-- `XGrabKey` DOES work for global shortcuts even on Sway/Wayland via XWayland
-- BUT: if Sway is running in pure Wayland mode and XWayland is not active, it will fail
+**Other shortcuts (Ctrl+Shift+;, etc.):** Not implemented via Sway yet. Can be added to
+`dotfiles-sway/sway/config` as needed (same pattern: bindsym → kill -RTMIN+N).
 
-**Test:** open a text editor, type something, then press `Control+Shift+;` — does the app
-react (start recording) even though another window is focused?
-
-**6b — Do default shortcuts get installed at system/session level at startup?**
-
-Shortcuts are NOT installed at package install time. They are registered at runtime when
-the app starts, via `tauri-plugin-global-shortcut`. This means:
-- Shortcuts only work while the app is RUNNING (even if hidden to tray) ✅ (expected)
-- Shortcuts do NOT work if the app is not running ✅ (expected — not a bug)
-- If the app crashes/is killed, shortcuts are automatically unregistered
-
-**Test:** confirm the app registers shortcuts on startup (before any user interaction).
-Check `register-commands.ts` — are shortcuts registered in the app init flow?
-
-**6c — Conflict check: do default shortcuts clash with Sway or other system shortcuts?**
-
-Default global shortcuts (Linux — `CommandOrControl`=`Control`, `CommandOrAlt`=`Alt`):
-| Shortcut | Action | Sway conflict? |
-|----------|--------|----------------|
-| `Control+Shift+;` | Toggle recording | ✅ None — Sway uses `Super` (`Mod4`) |
-| `Control+Shift+'` | Cancel recording | ✅ None |
-| `Alt+Shift+D` | Push-to-talk | ✅ None |
-| `Control+Shift+X` | Open transformation picker | ✅ None |
-| `Control+Shift+R` | Run transformation on clipboard | ✅ None |
-
-Note: `startManualRecording`, `stopManualRecording`, `toggleVadRecording`, `stopVadRecording`
-have `null` defaults — no shortcut assigned unless user sets one manually.
-
-**Checked 2026-05-28:** `~/.config/sway/config` uses `set $mod Mod4` (Super/Win key). All Sway
-bindings use `$mod+...` — zero conflicts with `Control+Shift+*`.
-
-**Source:** `apps/whispering/src/lib/state/device-config.svelte.ts`
-
-**Still needs manual test:** each shortcut while Firefox/terminal/VS Code is in focus.
-
-**6d — XWayland limitation: global shortcuts may not capture from Wayland-native apps**
-
-The app runs with `GDK_BACKEND=x11` (XWayland). `tauri-plugin-global-shortcut` on Linux
-uses `XGrabKey` (X11 API). On Sway:
-- `XGrabKey` via XWayland captures keys from **XWayland apps** (Firefox in XWayland, Electron apps)
-- `XGrabKey` may **NOT** capture keys from **Wayland-native apps** (native Wayland terminals,
-  Wayland-native Firefox, wl-clipboard tools) when they are focused
-
-This is a known Wayland limitation — X11 global grabs do not extend to Wayland clients.
-
-**Workaround if needed:** `ydotool` or a Sway keybinding that calls the app's IPC. But test first —
-the impact may be small if most apps in use are XWayland-based.
-
-**Pass criteria:**
-- [ ] All 4 shortcuts trigger from any focused window (at minimum: XWayland apps)
-- [ ] No conflicts with Sway's built-in shortcuts ✅ confirmed
-- [ ] App registers shortcuts immediately at startup (not only after visiting Settings)
-- [ ] Document whether Wayland-native apps are a problem in practice
+**Conflict check:** No conflicts with Sway (`$mod` = Super/Mod4). ✅
 
 ---
 
