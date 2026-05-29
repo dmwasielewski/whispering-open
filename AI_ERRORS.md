@@ -2,6 +2,52 @@
 
 Known mistakes, traps, and decisions for AI agents. Add to this file when a real lesson is learned.
 
+## Do Not Use SIGUSR1/SIGUSR2 — Reserved by WebKit/JSC
+
+**Symptom:** App crashes on recording/any WebKit activity after SIGUSR1 handler is registered.
+
+**Root cause:** WebKit's WTF (WebKit Template Framework) uses SIGUSR1 (signal 10) internally for GC thread suspend/resume. Registering any custom handler for SIGUSR1 overrides WebKit's handler and causes crashes in `_ZN3WTF6Thread26signalHandlerSuspendResumeEiP9siginfo_tPv`. Startup log will show: `Overriding existing handler for signal 10.`
+
+**Fix:** Use `SIGRTMIN+1` and `SIGRTMIN+2` (real-time signals) which are not reserved by any system library.
+
+```rust
+let sigrtmin = libc::SIGRTMIN();
+signal(SignalKind::from_raw(sigrtmin + 1))  // start PTT
+signal(SignalKind::from_raw(sigrtmin + 2))  // stop PTT
+```
+
+From Sway: `kill -RTMIN+1 $(pgrep -x whispering-open)` and `kill -RTMIN+2 ...`
+
+## Do Not Use XGrabKey / tauri-plugin-global-shortcut for Global Hotkeys on Wayland
+
+**Symptom:** Global shortcuts registered with `tauri-plugin-global-shortcut` never fire when native Wayland windows are focused. Startup produces "Error registering global commands" toast.
+
+**Root cause:** `tauri-plugin-global-shortcut` uses `global-hotkey` crate which uses `XGrabKey` via X11/XWayland. On Sway/Wayland, keypresses directed at native Wayland windows bypass XWayland entirely — XGrabKey never sees them.
+
+**Fix for Fedora Sway:**
+1. Skip `syncGlobalShortcutsWithSettings()` on Linux (`if (!IS_LINUX) { ... }`)
+2. Add Sway `bindsym` entries for each shortcut instead
+3. For push-to-talk (press+release), use SIGRTMIN+1/+2 signals from Sway to the app
+
+## Do Not Use enigo / X11 Key Simulation for Paste on Wayland
+
+**Symptom:** After transcription, text appears in clipboard but is NOT pasted into the focused app (terminal, browser). The "write text at cursor" feature silently does nothing on Wayland-native windows.
+
+**Root cause:** `enigo` on Linux uses X11 `XSendEvent`/`XTestFakeKeyEvent` to simulate Ctrl+V. Native Wayland windows do not receive X11 input events — the Wayland compositor routes input directly and never passes it through XWayland.
+
+**Fix:** On Linux, use `wl-copy` (clipboard) + `wtype` (key simulation) instead:
+
+```rust
+#[cfg(target_os = "linux")]
+{
+    std::process::Command::new("wl-copy").arg(&text).status()?;
+    tokio::time::sleep(Duration::from_millis(50)).await;
+    std::process::Command::new("wtype").args(["-M", "ctrl", "-k", "v", "-m", "ctrl"]).status()?;
+}
+```
+
+Both `wl-copy` (`wl-clipboard` package) and `wtype` are installed on Damian's Fedora Sway setup. Always check with `which wtype wl-copy` before assuming availability.
+
 ## Do Not Automate Upstream Whispering Binaries
 
 Upstream Whispering `7.11.0` AppImage and unpacked RPM were tested on Damian's Fedora Sway Atomic setup.

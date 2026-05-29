@@ -257,7 +257,9 @@ pub async fn run() {
     });
 }
 
+#[cfg(not(target_os = "linux"))]
 use enigo::{Direction, Enigo, Key, Keyboard, Settings};
+#[cfg(not(target_os = "linux"))]
 use tauri_plugin_clipboard_manager::ClipboardExt;
 
 /// Writes text at the cursor position using the clipboard sandwich technique
@@ -272,55 +274,70 @@ use tauri_plugin_clipboard_manager::ClipboardExt;
 /// the user's clipboard, making it ideal for inserting transcribed text.
 #[tauri::command]
 async fn write_text(app: tauri::AppHandle, text: String) -> Result<(), String> {
-    // 1. Save current clipboard content
-    let original_clipboard = app.clipboard().read_text().ok();
-
-    // 2. Write new text to clipboard
-    app.clipboard()
-        .write_text(&text)
-        .map_err(|e| format!("Failed to write to clipboard: {}", e))?;
-
-    // Small delay to ensure clipboard is updated
-    tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
-
-    // 3. Simulate paste operation using virtual key codes (layout-independent)
-    let mut enigo = Enigo::new(&Settings::default()).map_err(|e| e.to_string())?;
-
-    // Use virtual key codes for V to work with any keyboard layout
-    #[cfg(target_os = "macos")]
-    let (modifier, v_key) = (Key::Meta, Key::Other(9)); // Virtual key code for V on macOS
-    #[cfg(target_os = "windows")]
-    let (modifier, v_key) = (Key::Control, Key::Other(0x56)); // VK_V on Windows
     #[cfg(target_os = "linux")]
-    let (modifier, v_key) = (Key::Control, Key::Unicode('v')); // Fallback for Linux
+    let _ = &app;
+    // On Linux/Wayland, enigo uses X11 XSendEvent which native Wayland windows ignore.
+    // Use wl-copy (Wayland clipboard) + wtype (Wayland virtual keyboard) instead.
+    #[cfg(target_os = "linux")]
+    {
+        let original = std::process::Command::new("wl-paste")
+            .arg("--no-newline")
+            .output()
+            .ok()
+            .and_then(|o| String::from_utf8(o.stdout).ok());
 
-    // Press modifier + V
-    enigo
-        .key(modifier, Direction::Press)
-        .map_err(|e| format!("Failed to press modifier key: {}", e))?;
-    enigo
-        .key(v_key, Direction::Press)
-        .map_err(|e| format!("Failed to press V key: {}", e))?;
+        std::process::Command::new("wl-copy")
+            .arg(&text)
+            .status()
+            .map_err(|e| format!("wl-copy failed: {}", e))?;
 
-    // Release V + modifier (in reverse order for proper cleanup)
-    enigo
-        .key(v_key, Direction::Release)
-        .map_err(|e| format!("Failed to release V key: {}", e))?;
-    enigo
-        .key(modifier, Direction::Release)
-        .map_err(|e| format!("Failed to release modifier key: {}", e))?;
+        tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
 
-    // Small delay to ensure paste completes
-    tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+        std::process::Command::new("wtype")
+            .args(["-M", "ctrl", "-k", "v", "-m", "ctrl"])
+            .status()
+            .map_err(|e| format!("wtype failed: {}", e))?;
 
-    // 4. Restore original clipboard content
-    if let Some(content) = original_clipboard {
-        app.clipboard()
-            .write_text(&content)
-            .map_err(|e| format!("Failed to restore clipboard: {}", e))?;
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+
+        if let Some(content) = original {
+            std::process::Command::new("wl-copy").arg(&content).status().ok();
+        }
+
+        return Ok(());
     }
 
-    Ok(())
+    // macOS / Windows: clipboard sandwich via enigo
+    #[cfg(not(target_os = "linux"))]
+    {
+        let original_clipboard = app.clipboard().read_text().ok();
+
+        app.clipboard()
+            .write_text(&text)
+            .map_err(|e| format!("Failed to write to clipboard: {}", e))?;
+
+        tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
+
+        let mut enigo = Enigo::new(&Settings::default()).map_err(|e| e.to_string())?;
+
+        #[cfg(target_os = "macos")]
+        let (modifier, v_key) = (Key::Meta, Key::Other(9));
+        #[cfg(target_os = "windows")]
+        let (modifier, v_key) = (Key::Control, Key::Other(0x56));
+
+        enigo.key(modifier, Direction::Press).map_err(|e| format!("Failed to press modifier key: {}", e))?;
+        enigo.key(v_key, Direction::Press).map_err(|e| format!("Failed to press V key: {}", e))?;
+        enigo.key(v_key, Direction::Release).map_err(|e| format!("Failed to release V key: {}", e))?;
+        enigo.key(modifier, Direction::Release).map_err(|e| format!("Failed to release modifier key: {}", e))?;
+
+        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+
+        if let Some(content) = original_clipboard {
+            app.clipboard().write_text(&content).map_err(|e| format!("Failed to restore clipboard: {}", e))?;
+        }
+
+        Ok(())
+    }
 }
 
 /// Simulates pressing the Enter/Return key
@@ -329,12 +346,19 @@ async fn write_text(app: tauri::AppHandle, text: String) -> Result<(), String> {
 /// after transcription has been pasted.
 #[tauri::command]
 async fn simulate_enter_keystroke() -> Result<(), String> {
-    let mut enigo = Enigo::new(&Settings::default()).map_err(|e| e.to_string())?;
+    #[cfg(target_os = "linux")]
+    {
+        std::process::Command::new("wtype")
+            .args(["-k", "Return"])
+            .status()
+            .map_err(|e| format!("wtype failed: {}", e))?;
+        return Ok(());
+    }
 
-    // Use Direction::Click for a combined press+release action
-    enigo
-        .key(Key::Return, Direction::Click)
-        .map_err(|e| format!("Failed to simulate Enter key: {}", e))?;
-
-    Ok(())
+    #[cfg(not(target_os = "linux"))]
+    {
+        let mut enigo = Enigo::new(&Settings::default()).map_err(|e| e.to_string())?;
+        enigo.key(Key::Return, Direction::Click).map_err(|e| format!("Failed to simulate Enter key: {}", e))?;
+        Ok(())
+    }
 }
