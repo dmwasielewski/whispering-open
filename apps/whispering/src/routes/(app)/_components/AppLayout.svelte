@@ -5,6 +5,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { commandCallbacks } from '$lib/commands';
+	import { IS_LINUX } from '$lib/constants/platform';
 	import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 	import MoreDetailsDialog from '$lib/components/MoreDetailsDialog.svelte';
 	import NotificationLog from '$lib/components/NotificationLog.svelte';
@@ -60,8 +61,12 @@
 		migrationDialog.check();
 
 		if (window.__TAURI_INTERNALS__) {
-			syncGlobalShortcutsWithSettings();
-			resetGlobalShortcutsToDefaultIfDuplicates();
+			// On Linux/Wayland, XGrabKey doesn't work — global shortcuts are handled
+			// via Sway bindsym + SIGRTMIN signals. Skip registration to avoid error toasts.
+			if (!IS_LINUX) {
+				syncGlobalShortcutsWithSettings();
+				resetGlobalShortcutsToDefaultIfDuplicates();
+			}
 
 			// Linux/Sway push-to-talk via SIGUSR1/SIGUSR2 (Wayland workaround)
 			listen<string>('ptt-signal', (event) => {
